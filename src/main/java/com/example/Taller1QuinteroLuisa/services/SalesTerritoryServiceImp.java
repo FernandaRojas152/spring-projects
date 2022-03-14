@@ -21,7 +21,15 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 	
 	public void update(Salesterritory t) {
 		Salesterritory salesT= st.getById(t.getTerritoryid());
-		
+		salesT.setCostlastyear(t.getCostlastyear());
+		salesT.setCostytd(t.getCostytd());
+		salesT.setCountryregioncode(t.getCountryregioncode());
+		salesT.setSalesGroup(t.getSalesGroup());
+		salesT.setModifieddate(t.getModifieddate());
+		salesT.setName(t.getName());
+		salesT.setRowguid(t.getRowguid());
+		salesT.setSaleslastyear(t.getSaleslastyear());
+		salesT.setCostytd(t.getCostytd());
 	}
 	
 	
