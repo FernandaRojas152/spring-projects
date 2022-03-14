@@ -3,12 +3,13 @@ package com.example.Taller1QuinteroLuisa.model.sales;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.PositiveOrZero;
 
 /**
  * The persistent class for the salespersonquotahistory database table.
@@ -21,11 +22,13 @@ public class Salespersonquotahistory implements Serializable {
 
 	@EmbeddedId
 	private SalespersonquotahistoryPK id;
-
+	
+	@PastOrPresent
 	private Timestamp modifieddate;
 
 	private Integer rowguid;
 
+	@PositiveOrZero
 	private BigDecimal salesquota;
 
 	// bi-directional many-to-one association to Salesperson
