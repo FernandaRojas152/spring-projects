@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
@@ -29,6 +30,7 @@ public class Salesperson implements Serializable {
 	@Id
 	@SequenceGenerator(name = "SALESPERSON_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESPERSON_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESPERSON_BUSINESSENTITYID_GENERATOR")
+	@NotNull
 	private Integer businessentityid;
 
 	private BigDecimal bonus;
