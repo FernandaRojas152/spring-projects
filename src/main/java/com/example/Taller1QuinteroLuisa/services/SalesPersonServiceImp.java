@@ -32,8 +32,4 @@ public class SalesPersonServiceImp implements SalesPersonService{
 		
 		sp.save(p);
 	}
-	
-	public void delete(Salesperson s) {
-		sp.delete(s);
-	}
 }
