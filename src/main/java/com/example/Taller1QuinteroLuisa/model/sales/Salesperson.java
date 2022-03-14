@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 
 /**
  * The persistent class for the salesperson database table.
@@ -31,6 +33,7 @@ public class Salesperson implements Serializable {
 
 	private BigDecimal bonus;
 
+	@Size(min = 0, max = 1)
 	private BigDecimal commissionpct;
 
 	private Timestamp modifieddate;
@@ -39,6 +42,7 @@ public class Salesperson implements Serializable {
 
 	private BigDecimal saleslastyear;
 
+	@PositiveOrZero
 	private BigDecimal salesquota;
 
 	private BigDecimal salesytd;
