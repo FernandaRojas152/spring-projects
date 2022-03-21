@@ -35,7 +35,6 @@ public class Salesperson implements Serializable {
 
 	private BigDecimal bonus;
 
-	@Size(min = 0, max = 1)
 	private BigDecimal commissionpct;
 
 	private Timestamp modifieddate;

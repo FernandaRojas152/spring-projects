@@ -26,13 +26,14 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	
 	public void save(Salespersonquotahistory s) {
 		Salesperson o= s.getSalesperson();
+		//Integer sp= o.get
 		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
 		Integer p= pk.getBusinessentityid();
 		if(be.getById(p)!= null) {
-			
+			spq.save(s);
 		}
 		//s.setSalesperson(spq.getById(s.getSalesperson()));
-		spq.save(s);
+		
 	}
 
 }
