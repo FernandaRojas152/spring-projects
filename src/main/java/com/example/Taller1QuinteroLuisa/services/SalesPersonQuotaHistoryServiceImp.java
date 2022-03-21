@@ -28,7 +28,9 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
 		Integer p= pk.getBusinessentityid();
 		
-		if(be.findById(p).isPresent() && person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
+		if(be.findById(p).isPresent()
+				&& person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
+			validateConstraints(sales);
 			spq.save(sales);
 		}
 		//s.setSalesperson(spq.getById(s.getSalesperson()));
@@ -36,7 +38,18 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 
 	@Override
 	public void update(Salespersonquotahistory sales) throws Exception {
-		// TODO Auto-generated method stub
+		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
+		Integer p= pk.getBusinessentityid();
+		
+		if(be.findById(p).isPresent()
+				&& person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
+			Salespersonquotahistory spqh = spq.getById(sales.getId());
+			spqh.setModifieddate(sales.getModifieddate());
+			spqh.setRowguid(sales.getRowguid());
+			
+			validateConstraints(sales);
+			
+		}
 		
 	}
 	
