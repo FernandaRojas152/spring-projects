@@ -1,10 +1,9 @@
 package com.example.Taller1QuinteroLuisa.services;
 
+import java.math.BigDecimal;
+import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.Taller1QuinteroLuisa.model.person.Businessentity;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
 import com.example.Taller1QuinteroLuisa.model.sales.SalespersonquotahistoryPK;
 import com.example.Taller1QuinteroLuisa.repository.BusinessentityRepository;
@@ -24,16 +23,27 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 		this.be= be;
 	}
 	
-	public void save(Salespersonquotahistory s) {
-		Salesperson o= s.getSalesperson();
-		//Integer sp= o.get
+	@Override
+	public void save(Salespersonquotahistory sales) throws Exception{
 		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
 		Integer p= pk.getBusinessentityid();
-		if(be.getById(p)!= null) {
-			spq.save(s);
+		
+		if(be.findById(p).isPresent() && person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
+			spq.save(sales);
 		}
 		//s.setSalesperson(spq.getById(s.getSalesperson()));
-		
 	}
 
+	@Override
+	public void update(Salespersonquotahistory sales) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@NotNull
+	private void validateConstraints(Salespersonquotahistory sales) throws Exception{
+		if(!(sales.getSalesquota().compareTo(BigDecimal.ZERO) > 0)){
+			throw new Exception("La cuota no es mayor que 0");
+		}
+	}
 }
