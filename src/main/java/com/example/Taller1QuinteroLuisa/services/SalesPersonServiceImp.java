@@ -1,12 +1,11 @@
 package com.example.Taller1QuinteroLuisa.services;
 
 import java.math.BigDecimal;
-
 import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.repository.EmployeeRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
 
@@ -14,22 +13,31 @@ import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
 public class SalesPersonServiceImp implements SalesPersonService{
 	private SalesPersonRepository sp;
 	private SalesTerritoryRepository st;
+	private EmployeeRepository e;
 	
 	@Autowired
-	public SalesPersonServiceImp(SalesPersonRepository sp, SalesTerritoryRepository st) {
+	public SalesPersonServiceImp(SalesPersonRepository sp, SalesTerritoryRepository st, EmployeeRepository e) {
+		this.e= e;
 		this.sp= sp;
 		this.st= st;
 	}
 	
 	@Override
 	public void save(Salesperson s) throws Exception {
-		s.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
-		validateConstrains(s);
-		sp.save(s);
+		if(st.findById(s.getSalesterritory().getTerritoryid()).isPresent()
+				&& sp.findById(s.getBusinessentityid()).isPresent()
+				&& e.findById(s.getBusinessentityid()).isPresent()) {
+			s.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
+			validateConstrains(s);
+			sp.save(s);
+		}
 	}
 	
 	@Override
 	public void update(Salesperson s) throws Exception {
+		if(st.findById(s.getSalesterritory().getTerritoryid()).isPresent()
+				&& sp.findById(s.getBusinessentityid()).isPresent()
+				&& e.findById(s.getBusinessentityid()).isPresent()) {
 		Salesperson p= sp.getById(s.getBusinessentityid());
 		p.setModifieddate(s.getModifieddate());
 		p.setSaleslastyear(s.getSaleslastyear());
@@ -41,6 +49,7 @@ public class SalesPersonServiceImp implements SalesPersonService{
 		p.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
 		validateConstrains(s);
 		sp.save(p);
+		}
 	}
 	
 	@NotNull
