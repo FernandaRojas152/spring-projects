@@ -32,7 +32,6 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 			validateConstraints(sales);
 			spq.save(sales);
 		}
-		//s.setSalesperson(spq.getById(s.getSalesperson()));
 	}
 
 	@Override

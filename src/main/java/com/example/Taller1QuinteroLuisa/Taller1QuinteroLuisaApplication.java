@@ -9,5 +9,4 @@ public class Taller1QuinteroLuisaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Taller1QuinteroLuisaApplication.class, args);
 	}
-
 }

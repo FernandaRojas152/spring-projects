@@ -4,18 +4,20 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
 import com.example.Taller1QuinteroLuisa.model.hr.Employee;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
@@ -26,9 +28,8 @@ import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonService;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 
-@SpringBootTest
-@TestMethodOrder(OrderAnnotation.class)
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)
+//@SpringBootTest(classes= Taller1QuinteroLuisaApplication.class)
 @ExtendWith(MockitoExtension.class)
 class SalesPersonUnitTest {
 	private static final Integer BUSINESSENTITY_ID = 1522215;
@@ -47,7 +48,12 @@ class SalesPersonUnitTest {
 	private SalesTerritoryRepository salesTerritoryRepository;
 	
 	@InjectMocks
-	private SalesPersonService salesPersonService;
+	private SalesPersonServiceImp salesPersonServiceImp;
+	
+	@Autowired
+	public SalesPersonUnitTest(SalesPersonRepository salesPersonRepository, EmployeeRepository employeeRepository, SalesTerritoryRepository salesTerritoryRepository) {		
+		this.salesPersonServiceImp = new SalesPersonServiceImp(salesPersonRepository, salesTerritoryRepository, employeeRepository);
+	}
 	
 	@BeforeAll
     static void init() {
@@ -57,7 +63,7 @@ class SalesPersonUnitTest {
 	@BeforeEach
 	void setUp() {
 		try {
-			salesPersonService= new SalesPersonServiceImp(salesPersonRepository, salesTerritoryRepository, employeeRepository);
+			salesPersonServiceImp= new SalesPersonServiceImp(salesPersonRepository, salesTerritoryRepository, employeeRepository);
 			person = new Salesperson();
 			employee= new Employee();
 			territory= new Salesterritory();
@@ -71,18 +77,26 @@ class SalesPersonUnitTest {
 	        person.setModifieddate(time);
 			
 	        employee.setBusinessentityid(BUSINESSENTITY_ID);
-	        territory.setTerritoryid(57);
+	        territory.setTerritoryid(57);	        
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	@Test
-	@Order(1)
 	void saveSalesPersonTest() {
+		when(salesPersonRepository.findById(BUSINESSENTITY_ID)).thenReturn(Optional.of(person));
+		when(employeeRepository.findById(BUSINESSENTITY_ID)).thenReturn(Optional.of(employee));
+		when(salesTerritoryRepository.findById(57)).thenReturn(Optional.of(territory));
 		
+		try {
+			salesPersonServiceImp.save(person);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		Salesperson temp= salesPersonRepository.findById(BUSINESSENTITY_ID).get();
+		
+		assertEquals(temp.getBusinessentityid(), employee.getBusinessentityid());
 	}
-	
-	
-
 }

@@ -27,7 +27,7 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 		SalesterritoryhistoryPK pk= new SalesterritoryhistoryPK();
 		Integer p= pk.getBusinessentityid();
 
-		//sales person or business entity?
+		//corregir el sp por be
 		if(sp.findById(p).isPresent() &&
 				st.findById(territory.getSalesterritory().getTerritoryid()).isPresent()) {
 

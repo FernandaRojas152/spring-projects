@@ -20,11 +20,10 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 		this.cr= cr;
 	}
 	
+	
 	@Override
 	public void save(Salesterritory t) throws Exception {
-		int id= Integer.parseInt(t.getCountryregioncode());
-		if(st.findById(id).isPresent() && st.findById(t.getTerritoryid()).isPresent()) {
-			//t.setCountryregioncode(cr.getById(t.getCountryregioncode().toString()));
+		if(cr.findById(t.getCountryregioncode()).isPresent()) {
 			validateConstraints(t);
 			st.save(t);
 		}
@@ -32,8 +31,7 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 	
 	@Override
 	public void update(Salesterritory t) throws Exception{
-		int id= Integer.parseInt(t.getCountryregioncode());
-		if(st.findById(id).isPresent() && st.findById(t.getTerritoryid()).isPresent()) {
+		if(cr.findById(t.getCountryregioncode()).isPresent()) {
 		Salesterritory salesT= st.getById(t.getTerritoryid());
 		salesT.setCostlastyear(t.getCostlastyear());
 		salesT.setCostytd(t.getCostytd());
