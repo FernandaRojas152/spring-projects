@@ -29,8 +29,8 @@ import com.example.Taller1QuinteroLuisa.services.SalesPersonService;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)
-//@SpringBootTest(classes= Taller1QuinteroLuisaApplication.class)
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest()
+//@ExtendWith(MockitoExtension.class)
 class SalesPersonUnitTest {
 	private static final Integer BUSINESSENTITY_ID = 1522215;
 	

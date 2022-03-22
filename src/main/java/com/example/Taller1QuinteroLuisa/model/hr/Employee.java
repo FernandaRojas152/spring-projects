@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,15 +14,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.AllArgsConstructor;
-
 /**
  * The persistent class for the employee database table.
  *
  */
 @Entity
 @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
-@AllArgsConstructor
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
