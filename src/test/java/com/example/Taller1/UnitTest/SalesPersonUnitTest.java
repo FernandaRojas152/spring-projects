@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,11 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
 import com.example.Taller1QuinteroLuisa.model.hr.Employee;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
@@ -25,7 +25,6 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.repository.EmployeeRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
-import com.example.Taller1QuinteroLuisa.services.SalesPersonService;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)
@@ -75,6 +74,8 @@ class SalesPersonUnitTest {
 	        long time1 = date.getTime();
 	        Timestamp time = new Timestamp(time1);
 	        person.setModifieddate(time);
+	        person.setBonus(BigDecimal.ONE);
+	        person.setCommissionpct(BigDecimal.valueOf(0.3));
 			
 	        employee.setBusinessentityid(BUSINESSENTITY_ID);
 	        territory.setTerritoryid(57);	        
@@ -97,6 +98,19 @@ class SalesPersonUnitTest {
 		
 		Salesperson temp= salesPersonRepository.findById(BUSINESSENTITY_ID).get();
 		
+		assertEquals(new BigDecimal(152), temp.getSalesquota());
 		assertEquals(temp.getBusinessentityid(), employee.getBusinessentityid());
+		
+	}
+	
+	@AfterEach
+	void tearDown() {
+		person = null;
+		System.gc();
+	}
+
+	@AfterAll
+	static void end() {
+		System.out.println("--------------- TEST ENDED -----------------");
 	}
 }
