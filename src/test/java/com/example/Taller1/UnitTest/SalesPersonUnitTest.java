@@ -10,7 +10,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +28,6 @@ import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)
 @SpringBootTest()
-//@ExtendWith(MockitoExtension.class)
 class SalesPersonUnitTest {
 	private static final Integer BUSINESSENTITY_ID = 1522215;
 	
@@ -76,6 +74,7 @@ class SalesPersonUnitTest {
 	        person.setModifieddate(time);
 	        person.setBonus(BigDecimal.ONE);
 	        person.setCommissionpct(BigDecimal.valueOf(0.3));
+	        //person.setSalesterritory(salesTerritoryRepository.getById(person.getSalesterritory().getTerritoryid()));
 			
 	        employee.setBusinessentityid(BUSINESSENTITY_ID);
 	        territory.setTerritoryid(57);	        
@@ -100,6 +99,7 @@ class SalesPersonUnitTest {
 		
 		assertEquals(new BigDecimal(152), temp.getSalesquota());
 		assertEquals(temp.getBusinessentityid(), employee.getBusinessentityid());
+		//assertEquals(temp.getSalesterritory().getTerritoryid(), territory.getTerritoryid());
 		
 	}
 	
