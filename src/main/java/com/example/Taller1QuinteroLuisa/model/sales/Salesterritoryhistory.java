@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  * The persistent class for the salesterritoryhistory database table.
@@ -20,7 +21,8 @@ public class Salesterritoryhistory implements Serializable {
 
 	@EmbeddedId
 	private SalesterritoryhistoryPK id;
-
+	
+	@PastOrPresent
 	private Timestamp enddate;
 
 	private Timestamp modifieddate;

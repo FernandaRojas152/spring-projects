@@ -27,7 +27,6 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	public void save(Salespersonquotahistory sales) throws Exception{
 		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
 		Integer p= pk.getBusinessentityid();
-		
 		if(be.findById(p).isPresent()
 				&& person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
 			validateConstraints(sales);
@@ -46,7 +45,8 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 			Salespersonquotahistory spqh = spq.getById(sales.getId());
 			spqh.setModifieddate(sales.getModifieddate());
 			spqh.setRowguid(sales.getRowguid());
-			
+			spqh.setSalesquota(sales.getSalesquota());
+			sales.setSalesperson(person.getById(p)); //Not sure :v
 			validateConstraints(sales);
 			
 		}
