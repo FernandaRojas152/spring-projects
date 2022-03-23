@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -73,9 +74,7 @@ class SalesPersonUnitTest {
 	        Timestamp time = new Timestamp(time1);
 	        person.setModifieddate(time);
 	        person.setBonus(BigDecimal.ONE);
-	        person.setCommissionpct(BigDecimal.valueOf(0.3));
-	        //person.setSalesterritory(salesTerritoryRepository.getById(person.getSalesterritory().getTerritoryid()));
-			
+	        person.setCommissionpct(new BigDecimal(0.3));
 	        employee.setBusinessentityid(BUSINESSENTITY_ID);
 	        territory.setTerritoryid(57);	        
 		} catch (Exception e) {
@@ -84,13 +83,15 @@ class SalesPersonUnitTest {
 	}
 	
 	@Test
-	void saveSalesPersonTest() {
+	@Tag("Test para ver si guarda una persona vendedora bien")
+	void saveSalesPersonTest1() {
 		when(salesPersonRepository.findById(BUSINESSENTITY_ID)).thenReturn(Optional.of(person));
 		when(employeeRepository.findById(BUSINESSENTITY_ID)).thenReturn(Optional.of(employee));
 		when(salesTerritoryRepository.findById(57)).thenReturn(Optional.of(territory));
 		
 		try {
 			salesPersonServiceImp.save(person);
+			Salesperson aux= null;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -99,8 +100,7 @@ class SalesPersonUnitTest {
 		
 		assertEquals(new BigDecimal(152), temp.getSalesquota());
 		assertEquals(temp.getBusinessentityid(), employee.getBusinessentityid());
-		//assertEquals(temp.getSalesterritory().getTerritoryid(), territory.getTerritoryid());
-		
+		assertEquals(new BigDecimal(0.3), temp.getCommissionpct());
 	}
 	
 	@AfterEach
