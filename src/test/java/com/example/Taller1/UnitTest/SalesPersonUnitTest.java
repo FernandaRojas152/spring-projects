@@ -2,6 +2,7 @@ package com.example.Taller1.UnitTest;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -103,7 +104,7 @@ class SalesPersonUnitTest {
 		@Test
 		void salesPersonNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				salesPersonServiceImp.update(null, null);
+				salesPersonServiceImp.save(null, null);
 			});
 		}
 
@@ -234,6 +235,13 @@ class SalesPersonUnitTest {
 			assertEquals(person.getBusinessentityid(), temp.getBusinessentityid());
 			assertEquals(new BigDecimal(0), temp.getCommissionpct());
 			assertEquals(territory, temp.getSalesterritory());
+		}
+		
+		@Test
+		void salesPersonUpdateNull() throws Exception{
+			Assertions.assertThrows(NullPointerException.class, () -> {
+				salesPersonServiceImp.update(null, null);
+			});
 		}
 		
 	}
