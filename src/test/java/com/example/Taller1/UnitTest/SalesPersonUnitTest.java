@@ -243,7 +243,6 @@ class SalesPersonUnitTest {
 				salesPersonServiceImp.update(null, null);
 			});
 		}
-		
 	}
 
 	/**@BeforeEach
