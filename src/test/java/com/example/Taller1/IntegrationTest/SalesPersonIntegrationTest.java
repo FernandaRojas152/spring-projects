@@ -28,10 +28,10 @@ public class SalesPersonIntegrationTest {
 	private SalesTerritoryRepository st;
 	
 	public SalesPersonIntegrationTest(EmployeeRepository ep, SalesTerritoryRepository st) {
-		// TODO Auto-generated constructor stub
 		this.ep= ep;
 		this.st= st;
-		
 		this.sp= new SalesPersonServiceImp(salesPerson, st, ep);
 	}
+	
+	
 }

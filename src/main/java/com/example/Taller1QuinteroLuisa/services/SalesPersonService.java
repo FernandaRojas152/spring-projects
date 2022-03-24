@@ -4,9 +4,9 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 
 public interface SalesPersonService {
 	
-	public void save(Salesperson s) throws Exception;
+	public Salesperson save(Salesperson s, Integer id) throws Exception;
 	
-	public void update(Salesperson s) throws Exception;
+	public Salesperson update(Salesperson s, Integer id) throws Exception;
 	
 
 }
