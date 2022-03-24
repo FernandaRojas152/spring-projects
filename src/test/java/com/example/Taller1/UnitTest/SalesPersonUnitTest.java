@@ -113,13 +113,21 @@ class SalesPersonUnitTest {
 	        long time1 = date.getTime();
 	        Timestamp time = new Timestamp(time1);
 	        person.setModifieddate(time);
-	        person.setSalesquota(new BigDecimal(-152));
+	        try {
+	        	person.setSalesquota(new BigDecimal(-152));
+			} catch (Exception e) {
+				Throwable exception = assertThrows(RuntimeException.class, () -> person.getSalesquota());
+		        assertEquals("La cuota no es mayor que 0", exception.getMessage());
+			}
+	        
 	        person.setCommissionpct(BigDecimal.ZERO);
 	        person.setBonus(BigDecimal.ONE);
 	        
-	        Salesperson temp= salesPersonServiceImp.save(person,57);
+	        //Salesperson temp= salesPersonServiceImp.save(person,57);
 	        
-	        assertNotNull(temp);
+	        //assertNull(temp);
+	        
+	        
 	        
 		}
 		
