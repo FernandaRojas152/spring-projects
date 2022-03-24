@@ -2,15 +2,12 @@ package com.example.Taller1.UnitTest;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -22,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -39,7 +37,7 @@ import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 @ExtendWith(MockitoExtension.class)
 //@SpringBootTest()
 class SalesPersonUnitTest {
-	private static final Integer BUSINESSENTITY_ID = 1522215;
+	//private static final Integer BUSINESSENTITY_ID = 1522215;
 
 	private Salesperson person;
 	private Employee employee;
@@ -66,11 +64,9 @@ class SalesPersonUnitTest {
 	@Nested
 	@DisplayName("Save methods for sales person")
 	class savePerson {
-
 		@Test
 		void saveSalesPersonCorrect() throws Exception {
 			//Set up
-
 			person= new Salesperson();
 			employee= new Employee();
 
@@ -90,7 +86,6 @@ class SalesPersonUnitTest {
 			when(salesPersonRepository.save(person)).thenReturn(person);
 
 			//Method
-
 			Salesperson temp= salesPersonServiceImp.save(person,57);
 
 			assertNotNull(temp);
@@ -153,6 +148,25 @@ class SalesPersonUnitTest {
 
 			verify(salesPersonRepository, times(0)).save(person);
 		}
+		
+		@Test
+		void salesPersonWrongComissionNull() throws Exception {
+			person= new Salesperson();
+			employee= new Employee();
+
+			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			Date date  = df.parse("10-11-2022");
+			long time1 = date.getTime();
+			Timestamp time = new Timestamp(time1);
+			person.setModifieddate(time);
+			person.setSalesquota(new BigDecimal(42));
+			person.setCommissionpct(null);
+			person.setBonus(BigDecimal.ONE);
+
+			assertNull(person.getCommissionpct());
+
+			verify(salesPersonRepository, times(0)).save(person);
+		}
 
 		@Test
 		void salesPersonPercentageWrong() throws Exception {
@@ -180,8 +194,15 @@ class SalesPersonUnitTest {
 			verify(salesPersonRepository, times(0)).save(person);
 			//verify(salesTerritoryRepository, times(0)).findById(57);
 		}
-
 	}
+	
+	@Nested
+	@DisplayName("Update methods for sales person")
+	class updateSalesPerson{
+		
+	}
+	
+	
 
 	/**@BeforeEach
 	void setUp() {
