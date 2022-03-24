@@ -48,19 +48,19 @@ public class SalesPersonServiceImp implements SalesPersonService{
 		
 		if(optional.isPresent()) {
 			
-			Salesperson p= sp.getById(s.getBusinessentityid());
-			p.setModifieddate(s.getModifieddate());
-			p.setSaleslastyear(s.getSaleslastyear());
-			p.setBonus(s.getBonus());
-			p.setCommissionpct(s.getCommissionpct());
-			p.setRowguid(s.getRowguid());
-			p.setSalesquota(s.getSalesquota());
-			p.setSalesytd(s.getSalesytd());
-			p.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
+//			Salesperson p= sp.getById(s.getBusinessentityid());
+//			p.setModifieddate(s.getModifieddate());
+//			p.setSaleslastyear(s.getSaleslastyear());
+//			p.setBonus(s.getBonus());
+//			p.setCommissionpct(s.getCommissionpct());
+//			p.setRowguid(s.getRowguid());
+//			p.setSalesquota(s.getSalesquota());
+//			p.setSalesytd(s.getSalesytd());
+//			p.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
 
 
 			validateConstrains(s);
-			temp= save(p, id);
+			temp= save(s, id);
 		}
 
 		return temp;

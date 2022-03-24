@@ -88,6 +88,7 @@ class SalesPersonUnitTest {
 			//Method
 			Salesperson temp= salesPersonServiceImp.save(person,57);
 
+			//Asserts
 			assertNotNull(temp);
 			assertEquals(new BigDecimal(152), temp.getSalesquota());
 			assertEquals(person.getBusinessentityid(), temp.getBusinessentityid());
@@ -200,9 +201,42 @@ class SalesPersonUnitTest {
 	@DisplayName("Update methods for sales person")
 	class updateSalesPerson{
 		
+		@Test
+		void updateSalesPersonCorrect() throws Exception {
+			person= new Salesperson();
+			employee= new Employee();
+
+			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			Date date  = df.parse("10-11-2022");
+			long time1 = date.getTime();
+			Timestamp time = new Timestamp(time1);
+			person.setModifieddate(time);
+			person.setBusinessentityid(2215);
+			person.setSalesquota(new BigDecimal(152));
+			person.setCommissionpct(BigDecimal.ZERO);
+			person.setBonus(BigDecimal.ONE);
+			
+			Salesperson person2= new Salesperson();
+
+			Salesterritory territory= new Salesterritory();
+
+			//when(employeeRepository.findById(BUSINESSENTITY_ID)).thenReturn(Optional.of(employee));
+			when(salesTerritoryRepository.findById(57)).thenReturn(Optional.of(territory));
+			when(salesPersonRepository.findById(2215)).thenReturn(Optional.of(person2));
+			when(salesPersonRepository.save(person)).thenReturn(person);
+
+			//Method
+			Salesperson temp= salesPersonServiceImp.update(person, 57);
+			
+			//Asserts
+			assertNotNull(temp);
+			assertEquals(new BigDecimal(152), temp.getSalesquota());
+			assertEquals(person.getBusinessentityid(), temp.getBusinessentityid());
+			assertEquals(new BigDecimal(0), temp.getCommissionpct());
+			assertEquals(territory, temp.getSalesterritory());
+		}
+		
 	}
-	
-	
 
 	/**@BeforeEach
 	void setUp() {
