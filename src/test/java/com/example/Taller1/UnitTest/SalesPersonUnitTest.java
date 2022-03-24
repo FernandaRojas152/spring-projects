@@ -60,6 +60,7 @@ class SalesPersonUnitTest {
 	@BeforeAll
 	static void init() {
 		System.out.println("--------------- SALESPERSON TESTING -----------------");
+		System.out.println(" ");
 	}
 
 	@Nested
@@ -101,6 +102,13 @@ class SalesPersonUnitTest {
 			verify(salesTerritoryRepository).findById(57);
 			//verify(employeeRepository).findById(BUSINESSENTITY_ID);
 			verify(salesPersonRepository).save(person);
+		}
+		
+		@Test
+		void salesPersonNull() {
+			Assertions.assertThrows(NullPointerException.class, () -> {
+				salesPersonServiceImp.update(null, null);
+			});
 		}
 
 		@Test
@@ -164,14 +172,13 @@ class SalesPersonUnitTest {
 				assertEquals("El porcentaje de comision no esta entre 0 y 1", exception.getMessage());
 			}
 			person.setBonus(BigDecimal.ONE);
-			
+
 			Salesterritory territory= new Salesterritory();
 			Salesperson temp= salesPersonServiceImp.save(person,57);
-			
+
 			assertNull(temp);
 			verify(salesPersonRepository, times(0)).save(person);
 			//verify(salesTerritoryRepository, times(0)).findById(57);
-
 		}
 
 	}
