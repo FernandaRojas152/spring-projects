@@ -25,11 +25,13 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	
 	@Override
 	public void save(Salespersonquotahistory sales) throws Exception{
+		Salespersonquotahistory temp = null;
+		validateConstraints(sales);
 		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
 		Integer p= pk.getBusinessentityid();
 		if(be.findById(p).isPresent()
 				&& person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
-			validateConstraints(sales);
+			
 			spq.save(sales);
 		}
 	}
