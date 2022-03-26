@@ -28,7 +28,6 @@ public class Salespersonquotahistory implements Serializable {
 
 	private Integer rowguid;
 
-	@PositiveOrZero
 	private BigDecimal salesquota;
 
 	// bi-directional many-to-one association to Salesperson

@@ -2,7 +2,6 @@ package com.example.Taller1.UnitTest;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -188,7 +187,7 @@ class SalesPersonUnitTest {
 			}
 			person.setBonus(BigDecimal.ONE);
 
-			Salesterritory territory= new Salesterritory();
+			//Salesterritory territory= new Salesterritory();
 			Salesperson temp= salesPersonServiceImp.save(person,57);
 
 			assertNull(temp);

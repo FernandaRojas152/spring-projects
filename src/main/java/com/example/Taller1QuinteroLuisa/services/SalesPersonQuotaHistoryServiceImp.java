@@ -1,9 +1,13 @@
 package com.example.Taller1QuinteroLuisa.services;
 
 import java.math.BigDecimal;
+import java.util.Optional;
+
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
 import com.example.Taller1QuinteroLuisa.model.sales.SalespersonquotahistoryPK;
 import com.example.Taller1QuinteroLuisa.repository.BusinessentityRepository;
@@ -24,34 +28,37 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	}
 	
 	@Override
-	public void save(Salespersonquotahistory sales) throws Exception{
+	public Salespersonquotahistory save(Salespersonquotahistory sales, Integer id) throws Exception{
 		Salespersonquotahistory temp = null;
 		validateConstraints(sales);
-		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
-		Integer p= pk.getBusinessentityid();
-		if(be.findById(p).isPresent()
-				&& person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
-			
-			spq.save(sales);
+		Optional<Salesperson> optional = this.person.findById(id);
+		if(optional.isPresent()) {
+			sales.setSalesperson(optional.get());
+			temp= this.spq.save(sales);
 		}
+		
+		return temp;
 	}
 
 	@Override
-	public void update(Salespersonquotahistory sales) throws Exception {
+	public Salespersonquotahistory update(Salespersonquotahistory sales, Integer id) throws Exception {
+		Salespersonquotahistory temp = null;
 		SalespersonquotahistoryPK pk= new SalespersonquotahistoryPK();
 		Integer p= pk.getBusinessentityid();
+		Optional<Salespersonquotahistory> optional = spq.findById(pk);
 		
-		if(be.findById(p).isPresent()
-				&& person.findById(sales.getSalesperson().getBusinessentityid()).isPresent()) {
-			Salespersonquotahistory spqh = spq.getById(sales.getId());
-			spqh.setModifieddate(sales.getModifieddate());
-			spqh.setRowguid(sales.getRowguid());
-			spqh.setSalesquota(sales.getSalesquota());
-			sales.setSalesperson(person.getById(p)); //Not sure :v
-			validateConstraints(sales);
+		if(optional.isPresent() || be.findById(p).isPresent()) {
 			
-		}
+//			Salespersonquotahistory spqh = spq.getById(sales.getId());
+//			spqh.setModifieddate(sales.getModifieddate());
+//			spqh.setRowguid(sales.getRowguid());
+//			spqh.setSalesquota(sales.getSalesquota());
+//			sales.setSalesperson(person.getById(p)); //Not sure :v
+			validateConstraints(sales);
+			temp= save(sales, id);
 		
+		}
+		return temp;
 	}
 	
 	@NotNull
