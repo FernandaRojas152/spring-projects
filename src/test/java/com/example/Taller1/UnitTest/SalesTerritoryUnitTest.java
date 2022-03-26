@@ -13,7 +13,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -27,9 +26,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.model.hr.Employee;
 import com.example.Taller1QuinteroLuisa.model.person.Countryregion;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.repository.CountryRegionRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
@@ -298,6 +295,11 @@ public class SalesTerritoryUnitTest {
 
 			verify(territoryRepository, times(0)).save(st);
 		}
+	}
+	
+	@Nested
+	@DisplayName("Update methods for sales territory")
+	class UpdateSalesTerritory{
 		
 	}
 	
