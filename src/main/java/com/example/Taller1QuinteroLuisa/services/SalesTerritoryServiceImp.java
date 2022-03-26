@@ -59,7 +59,7 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 	@NotNull
 	private void validateConstraints(Salesterritory t) throws Exception{
 		if(t.getName().length() < 5) {
-			throw new Exception("El nombre debe tener al menos 5 caracteres ");
+			throw new RuntimeException("El nombre debe tener al menos 5 caracteres");
 		}
 	}
 }
