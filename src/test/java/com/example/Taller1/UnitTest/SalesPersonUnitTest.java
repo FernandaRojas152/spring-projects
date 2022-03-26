@@ -38,8 +38,7 @@ import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 @ExtendWith(MockitoExtension.class)
 //@SpringBootTest()
 class SalesPersonUnitTest {
-	//private static final Integer BUSINESSENTITY_ID = 1522215;
-
+	//private static final Integer BUSINESSENTITY_ID = 15ñ22215;
 	private Salesperson person;
 	private Employee employee;
 	//private Salesterritory territory;
@@ -64,7 +63,7 @@ class SalesPersonUnitTest {
 
 	@Nested
 	@DisplayName("Save methods for sales person")
-	class savePerson {
+	class savePerson {		
 		@Test
 		void saveSalesPersonCorrect() throws Exception {
 			//Set up
@@ -265,8 +264,7 @@ class SalesPersonUnitTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	 */
+	}*/
 
 	@AfterEach
 	void tearDown() {

@@ -4,7 +4,7 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 
 public interface SalesTerritoryService {
 	
-	public void save(Salesterritory t) throws Exception;
-	public void update(Salesterritory t) throws Exception;
+	public Salesterritory save(Salesterritory t, String id) throws Exception;
+	public Salesterritory update(Salesterritory t, String id) throws Exception;
 
 }

@@ -34,10 +34,8 @@ public class SalesPersonServiceImp implements SalesPersonService{
 		if(optional.isPresent()) {
 			s.setSalesterritory(optional.get());
 			//s.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
-
 			temp= this.sp.save(s);
 		}
-
 		return temp;
 	}
 
@@ -47,7 +45,6 @@ public class SalesPersonServiceImp implements SalesPersonService{
 		Optional<Salesperson> optional = sp.findById(s.getBusinessentityid());
 		
 		if(optional.isPresent()) {
-			
 //			Salesperson p= sp.getById(s.getBusinessentityid());
 //			p.setModifieddate(s.getModifieddate());
 //			p.setSaleslastyear(s.getSaleslastyear());
@@ -57,8 +54,6 @@ public class SalesPersonServiceImp implements SalesPersonService{
 //			p.setSalesquota(s.getSalesquota());
 //			p.setSalesytd(s.getSalesytd());
 //			p.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
-
-
 			validateConstrains(s);
 			temp= save(s, id);
 		}
