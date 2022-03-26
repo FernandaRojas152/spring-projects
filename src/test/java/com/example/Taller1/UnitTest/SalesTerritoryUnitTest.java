@@ -250,6 +250,55 @@ public class SalesTerritoryUnitTest {
 
 			verify(territoryRepository, times(0)).save(st);
 		}
+		
+		@Test
+		void salesTerritoryGroupEmpty() throws Exception {
+			st= new Salesterritory();
+			
+			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			Date date  = df.parse("14-04-2022");
+			long time1 = date.getTime();
+			Timestamp time = new Timestamp(time1);
+			
+			st.setName("Sarumi");
+			st.setModifieddate(time);
+			st.setCostlastyear(new BigDecimal(200));
+			st.setCostytd(new BigDecimal(30));
+			st.setSalesGroup("");
+			st.setSaleslastyear(new BigDecimal(400));
+			st.setSalesytd(new BigDecimal(40));
+			
+			Salesterritory temp = salesTerritoryService.save(st, "+40");
+			
+			assertNull(temp);
+
+			verify(territoryRepository, times(0)).save(st);
+		}
+		
+		@Test
+		void salesTerritoryGroupNull() throws Exception {
+			st= new Salesterritory();
+			
+			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			Date date  = df.parse("14-04-2022");
+			long time1 = date.getTime();
+			Timestamp time = new Timestamp(time1);
+			
+			st.setName("Sarumi");
+			st.setModifieddate(time);
+			st.setCostlastyear(new BigDecimal(200));
+			st.setCostytd(new BigDecimal(30));
+			st.setSalesGroup(null);
+			st.setSaleslastyear(new BigDecimal(400));
+			st.setSalesytd(new BigDecimal(40));
+			
+			Salesterritory temp = salesTerritoryService.save(st, "+40");
+			
+			assertNull(temp);
+
+			verify(territoryRepository, times(0)).save(st);
+		}
+		
 	}
 	
 	@AfterEach
