@@ -125,9 +125,6 @@ class SalesPersonUnitTest {
 
 			person.setCommissionpct(BigDecimal.ZERO);
 			person.setBonus(BigDecimal.ONE);
-
-			//Salesperson temp= salesPersonServiceImp.save(person,57);
-			//assertNull(temp);
 		}
 
 		@Test
