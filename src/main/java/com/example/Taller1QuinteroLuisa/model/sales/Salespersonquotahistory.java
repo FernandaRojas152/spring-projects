@@ -5,9 +5,13 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -19,9 +23,15 @@ import javax.validation.constraints.PositiveOrZero;
 @NamedQuery(name = "Salespersonquotahistory.findAll", query = "SELECT s FROM Salespersonquotahistory s")
 public class Salespersonquotahistory implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
+	
+	@Id
+	@SequenceGenerator(name = "SALESPERSONQUOTAHISTORY_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESPERSONQUOTAHISTORY_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESPERSONQUOTAHISTORY_BUSINESSENTITYID_GENERATOR")
+	private Integer businessentityid;
+	
+	/**@EmbeddedId
 	private SalespersonquotahistoryPK id;
+	*/
 	
 	@PastOrPresent
 	private Timestamp modifieddate;
@@ -38,9 +48,9 @@ public class Salespersonquotahistory implements Serializable {
 	public Salespersonquotahistory() {
 	}
 
-	public SalespersonquotahistoryPK getId() {
-		return this.id;
-	}
+//	public SalespersonquotahistoryPK getId() {
+//		return this.id;
+//	}
 
 	public Timestamp getModifieddate() {
 		return this.modifieddate;
@@ -53,14 +63,18 @@ public class Salespersonquotahistory implements Serializable {
 	public Salesperson getSalesperson() {
 		return this.salesperson;
 	}
+	
+	public Integer getBusinessentityid() {
+		return this.businessentityid;
+	}
 
 	public BigDecimal getSalesquota() {
 		return this.salesquota;
 	}
 
-	public void setId(SalespersonquotahistoryPK id) {
-		this.id = id;
-	}
+//	public void setId(SalespersonquotahistoryPK id) {
+//		this.id = id;
+//	}
 
 	public void setModifieddate(Timestamp modifieddate) {
 		this.modifieddate = modifieddate;
@@ -76,6 +90,10 @@ public class Salespersonquotahistory implements Serializable {
 
 	public void setSalesquota(BigDecimal salesquota) {
 		this.salesquota = salesquota;
+	}
+	
+	public void setBusinessentityid(Integer businessentityid) {
+		this.businessentityid = businessentityid;
 	}
 
 }

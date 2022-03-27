@@ -2,12 +2,15 @@ package com.example.Taller1QuinteroLuisa.model.sales;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.PastOrPresent;
 
 /**
@@ -19,8 +22,13 @@ import javax.validation.constraints.PastOrPresent;
 public class Salesterritoryhistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private SalesterritoryhistoryPK id;
+//	@EmbeddedId
+//	private SalesterritoryhistoryPK id;
+	
+	@Id
+	@SequenceGenerator(name = "SALESTERRITORYHISTORY_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESTERRITORYHISTORY_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESTERRITORYHISTORY_BUSINESSENTITYID_GENERATOR")
+	private Integer businessentityid;
 	
 	@PastOrPresent
 	private Timestamp enddate;
@@ -46,8 +54,12 @@ public class Salesterritoryhistory implements Serializable {
 		return this.enddate;
 	}
 
-	public SalesterritoryhistoryPK getId() {
-		return this.id;
+//	public SalesterritoryhistoryPK getId() {
+//		return this.id;
+//	}
+	
+	public Integer getBusinessentityid() {
+		return this.businessentityid;
 	}
 
 	public Timestamp getModifieddate() {
@@ -70,9 +82,9 @@ public class Salesterritoryhistory implements Serializable {
 		this.enddate = enddate;
 	}
 
-	public void setId(SalesterritoryhistoryPK id) {
-		this.id = id;
-	}
+//	public void setId(SalesterritoryhistoryPK id) {
+//		this.id = id;
+//	}
 
 	public void setModifieddate(Timestamp modifieddate) {
 		this.modifieddate = modifieddate;
@@ -88,6 +100,10 @@ public class Salesterritoryhistory implements Serializable {
 
 	public void setSalesterritory(Salesterritory salesterritory) {
 		this.salesterritory = salesterritory;
+	}
+	
+	public void setBusinessentityid(Integer businessentityid) {
+		this.businessentityid = businessentityid;
 	}
 
 }

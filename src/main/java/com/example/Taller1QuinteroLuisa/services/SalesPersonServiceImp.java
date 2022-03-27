@@ -42,31 +42,22 @@ public class SalesPersonServiceImp implements SalesPersonService{
 	@Override
 	public Salesperson update(Salesperson s, Integer id) throws Exception {
 		Salesperson temp= null;
-		Optional<Salesperson> optional = sp.findById(s.getBusinessentityid());
-		
-		if(optional.isPresent()) {
-//			Salesperson p= sp.getById(s.getBusinessentityid());
-//			p.setModifieddate(s.getModifieddate());
-//			p.setSaleslastyear(s.getSaleslastyear());
-//			p.setBonus(s.getBonus());
-//			p.setCommissionpct(s.getCommissionpct());
-//			p.setRowguid(s.getRowguid());
-//			p.setSalesquota(s.getSalesquota());
-//			p.setSalesytd(s.getSalesytd());
-//			p.setSalesterritory(st.getById(s.getSalesterritory().getTerritoryid()));
-			validateConstrains(s);
-			temp= save(s, id);
+		if(s.getBusinessentityid()!=null) {
+			Optional<Salesperson> optional = sp.findById(s.getBusinessentityid());
+			if(optional.isPresent()) {
+				//validateConstrains(s);
+				temp= save(s, id);
+			}
 		}
-
 		return temp;
 	}
 
 	@NotNull
 	private void validateConstrains(Salesperson s) throws Exception{
-		if(!(s.getCommissionpct().compareTo(BigDecimal.ZERO) >= 0) || !(s.getCommissionpct().compareTo(BigDecimal.ZERO) <= 1)) {
+		if(s.getCommissionpct()!=null && !(s.getCommissionpct().compareTo(BigDecimal.ZERO) >= 0) || !(s.getCommissionpct().compareTo(BigDecimal.ZERO) <= 1)) {
 			throw new RuntimeException("El porcentaje de comision no esta entre 0 y 1");
 		}
-		if(!(s.getSalesquota().signum()!=-1)){
+		if(s.getSalesquota()!=null && !(s.getSalesquota().signum()!=-1)){
 			throw new RuntimeException("La cuota no es mayor que 0");
 		}
 		

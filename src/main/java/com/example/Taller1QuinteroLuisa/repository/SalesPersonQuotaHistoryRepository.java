@@ -6,6 +6,6 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
 import com.example.Taller1QuinteroLuisa.model.sales.SalespersonquotahistoryPK;
 
 @Repository
-public interface SalesPersonQuotaHistoryRepository extends JpaRepository<Salespersonquotahistory, SalespersonquotahistoryPK>{
+public interface SalesPersonQuotaHistoryRepository extends JpaRepository<Salespersonquotahistory, Integer>{
 
 }

@@ -1,19 +1,21 @@
 package com.example.Taller1QuinteroLuisa.services;
 
+import java.util.Optional;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritoryhistory;
-import com.example.Taller1QuinteroLuisa.model.sales.SalesterritoryhistoryPK;
 import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryHistoryRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
 
 @Service
 public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistoryService{
-	SalesTerritoryHistoryRepository sth;
-	SalesPersonRepository sp;
-	SalesTerritoryRepository st;
+	private SalesTerritoryHistoryRepository sth;
+	private SalesPersonRepository sp;
+	private SalesTerritoryRepository st;
 
 	@Autowired
 	public SalesTerritoryHistoryServiceImp(SalesTerritoryHistoryRepository sth,SalesPersonRepository sp, SalesTerritoryRepository st) {
@@ -23,40 +25,38 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	}
 
 	@Override
-	public void save(Salesterritoryhistory territory) throws Exception {
-		SalesterritoryhistoryPK pk= new SalesterritoryhistoryPK();
-		Integer p= pk.getBusinessentityid();
-
-		//corregir el sp por be
-		if(sp.findById(p).isPresent() &&
-				st.findById(territory.getSalesterritory().getTerritoryid()).isPresent()) {
-
-			territory.setSalesterritory(st.getById(territory.getSalesterritory().getTerritoryid()));
-			validateConstrains(territory);
-			sth.save(territory);
+	public Salesterritoryhistory save(Salesterritoryhistory territory, Integer id, Integer idPerson) throws Exception {
+		Salesterritoryhistory temp= null;
+		validateConstrains(territory);
+		
+		Optional<Salesterritory> optional= this.st.findById(id);
+		Optional<Salesperson> optional2= this.sp.findById(idPerson);
+		if(optional.isPresent() && optional2.isPresent()) {
+			territory.setSalesterritory(optional.get());
+			territory.setSalesperson(optional2.get());
+			
+			temp= this.sth.save(territory);
 		}
+		return temp;
 	}
 
 	@Override
-	public void update(Salesterritoryhistory territory) throws Exception {
-		SalesterritoryhistoryPK pk= new SalesterritoryhistoryPK();
-		Integer p= pk.getBusinessentityid();
+	public Salesterritoryhistory update(Salesterritoryhistory territory, Integer id, Integer idPerson) throws Exception {
+		Salesterritoryhistory temp= null;
 
-		if(sp.findById(p).isPresent() &&
-				st.findById(territory.getSalesterritory().getTerritoryid()).isPresent()) {
-			Salesterritoryhistory t= sth.getById(territory.getId());
-			t.setEnddate(territory.getEnddate());
-			t.setModifieddate(territory.getModifieddate());
-			t.setRowguid(territory.getRowguid());
-			t.setSalesterritory(st.getById(territory.getSalesterritory().getTerritoryid()));
-			validateConstrains(territory);
-			sth.save(t);
+		if(territory.getBusinessentityid()!=null) {
+			Optional<Salesterritoryhistory> optional = sth.findById(territory.getBusinessentityid());
+			if(optional.isPresent()) {
+				//validateConstrains(territory);
+				temp = save(territory, id, idPerson);
+			}	
 		}
+		return temp;
 	}
 
 	@NotNull
 	private void validateConstrains(Salesterritoryhistory territory) throws Exception {
-		if(territory.getModifieddate().after(territory.getEnddate())) { //fix start date
+		if(territory.getModifieddate().after(territory.getEnddate())) {
 			throw new Exception("La fecha de inicio no es mejor a la fecha final");
 		}
 	}

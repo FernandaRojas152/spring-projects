@@ -55,7 +55,6 @@ public class SalesTerritoryUnitTest {
 	@Nested
 	@DisplayName("Save methods for sales territory")
 	class saveTerritory {
-		
 		@Test
 		@DisplayName("Save Test Correctly")
 		void saveSalesTerritoryCorrect() throws Exception {
@@ -373,7 +372,7 @@ public class SalesTerritoryUnitTest {
 			Date date  = df.parse("14-04-2022");
 			long time1 = date.getTime();
 			Timestamp time = new Timestamp(time1);
-
+			
 			st.setTerritoryid(57);
 			st.setModifieddate(time);
 			st.setCostlastyear(new BigDecimal(200));
@@ -407,6 +406,6 @@ public class SalesTerritoryUnitTest {
 	@AfterAll
 	static void end() {
 		System.out.println(" ");
-		System.out.println("--------------- SALESPERSON TEST ENDED -----------------");
+		System.out.println("--------------- SALESTERRITORY TEST ENDED -----------------");
 	}
 }

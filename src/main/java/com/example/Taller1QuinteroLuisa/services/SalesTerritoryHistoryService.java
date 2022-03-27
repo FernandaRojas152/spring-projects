@@ -4,7 +4,7 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salesterritoryhistory;
 
 public interface SalesTerritoryHistoryService {
 	
-	public void save(Salesterritoryhistory territory) throws Exception;
-	public void update(Salesterritoryhistory territory) throws Exception;
+	public Salesterritoryhistory save(Salesterritoryhistory territory, Integer id, Integer idPerson) throws Exception;
+	public Salesterritoryhistory update(Salesterritoryhistory territory, Integer id, Integer idPerson) throws Exception;
 
 }
