@@ -2,17 +2,18 @@ package com.example.Taller1.IntegrationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -38,37 +39,37 @@ public class SalesPersonIntegrationTest {
 	private Salesperson s;
 	private Employee e;
 	private Salesterritory t;
-	
+
 	private SalesPersonServiceImp sp;
-	private SalesTerritoryServiceImp stS;	
+	//private SalesTerritoryServiceImp stS;	
 	private SalesPersonRepository salesPerson;
-	private EmployeeRepository ep;
+	//private EmployeeRepository ep;
 	private SalesTerritoryRepository st;
-	
+
 	@Autowired
-	public SalesPersonIntegrationTest(SalesPersonRepository salesPerson,
-			EmployeeRepository ep, SalesTerritoryRepository st, SalesPersonServiceImp sp) {
-		super();
-		this.ep= ep;
+	public SalesPersonIntegrationTest(SalesPersonRepository salesPerson, SalesTerritoryRepository st, SalesPersonServiceImp sp) {
+		//super();
 		this.st= st;
 		this.sp= sp;
 		this.salesPerson= salesPerson;
 	}
-	
+
 	@BeforeAll
-    static void init() {
-        System.out.println("---------------SALESPERSON TESTED-----------------");
-    }
-	
+	static void init() {
+		System.out.println("---------------SALESPERSON TESTED-----------------");
+	}
+
 	@Nested
 	@DisplayName("Save methods for sales person")
 	class SaveSalesPerson{
-		@Test
-		void saveCorrectly() throws Exception {
+		
+		@BeforeEach
+		void setUp() throws Exception{
 			s = new Salesperson();
-			e= new Employee();
+			//e= new Employee();
 			t= new Salesterritory();
 			
+			s.setBusinessentityid(2215);
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 			Date date  = df.parse("10-11-2022");
 			long time1 = date.getTime();
@@ -77,19 +78,35 @@ public class SalesPersonIntegrationTest {
 			s.setSalesquota(new BigDecimal(152));
 			s.setCommissionpct(BigDecimal.ZERO);
 			s.setBonus(BigDecimal.ONE);	
-			t.setTerritoryid(57);
-			st.save(t);
-			Salesperson temp= sp.save(s,57);
-			assertNotNull(temp);
-			assertEquals(new BigDecimal(152), temp.getSalesquota());
-			assertEquals(s.getBusinessentityid(), temp.getBusinessentityid());
-			assertEquals(new BigDecimal(0), temp.getCommissionpct());
 			
-			Optional <Salesterritory> optional = st.findById(57);
-			assertEquals(temp.getSalesterritory().getTerritoryid(), optional.get().getTerritoryid());
+			st.save(t);
+			s.setSalesterritory(t);
+		}
+		
+		@Test
+		void saveCorrectly() throws Exception {
+			Salesterritory temp= new Salesterritory();
+			temp.setTerritoryid(57);
+			s.setSalesterritory(temp);
+			
+			System.out.println(s.getSalesterritory());
+			System.out.println(s);
+			sp.save(s, 57);
+			assertNotNull(temp);
+			
+//			assertThrows(NoSuchElementException.class, ()-> { sp.save(s, 57);
+//				
+//			});
+
+//			assertEquals(new BigDecimal(152), temp.getSalesquota());
+//			assertEquals(s.getBusinessentityid(), temp.getBusinessentityid());
+//			assertEquals(new BigDecimal(0), temp.getCommissionpct());
+//
+//			Optional <Salesterritory> optional = st.findById(57);
+//			assertEquals(temp.getSalesterritory().getTerritoryid(), optional.get().getTerritoryid());
 		}		
 	}
-	
+
 	@AfterEach
 	void tearDown() {
 		s = null;
@@ -100,6 +117,6 @@ public class SalesPersonIntegrationTest {
 	static void end() {
 		System.out.println("--------------- FINISHED -----------------");
 	}
-	
-	
+
+
 }
