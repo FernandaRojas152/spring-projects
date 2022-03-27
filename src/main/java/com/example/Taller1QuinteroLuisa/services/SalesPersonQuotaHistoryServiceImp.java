@@ -62,9 +62,9 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	}
 	
 	@NotNull
-	private void validateConstraints(Salespersonquotahistory sales) throws Exception{
+	private void validateConstraints(Salespersonquotahistory sales) throws RuntimeException{
 		if(!(sales.getSalesquota().compareTo(BigDecimal.ZERO) > 0)){
-			throw new Exception("La cuota no es mayor que 0");
+			throw new RuntimeException("La cuota no es mayor que 0");
 		}
 	}
 }
