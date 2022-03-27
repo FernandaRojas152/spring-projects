@@ -3,8 +3,6 @@ package com.example.Taller1.IntegrationTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -23,7 +21,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.model.hr.Employee;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
@@ -37,16 +34,13 @@ public class SalesPersonIntegrationTest {
 	private Salesperson s;
 	//private Employee e;
 	private Salesterritory t;
-
 	private SalesPersonServiceImp sp;
-	//private SalesTerritoryServiceImp stS;	
 	private SalesPersonRepository salesPerson;
 	//private EmployeeRepository ep;
 	private SalesTerritoryRepository st;
 
 	@Autowired
 	public SalesPersonIntegrationTest(SalesPersonRepository salesPerson, SalesTerritoryRepository st, SalesPersonServiceImp sp) {
-		//super();
 		this.st= st;
 		this.sp= sp;
 		this.salesPerson= salesPerson;
@@ -145,7 +139,6 @@ public class SalesPersonIntegrationTest {
 			s.setCommissionpct(BigDecimal.ZERO);
 			s.setBonus(BigDecimal.ONE);
 			
-			
 			st.save(t);
 			s.setSalesterritory(t);
 		}
@@ -180,6 +173,4 @@ public class SalesPersonIntegrationTest {
 	static void end() {
 		System.out.println("--------------- FINISHED -----------------");
 	}
-
-
 }
