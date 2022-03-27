@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -71,7 +72,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			business= new Businessentity();
 
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
+			Date date  = df.parse("06-01-2022");
 			long time1 = date.getTime();
 			Timestamp time = new Timestamp(time1);
 			
@@ -99,6 +100,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 		}
 		
 		@Test
+		@DisplayName("Saving a person quota with a wrong quota")
 		void wrongQuota() {
 			try {
 				personQuota.setSalesquota(new BigDecimal(-5));
@@ -110,6 +112,34 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			verify(personQuotaRepo, times(0)).save(personQuota);
 		}
 		
+		@Test
+		void nullQuota() {
+			try {
+				personQuota.setSalesquota(null);
+			} catch (RuntimeException e) {
+				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
+				assertEquals("La cuota no es mayor que 0", exception.getMessage());
+			}
+			
+			verify(personQuotaRepo, times(0)).save(personQuota);
+		}
+		
+		@Test
+		void wrongDate() throws ParseException {
+			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			Date date  = df.parse("14-04-2022");
+			long time1 = date.getTime();
+			Timestamp time = new Timestamp(time1);
+			
+			try {
+				personQuota.setModifieddate(time);
+			} catch (RuntimeException e) {
+				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
+				assertEquals("La cuota no es mayor que 0", exception.getMessage());
+			}
+			
+			verify(personQuotaRepo, times(0)).save(personQuota);
+		}
 		
 		
 	}
