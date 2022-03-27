@@ -57,7 +57,7 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	@NotNull
 	private void validateConstrains(Salesterritoryhistory territory) throws Exception {
 		if(territory.getModifieddate().after(territory.getEnddate())) {
-			throw new Exception("La fecha de inicio no es mejor a la fecha final");
+			throw new Exception("La fecha de inicio no es menor a la fecha final");
 		}
 	}
 

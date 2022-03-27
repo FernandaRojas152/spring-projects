@@ -142,7 +142,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			try {
 				personQuota.setModifieddate(time);
 			} catch (RuntimeException e) {
-				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
+				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getModifieddate());
 				assertEquals("La fecha de inicio no es menor a la fecha actual", exception.getMessage());
 			}
 			verify(personQuotaRepo, times(0)).save(personQuota);
@@ -154,7 +154,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			try {
 				personQuota.setModifieddate(null);
 			} catch (RuntimeException e) {
-				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
+				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getModifieddate());
 				assertEquals("La fecha de inicio no es menor a la fecha actual", exception.getMessage());
 				assertNull(personQuota.getModifieddate());
 			}
