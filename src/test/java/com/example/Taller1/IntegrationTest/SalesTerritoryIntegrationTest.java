@@ -2,14 +2,11 @@ package com.example.Taller1.IntegrationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -121,7 +118,43 @@ public class SalesTerritoryIntegrationTest{
 	@Nested
 	@DisplayName("Update methods for territory")
 	class updateTerritory{
+		@BeforeEach
+		void setUp() throws Exception{
+			t= new Salesterritory();
+			cr= new Countryregion();
+			t.setTerritoryid(57);
+			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+			Date date  = df.parse("10-11-2022");
+			long time1 = date.getTime();
+			Timestamp time = new Timestamp(time1);
+			t.setModifieddate(time);
+			t.setName("Sarumi");
+			t.setCostlastyear(new BigDecimal(200));
+			t.setCostytd(new BigDecimal(30));
+			t.setSalesGroup("Xiao");
+			t.setSaleslastyear(new BigDecimal(400));
+			t.setSalesytd(new BigDecimal(40));
+			//countryRepo.save(cr);
+			t.setCountryregioncode(cr.getCountryregioncode());
+		}
 		
+		@Test
+		void updateCorrectly() throws Exception {
+			Salesterritory t2= new Salesterritory();
+			Countryregion temp= new Countryregion();
+			temp.setCountryregioncode("Spain");
+			t2.setCountryregioncode(temp.getCountryregioncode());
+			
+			territoryService.save(t, "Spain");
+			assertNotNull(territoryService);
+		}
+		
+		@Test
+		void salesPersonUpdateNull() throws Exception{
+			Assertions.assertThrows(NullPointerException.class, () -> {
+				territoryService.update(null, null);
+			});
+		}
 	}
 	
 	@AfterEach
