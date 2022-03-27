@@ -66,9 +66,7 @@ public class SalesPersonIntegrationTest {
 		@BeforeEach
 		void setUp() throws Exception{
 			s = new Salesperson();
-			//e= new Employee();
 			t= new Salesterritory();
-			
 			s.setBusinessentityid(2215);
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 			Date date  = df.parse("10-11-2022");
@@ -88,23 +86,20 @@ public class SalesPersonIntegrationTest {
 			Salesterritory temp= new Salesterritory();
 			temp.setTerritoryid(57);
 			s.setSalesterritory(temp);
-			
-			System.out.println(s.getSalesterritory());
-			System.out.println(s);
 			sp.save(s, 57);
 			assertNotNull(temp);
-			
-//			assertThrows(NoSuchElementException.class, ()-> { sp.save(s, 57);
-//				
-//			});
-
-//			assertEquals(new BigDecimal(152), temp.getSalesquota());
-//			assertEquals(s.getBusinessentityid(), temp.getBusinessentityid());
-//			assertEquals(new BigDecimal(0), temp.getCommissionpct());
-//
-//			Optional <Salesterritory> optional = st.findById(57);
-//			assertEquals(temp.getSalesterritory().getTerritoryid(), optional.get().getTerritoryid());
-		}		
+			assertNotNull(sp);
+		}
+		
+		@Test
+		void wrongPercentage() {
+			try {
+				s.setCommissionpct(new BigDecimal(80));
+			}catch (RuntimeException e) {
+				Throwable exception = assertThrows(RuntimeException.class, () -> s.getSalesquota());
+				assertEquals("El porcentaje de comision no esta entre 0 y 1", exception.getMessage());
+			}
+		}
 	}
 
 	@AfterEach
