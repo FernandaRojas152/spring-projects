@@ -79,7 +79,6 @@ public class SalesTerritoryUnitTest {
 			when(territoryRepository.save(st)).thenReturn(st);
 
 			//Method
-
 			Salesterritory temp = salesTerritoryService.save(st, "+40");
 
 			//Asserts
