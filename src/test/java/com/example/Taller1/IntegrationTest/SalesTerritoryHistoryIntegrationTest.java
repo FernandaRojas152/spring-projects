@@ -47,6 +47,7 @@ public class SalesTerritoryHistoryIntegrationTest{
 	public SalesTerritoryHistoryIntegrationTest(SalesTerritoryHistoryRepository territoryHistoryRepo,
 			SalesPersonRepository personRepo, SalesTerritoryRepository territoryRepo,
 			SalesTerritoryHistoryServiceImp territoryService) {
+		
 		this.territoryHistoryRepo= territoryHistoryRepo;
 		this.personRepo = personRepo;
 		this.territoryRepo = territoryRepo;
