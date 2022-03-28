@@ -160,7 +160,6 @@ public class SalesPersonIntegrationTest {
 				sp.update(null, null);
 			});
 		}
-		
 	}
 
 	@AfterEach
