@@ -1,0 +1,5 @@
+package com.example.Taller1QuinteroLuisa.validation;
+
+public interface PersonalInfoValidation {
+
+}
