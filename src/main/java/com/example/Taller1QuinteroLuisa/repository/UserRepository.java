@@ -2,9 +2,11 @@ package com.example.Taller1QuinteroLuisa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.example.Taller1QuinteroLuisa.model.person.User;
+import com.example.Taller1QuinteroLuisa.model.person.UserApp;
+import java.util.List;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long>{
 
+public interface UserRepository extends JpaRepository<UserApp, Long>{
+	List<UserApp> findByUsername(String username);
+	List<UserApp> findByType(String type);
 }

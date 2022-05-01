@@ -38,6 +38,8 @@ public class SalesPersonIntegrationTest {
 	private SalesPersonRepository salesPerson;
 	//private EmployeeRepository ep;
 	private SalesTerritoryRepository st;
+	
+	private Timestamp time;
 
 	@Autowired
 	public SalesPersonIntegrationTest(SalesPersonRepository salesPerson, SalesTerritoryRepository st, SalesPersonServiceImp sp) {
@@ -62,7 +64,18 @@ public class SalesPersonIntegrationTest {
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 			Date date  = df.parse("10-11-2022");
 			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			time = new Timestamp(time1);
+//			s.setModifieddate(time);
+//			s.setSalesquota(new BigDecimal(152));
+//			s.setCommissionpct(BigDecimal.ZERO);
+//			s.setBonus(BigDecimal.ONE);	
+//			
+//			st.save(t);
+//			s.setSalesterritory(t);
+		}
+		
+		@Test
+		void saveCorrectly() throws Exception {
 			s.setModifieddate(time);
 			s.setSalesquota(new BigDecimal(152));
 			s.setCommissionpct(BigDecimal.ZERO);
@@ -70,16 +83,24 @@ public class SalesPersonIntegrationTest {
 			
 			st.save(t);
 			s.setSalesterritory(t);
-		}
-		
-		@Test
-		void saveCorrectly() throws Exception {
+			
 			Salesterritory temp= new Salesterritory();
 			temp.setTerritoryid(57);
 			s.setSalesterritory(temp);
 			sp.save(s, 57);
-			assertNotNull(temp);
-			assertNotNull(sp);
+			
+			Salesperson aux= salesPerson.findById(s.getBusinessentityid()).get();
+			
+//			Productcategory found = productcategoryRepository.findById(productcategory.getProductcategoryid()).get();
+//			assertNotNull(found);
+//			assertEquals(productcategory.getProductcategoryid(), found.getProductcategoryid());
+//			Assertions.assertThat(found).isInstanceOfAny(Productcategory.class);
+//			Assertions.assertThat(found.getProductcategoryid()).isGreaterThan(0);
+//			Assertions.assertThat(found).hasNoNullFieldsOrProperties();
+//			assertEquals(found.getName(), "Hogar");
+			
+
+			assertNotNull(aux);
 		}
 		
 		@Test

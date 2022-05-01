@@ -12,13 +12,8 @@ import com.example.Taller1QuinteroLuisa.validation.CompleteInfoValidation;
 import com.example.Taller1QuinteroLuisa.validation.CredentialInfoValidation;
 import com.example.Taller1QuinteroLuisa.validation.PersonalInfoValidation;
 
-import lombok.Data;
-
 @Entity
-@Data
-public class User{
-	@SuppressWarnings("unused")
-	private static final long serialVersionUID = 1L;
+public class UserApp{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -39,8 +34,44 @@ public class User{
 	@Transient
 	@NotNull(groups= {PersonalInfoValidation.class, CompleteInfoValidation.class}, message= "Type can't be null")
 	private UserType type;
-	
-	
-	
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
+	}
+
+	public UserType getType() {
+		return type;
+	}
+
+	public void setType(UserType type) {
+		this.type = type;
+	}
 }
