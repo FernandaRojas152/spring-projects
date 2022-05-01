@@ -17,7 +17,7 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
-	public UserApp save(UserApp user, long id) {
+	public UserApp save(UserApp user) {
 		return userRepo.save(user);
 	}
 
@@ -25,34 +25,29 @@ public class UserServiceImp implements UserService{
 	public UserApp update(UserApp user, long id) {
 		UserApp aux= null;
 		Optional<UserApp> temp = this.userRepo.findById(id);
-		
 		if(temp.isPresent()) {
-			aux= save(user, id);
-		}	
+			aux= save(user);
+		}
 		return aux;
 	}
 
 	@Override
 	public Iterable<UserApp> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.findAll();
 	}
 
 	@Override
 	public Iterable<UserApp> findAllAdmins() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.findByType(UserType.ADMINISTRATOR);
 	}
 
 	@Override
 	public Iterable<UserApp> findAllOperators() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.findByType(UserType.OPERATOR);
 	}
 
 	@Override
 	public UserType[] getTypes() {
-		// TODO Auto-generated method stub
-		return null;
+		return UserType.values();
 	}
 }

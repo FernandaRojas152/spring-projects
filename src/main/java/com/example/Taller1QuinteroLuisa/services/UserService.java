@@ -4,7 +4,7 @@ import com.example.Taller1QuinteroLuisa.model.person.UserApp;
 import com.example.Taller1QuinteroLuisa.model.person.UserType;
 
 public interface UserService {
-	public UserApp save(UserApp user, long id);
+	public UserApp save(UserApp user);
 	public UserApp update(UserApp user, long id);
 	public Iterable<UserApp> findAll();
 

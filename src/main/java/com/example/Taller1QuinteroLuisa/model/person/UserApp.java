@@ -21,7 +21,7 @@ public class UserApp{
 	
 	@NotBlank(groups = CredentialInfoValidation.class)
 	@Size(min = 3, groups = { CredentialInfoValidation.class}, message="User must be at least 3 characters")
-	private String name;
+	private String username;
 	
 	@NotNull(groups = CompleteInfoValidation.class, message = "Size must be 8 characters")
 	@Size(min = 8, groups = { CredentialInfoValidation.class })
@@ -43,12 +43,12 @@ public class UserApp{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
