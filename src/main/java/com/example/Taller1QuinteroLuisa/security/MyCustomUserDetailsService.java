@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.example.Taller1QuinteroLuisa.model.person.UserApp;
 import com.example.Taller1QuinteroLuisa.repository.UserRepository;
 
-@Service
 public class MyCustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired

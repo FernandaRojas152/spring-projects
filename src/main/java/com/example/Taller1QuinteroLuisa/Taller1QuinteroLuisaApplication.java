@@ -1,9 +1,11 @@
 package com.example.Taller1QuinteroLuisa;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,11 +15,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.example.Taller1QuinteroLuisa.model.person.UserApp;
 import com.example.Taller1QuinteroLuisa.model.person.UserType;
+import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.repository.SalesPersonQuotaHistoryRepository;
+import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
+import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryHistoryRepository;
+import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
 import com.example.Taller1QuinteroLuisa.services.UserServiceImp;
 
 @SpringBootApplication
-//@EnableJpaRepositories("com.example.Taller1QuinteroLuisa.repository")
-//@EntityScan(basePackages = {"com.example.Taller1QuinteroLuisa.security","com.example.Taller1QuinteroLuisa.model"})
+@EnableJpaRepositories("com.example.Taller1QuinteroLuisa.repository")
+//@EnableAutoConfiguration
+//@EntityScan(basePackages = {"com.example.Taller1QuinteroLuisa.model"})
 //@ComponentScan(basePackages = {"com.example.Taller1QuinteroLuisa.security","com.example.Taller1QuinteroLuisa.repository","com.example.Taller1QuinteroLuisa.services","com.example.Taller1QuinteroLuisa.controller.implementation"})
 public class Taller1QuinteroLuisaApplication {
 
@@ -35,9 +43,14 @@ public class Taller1QuinteroLuisaApplication {
 	}
 	
 //	@Bean
-//	public CommandLineRunner add () {
+//	public CommandLineRunner add (SalesPersonRepository personRepo, SalesPersonQuotaHistoryRepository personQuotaRepo,
+//			SalesTerritoryRepository territoryRepo, SalesTerritoryHistoryRepository territoryHistoryRepo) {
 //		return(args)->{
-//			
+//			Salesperson sales = new Salesperson();
+//			sales.setBusinessentityid(12345);
+//			sales.setSalesquota(new BigDecimal(152));
+//			sales.setCommissionpct(BigDecimal.ZERO);
+//			sales.setBonus(BigDecimal.ONE);
 //		};
 //	}
 }

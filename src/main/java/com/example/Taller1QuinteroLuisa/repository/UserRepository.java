@@ -6,7 +6,6 @@ import com.example.Taller1QuinteroLuisa.model.person.UserApp;
 import com.example.Taller1QuinteroLuisa.model.person.UserType;
 import java.util.List;
 
-@Repository
 public interface UserRepository extends JpaRepository<UserApp, Long>{
 	List<UserApp> findByUsername(String username);
 	List<UserApp> findByType(UserType type);

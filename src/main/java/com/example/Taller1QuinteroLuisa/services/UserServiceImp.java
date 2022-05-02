@@ -3,6 +3,7 @@ package com.example.Taller1QuinteroLuisa.services;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 import com.example.Taller1QuinteroLuisa.model.person.UserApp;
 import com.example.Taller1QuinteroLuisa.model.person.UserType;
 import com.example.Taller1QuinteroLuisa.repository.UserRepository;
@@ -18,11 +19,13 @@ public class UserServiceImp implements UserService{
 	}
 
 	@Override
+	@Transactional
 	public UserApp save(UserApp user) {
 		return userRepo.save(user);
 	}
 
 	@Override
+	@Transactional
 	public UserApp update(UserApp user, long id) {
 		UserApp aux= null;
 		Optional<UserApp> temp = this.userRepo.findById(id);

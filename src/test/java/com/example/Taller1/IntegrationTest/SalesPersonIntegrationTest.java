@@ -91,14 +91,6 @@ public class SalesPersonIntegrationTest {
 			
 			Salesperson aux= salesPerson.findById(s.getBusinessentityid()).get();
 			
-//			Productcategory found = productcategoryRepository.findById(productcategory.getProductcategoryid()).get();
-//			assertNotNull(found);
-//			assertEquals(productcategory.getProductcategoryid(), found.getProductcategoryid());
-//			Assertions.assertThat(found).isInstanceOfAny(Productcategory.class);
-//			Assertions.assertThat(found.getProductcategoryid()).isGreaterThan(0);
-//			Assertions.assertThat(found).hasNoNullFieldsOrProperties();
-//			assertEquals(found.getName(), "Hogar");
-			
 
 			assertNotNull(aux);
 		}
