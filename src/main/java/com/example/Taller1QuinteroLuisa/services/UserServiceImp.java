@@ -9,6 +9,7 @@ import com.example.Taller1QuinteroLuisa.repository.UserRepository;
 
 @Service
 public class UserServiceImp implements UserService{
+	
 	private UserRepository userRepo;
 	
 	@Autowired
@@ -30,23 +31,23 @@ public class UserServiceImp implements UserService{
 		}
 		return aux;
 	}
+	
+	public Optional<UserApp> findById(long id) {
+		return userRepo.findById(id);
+	}
 
-	@Override
 	public Iterable<UserApp> findAll() {
 		return userRepo.findAll();
 	}
 
-	@Override
 	public Iterable<UserApp> findAllAdmins() {
-		return userRepo.findByType(UserType.ADMINISTRATOR);
+		return userRepo.findByType(UserType.administrator);
 	}
 
-	@Override
 	public Iterable<UserApp> findAllOperators() {
-		return userRepo.findByType(UserType.OPERATOR);
+		return userRepo.findByType(UserType.operator);
 	}
 
-	@Override
 	public UserType[] getTypes() {
 		return UserType.values();
 	}

@@ -12,7 +12,10 @@ import com.example.Taller1QuinteroLuisa.validation.CompleteInfoValidation;
 import com.example.Taller1QuinteroLuisa.validation.CredentialInfoValidation;
 import com.example.Taller1QuinteroLuisa.validation.PersonalInfoValidation;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class UserApp{
 	
 	@Id
