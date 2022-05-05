@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Operator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/shards.min.css">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Operator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/3b5eac7784.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="../css/shards.min.css">
 
 </head>
+
 <body>
 	<div th:switch="${operator}" class="container my-5">
 		<div class="row">
@@ -23,11 +20,13 @@
 				<h2 th:case="null">Operator Section</h2> <br>
 				<h6>Manage Salesperson quota history and sales territory history</h6>
 				<p>
-					<a href="/salespersonquotahistory"><i class="fas fa-user-edit ml-2"></i> Manage Salesperson quota history</a>
+					<a href="/salespersonquotahistory"><i class="fas fa-user-edit ml-2"></i> Manage Salesperson quota
+						history</a>
 				</p>
-                <p>
-                    <a href="/salesterritoryhistory"><i class="fas fa-user-edit ml-2"></i> Manage Salesterritory history</a>
-                </p>
+				<p>
+					<a href="/salesterritoryhistory"><i class="fas fa-user-edit ml-2"></i> Manage Salesterritory
+						history</a>
+				</p>
 				<p>
 					<a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
 				</p>
@@ -35,4 +34,5 @@
 		</div>
 	</div>
 </body>
+
 </html>
