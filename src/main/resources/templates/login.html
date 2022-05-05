@@ -49,10 +49,10 @@
                             <div class="row p-2">
                                 <label for="username" class="col-form-label"> Username</label>
                                 <input type="text" class="form-control" id="username" placeholder="username"
-                                    name="username" pattern>
+                                    name="username">
                                 <label for="password" class="col-form-label">Password</label>
                                 <input type="password" class="form-control" id="password" placeholder="password"
-                                    name="password" pattern>
+                                    name="password">
                             </div>
                             <span th:if="${param.error}" class="text-danger">User or password incorrect</span>
                             <span th:if="${param.logout}">Logout successful</span>

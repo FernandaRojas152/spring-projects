@@ -23,14 +23,13 @@ import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
 import com.example.Taller1QuinteroLuisa.services.UserServiceImp;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.example.Taller1QuinteroLuisa.repository")
+//@EnableJpaRepositories("com.example.Taller1QuinteroLuisa.repository")
 //@EnableAutoConfiguration
 //@EntityScan(basePackages = {"com.example.Taller1QuinteroLuisa.model"})
-//@ComponentScan(basePackages = {"com.example.Taller1QuinteroLuisa.security","com.example.Taller1QuinteroLuisa.repository","com.example.Taller1QuinteroLuisa.services","com.example.Taller1QuinteroLuisa.controller.implementation"})
+@ComponentScan("com.example.Taller1QuinteroLuisa")
 public class Taller1QuinteroLuisaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Taller1QuinteroLuisaApplication.class, args);
 		ConfigurableApplicationContext context = SpringApplication.run(Taller1QuinteroLuisaApplication.class, args);
 		UserServiceImp user= context.getBean(UserServiceImp.class);
 		

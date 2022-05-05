@@ -42,6 +42,7 @@ public class UserServiceImp implements UserService{
 	public Iterable<UserApp> findAll() {
 		return userRepo.findAll();
 	}
+	/*
 
 	public Iterable<UserApp> findAllAdmins() {
 		return userRepo.findByType(UserType.administrator);
@@ -49,7 +50,7 @@ public class UserServiceImp implements UserService{
 
 	public Iterable<UserApp> findAllOperators() {
 		return userRepo.findByType(UserType.operator);
-	}
+	}*/
 
 	public UserType[] getTypes() {
 		return UserType.values();

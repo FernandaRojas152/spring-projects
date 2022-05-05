@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Salesperson</title>
+<title>Salesterritory history</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -16,48 +16,41 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<div th:switch="${salesperson}" class="container my-5">
+	<div th:switch="${salesterritoryhistory}" class="container my-5">
 		<div class="row">
 			<div class="col-md-6">
-				<h2 th:case="null">There are no people added to the salesperson</h2>
+				<h2 th:case="null">There are no territories added to the salesterritory history</h2>
 				<div th:case="*">
-					<h2 class="my-5">Salesperson</h2>
+					<h2 class="my-5">salesterritory history</h2>
 					<table class="table table-striped table-responsive-md">
 						<thead>
 							<tr>
 								<th>Business Entity Id</th>
-								<th>Bonus</th>
-								<th>Comission percentage</th>
 								<th>Modified date</th>
-								<th>Sales last year</th>
-								<th>Sales quota</th>
-								<th>Sales tyd</th>
+                                <th>End date</th>
+								<th>Sales Person</th>
 								<th>Sales Territory</th>
 								<th>Edit</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="person : ${salesperson}">
-								<td th:text="${person.businessentity.entityId}"></td>
-								<td th:text="${person.bonus}"></td>
-								<td th:text="${person.commision}"></td>
-								<td th:text="${person.modifiedDate}"></td>
-								<td th:text="${person.salesLastYear}"></td>
-								<td th:text="${person.salesQuota}"></td>
-								<td th:text="${person.salesTyD}"></td>
-								<td th:text="${person.salesterritory.name}"></td>
-								<td><a th:href="@{/salesperson/update/{id}(id=${person.businessentity.entityId})}"
+							<tr th:each="personquota : ${salespersonquotahistory}">
+								<td th:text="${personquota.businessentity.entityId}"></td>
+								<td th:text="${personquota.modifiedDate}"></td>
+								<td th:text="${personquota.salesQuota}"></td>
+								<td th:text="${personquota.salesperson.name}"></td>
+								<td><a th:href="@{/salespersonquotahistory/update/{id}(id=${personquota.businessentity.entityId})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<p>
-					<a href="/salesperson/add" class="btn btn-primary"><i
-						class="fas fa-user-plus ml-2"></i> Add a salesperson</a>
+					<a href="/salespersonquotahistory/add" class="btn btn-primary"><i
+						class="fas fa-user-plus ml-2"></i> Add a salesperson quota history</a>
 				</p>
 				<p>
-					<a href="/administrator/"><i class="fas fa-user ml-2"></i> Go to Administrator Menu</a>
+					<a href="/operator/"><i class="fas fa-user ml-2"></i> Go to Operator Menu</a>
 				</p>
 			</div>
 		</div>

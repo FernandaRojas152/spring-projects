@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.Taller1QuinteroLuisa.model.person.UserApp;
 import com.example.Taller1QuinteroLuisa.repository.UserRepository;
 
+@Service
 public class MyCustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
@@ -19,13 +20,13 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserApp userApp = null;
 		try {
-			userApp= userRepo.findByUsername(username).get(0);
+			userApp= userRepo.findByUsername(username);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		if (userApp != null) {
-			User.UserBuilder builder = User.withUsername(username).password(userApp.getPassword()).roles(userApp.getType()+"");
+			User.UserBuilder builder = User.withUsername(username).password(userApp.getPassword()).roles(userApp.getType().toString());
 			return builder.build();
 			
 		} else {	
