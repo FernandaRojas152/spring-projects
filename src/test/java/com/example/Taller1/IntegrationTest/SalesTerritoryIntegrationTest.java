@@ -82,7 +82,7 @@ public class SalesTerritoryIntegrationTest{
 			temp.setCountryregioncode("Spain");
 			t.setCountryregioncode(temp.getCountryregioncode());
 			
-			territoryService.save(t, "Spain");
+			territoryService.save(t);
 			assertNotNull(temp);
 			assertNotNull(territoryService);
 		}
@@ -90,7 +90,7 @@ public class SalesTerritoryIntegrationTest{
 		@Test
 		void salesPersonNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				territoryService.save(null, null);
+				territoryService.save(null);
 			});
 		}
 		
@@ -111,7 +111,7 @@ public class SalesTerritoryIntegrationTest{
 			temp.setCountryregioncode(null);
 			t.setCountryregioncode(temp.getCountryregioncode());
 			
-			Assertions.assertThrows(InvalidDataAccessApiUsageException.class, ()-> {territoryService.save(t, null);}); 
+			Assertions.assertThrows(InvalidDataAccessApiUsageException.class, ()-> {territoryService.save(t);}); 
 		}	
 	}
 	
@@ -145,14 +145,14 @@ public class SalesTerritoryIntegrationTest{
 			temp.setCountryregioncode("Spain");
 			t2.setCountryregioncode(temp.getCountryregioncode());
 			
-			territoryService.save(t, "Spain");
+			territoryService.save(t);
 			assertNotNull(territoryService);
 		}
 		
 		@Test
 		void salesPersonUpdateNull() throws Exception{
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				territoryService.update(null, null);
+				territoryService.update(null);
 			});
 		}
 	}

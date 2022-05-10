@@ -85,7 +85,7 @@ class SalesPersonUnitTest {
 			when(salesPersonRepository.save(person)).thenReturn(person);
 
 			//Method
-			Salesperson temp= salesPersonServiceImp.save(person,57);
+			Salesperson temp= salesPersonServiceImp.save(person);
 
 			//Asserts
 			assertNotNull(temp);
@@ -102,7 +102,7 @@ class SalesPersonUnitTest {
 		@Test
 		void salesPersonNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				salesPersonServiceImp.save(null, null);
+				salesPersonServiceImp.save(null);
 			});
 		}
 
@@ -185,7 +185,7 @@ class SalesPersonUnitTest {
 			person.setBonus(BigDecimal.ONE);
 
 			//Salesterritory territory= new Salesterritory();
-			Salesperson temp= salesPersonServiceImp.save(person,57);
+			Salesperson temp= salesPersonServiceImp.save(person);
 
 			assertNull(temp);
 			verify(salesPersonRepository, times(0)).save(person);
@@ -222,7 +222,7 @@ class SalesPersonUnitTest {
 			when(salesPersonRepository.save(person)).thenReturn(person);
 
 			//Method
-			Salesperson temp= salesPersonServiceImp.update(person, 57);
+			Salesperson temp= salesPersonServiceImp.update(person);
 			
 			//Asserts
 			assertNotNull(temp);
@@ -235,7 +235,7 @@ class SalesPersonUnitTest {
 		@Test
 		void salesPersonUpdateNull() throws Exception{
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				salesPersonServiceImp.update(null, null);
+				salesPersonServiceImp.update(null);
 			});
 		}
 	}

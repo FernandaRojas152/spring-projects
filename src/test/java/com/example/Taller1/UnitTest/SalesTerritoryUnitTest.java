@@ -79,7 +79,7 @@ public class SalesTerritoryUnitTest {
 			when(territoryRepository.save(st)).thenReturn(st);
 
 			//Method
-			Salesterritory temp = salesTerritoryService.save(st, "+40");
+			Salesterritory temp = salesTerritoryService.save(st);
 
 			//Asserts
 			assertNotNull(temp);
@@ -99,7 +99,7 @@ public class SalesTerritoryUnitTest {
 		@DisplayName("Save a null territory")
 		void salesTerritoryNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				salesTerritoryService.save(null, null);
+				salesTerritoryService.save(null);
 			});
 		}
 
@@ -134,7 +134,7 @@ public class SalesTerritoryUnitTest {
 			st.setName(null);
 
 			try {
-				assertThrows(NullPointerException.class, () ->{salesTerritoryService.save(st, "+40");});
+				assertThrows(NullPointerException.class, () ->{salesTerritoryService.save(st);});
 			}catch(NullPointerException e) {
 				assertNull(st.getName());
 				verify(territoryRepository, times(0)).save(st);
@@ -159,7 +159,7 @@ public class SalesTerritoryUnitTest {
 			st.setSaleslastyear(new BigDecimal(400));
 			st.setSalesytd(new BigDecimal(40));
 
-			Salesterritory temp = salesTerritoryService.save(st, "+40");
+			Salesterritory temp = salesTerritoryService.save(st);
 
 			assertNull(temp);	
 		}
@@ -274,7 +274,7 @@ public class SalesTerritoryUnitTest {
 			st.setSaleslastyear(new BigDecimal(400));
 			st.setSalesytd(new BigDecimal(40));
 
-			Salesterritory temp = salesTerritoryService.save(st, "+40");
+			Salesterritory temp = salesTerritoryService.save(st);
 
 			assertNull(temp);
 
@@ -299,7 +299,7 @@ public class SalesTerritoryUnitTest {
 			st.setSaleslastyear(new BigDecimal(400));
 			st.setSalesytd(new BigDecimal(40));
 
-			Salesterritory temp = salesTerritoryService.save(st, "+40");
+			Salesterritory temp = salesTerritoryService.save(st);
 
 			assertNull(temp);
 
@@ -338,7 +338,7 @@ public class SalesTerritoryUnitTest {
 
 			//Method
 
-			Salesterritory temp = salesTerritoryService.update(st, "+40");
+			Salesterritory temp = salesTerritoryService.update(st);
 			
 			assertNotNull(temp);
 			assertEquals(new BigDecimal(200), temp.getCostlastyear());
@@ -358,7 +358,7 @@ public class SalesTerritoryUnitTest {
 		@DisplayName("Updating a territory to null")
 		void salesTerriroryUpdateNull() throws Exception{
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				salesTerritoryService.update(null, null);
+				salesTerritoryService.update(null);
 			});
 		}
 		
@@ -383,7 +383,7 @@ public class SalesTerritoryUnitTest {
 			Salesterritory temp= null;
 			try {
 				st.setName("F");
-				temp = salesTerritoryService.update(st, "+40");
+				temp = salesTerritoryService.update(st);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> st.getName());
 				assertEquals("El nombre debe tener al menos 5 caracteres", exception.getMessage());

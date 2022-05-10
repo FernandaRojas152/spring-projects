@@ -38,15 +38,15 @@
 						</thead>
 						<tbody>
 							<tr th:each="person : ${salesperson}">
-								<td th:text="${person.businessentity.entityId}"></td>
+								<td th:text="${person.businessentityid}"></td>
 								<td th:text="${person.bonus}"></td>
 								<td th:text="${person.commision}"></td>
-								<td th:text="${person.modifiedDate}"></td>
-								<td th:text="${person.salesLastYear}"></td>
-								<td th:text="${person.salesQuota}"></td>
-								<td th:text="${person.salesTyD}"></td>
+								<td th:text="${person.modifieddate}"></td>
+								<td th:text="${person.saleslastyear}"></td>
+								<td th:text="${person.salesquota}"></td>
+								<td th:text="${person.salesytd}"></td>
 								<td th:text="${person.salesterritory.name}"></td>
-								<td><a th:href="@{/salesperson/update/{id}(id=${person.businessentity.entityId})}"
+								<td><a th:href="@{/salesperson/update/{id}(id=${person.businessentityid})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 							</tr>
 						</tbody>

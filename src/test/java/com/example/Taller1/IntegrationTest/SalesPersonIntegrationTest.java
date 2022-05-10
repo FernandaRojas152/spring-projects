@@ -87,7 +87,7 @@ public class SalesPersonIntegrationTest {
 			Salesterritory temp= new Salesterritory();
 			temp.setTerritoryid(57);
 			s.setSalesterritory(temp);
-			sp.save(s, 57);
+			sp.save(s);
 			
 			Salesperson aux= salesPerson.findById(s.getBusinessentityid()).get();
 			
@@ -101,7 +101,7 @@ public class SalesPersonIntegrationTest {
 			Salesterritory temp= new Salesterritory();
 			temp.setTerritoryid(57);
 			s.setSalesterritory(temp);
-			sp.save(s, 57);
+			sp.save(s);
 			assertNotNull(sp);
 			assertNotNull(s.getSalesquota());
 			assertEquals(new BigDecimal(1), s.getSalesquota());
@@ -110,7 +110,7 @@ public class SalesPersonIntegrationTest {
 		@Test
 		void salesPersonNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				sp.save(null, null);
+				sp.save(null);
 			});
 		}
 		
@@ -162,7 +162,7 @@ public class SalesPersonIntegrationTest {
 			Salesterritory temp= new Salesterritory();
 			temp.setTerritoryid(57);
 			person2.setSalesterritory(temp);
-			sp.update(s, 57);
+			sp.update(s);
 			
 			assertNotNull(sp);
 		}
@@ -170,7 +170,7 @@ public class SalesPersonIntegrationTest {
 		@Test
 		void salesPersonUpdateNull() throws Exception{
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				sp.update(null, null);
+				sp.update(null);
 			});
 		}
 	}

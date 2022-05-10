@@ -1,26 +1,18 @@
 package com.example.Taller1QuinteroLuisa;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
 import com.example.Taller1QuinteroLuisa.model.person.UserApp;
 import com.example.Taller1QuinteroLuisa.model.person.UserType;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.repository.SalesPersonQuotaHistoryRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryHistoryRepository;
 import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
-import com.example.Taller1QuinteroLuisa.services.UserServiceImp;
+import com.example.Taller1QuinteroLuisa.repository.UserRepository;
 
 @SpringBootApplication
 //@EnableJpaRepositories("com.example.Taller1QuinteroLuisa.repository")
@@ -31,25 +23,29 @@ public class Taller1QuinteroLuisaApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Taller1QuinteroLuisaApplication.class, args);
-		UserServiceImp user= context.getBean(UserServiceImp.class);
-		
-		UserApp u= new UserApp();
-		u.setUsername("Fernanda");
-		u.setPassword("{noop}Fer123456");
-		u.setType(UserType.administrator);
-		
-		user.save(u);
+//		UserServiceImp user= context.getBean(UserServiceImp.class);
+//		
+//		UserApp u= new UserApp();
+//		u.setUsername("Fernanda");
+//		u.setPassword("{noop}Fer123456");
+//		u.setType(UserType.administrator);
+//		
+//		user.save(u);
+//		
+//		System.out.println(u.getUsername());
 	}
 	
-//	@Bean
-//	public CommandLineRunner add (SalesPersonRepository personRepo, SalesPersonQuotaHistoryRepository personQuotaRepo,
-//			SalesTerritoryRepository territoryRepo, SalesTerritoryHistoryRepository territoryHistoryRepo) {
-//		return(args)->{
-//			Salesperson sales = new Salesperson();
-//			sales.setBusinessentityid(12345);
-//			sales.setSalesquota(new BigDecimal(152));
-//			sales.setCommissionpct(BigDecimal.ZERO);
-//			sales.setBonus(BigDecimal.ONE);
-//		};
-//	}
+	@Bean
+	public CommandLineRunner add (UserRepository user, SalesPersonRepository personRepo,
+			SalesPersonQuotaHistoryRepository personQuotaRepo, SalesTerritoryRepository territoryRepo,
+			SalesTerritoryHistoryRepository territoryHistoryRepo) {
+		return(args)->{
+			UserApp u= new UserApp();
+			u.setUsername("Fernanda");
+			u.setPassword("{noop}Fer123456");
+			u.setType(UserType.administrator);
+			
+			user.save(u);		
+		};
+	}
 }

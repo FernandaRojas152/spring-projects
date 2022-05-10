@@ -18,12 +18,7 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserApp userApp = null;
-		try {
-			userApp= userRepo.findByUsername(username);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		UserApp userApp = userRepo.findByUsername(username);
 		
 		if (userApp != null) {
 			User.UserBuilder builder = User.withUsername(username).password(userApp.getPassword()).roles(userApp.getType().toString());
