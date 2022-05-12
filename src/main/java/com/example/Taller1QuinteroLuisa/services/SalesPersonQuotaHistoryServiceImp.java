@@ -1,8 +1,6 @@
 package com.example.Taller1QuinteroLuisa.services;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
 @Service
 public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistoryService{
 	private SalesPersonQuotaHistoryRepository spq;
-	//private BusinessentityRepository be;
 	private SalesPersonRepository person;
 	
 	@Autowired
@@ -25,11 +22,11 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	}
 	
 	@Override
-	public Salespersonquotahistory save(Salespersonquotahistory sales, Integer id) throws Exception{
+	public Salespersonquotahistory save(Salespersonquotahistory sales) throws Exception{
 		Salespersonquotahistory temp = null;
 		validateConstraints(sales);
 		
-		Optional<Salesperson> optional = this.person.findById(id);
+		Optional<Salesperson> optional = this.person.findById(sales.getSalesperson().getBusinessentityid());
 		if(optional.isPresent()) {
 			sales.setSalesperson(optional.get());
 			temp= this.spq.save(sales);
@@ -39,27 +36,25 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	}
 
 	@Override
-	public Salespersonquotahistory update(Salespersonquotahistory sales, Integer id) throws Exception {
+	public Salespersonquotahistory update(Salespersonquotahistory sales) throws Exception {
 		Salespersonquotahistory temp = null;
 		
 		Optional<Salespersonquotahistory> optional = spq.findById(sales.getBusinessentityid());
 		if(optional.isPresent()) {
 			//validateConstraints(sales);
-			temp= save(sales, id);
-		
+			temp= save(sales);
 		}
 		return temp;
 	}
 	
 	@NotNull
 	private void validateConstraints(Salespersonquotahistory sales) throws RuntimeException{
-		LocalDateTime now = LocalDateTime.now();
-		Timestamp timeNow = Timestamp.valueOf(now);
-		if(sales.getModifieddate().after(timeNow)){
-			throw new RuntimeException("La fecha de inicio no es menor a la fecha actual");
-		}
 		if(!(sales.getSalesquota().compareTo(BigDecimal.ZERO) > 0)){
 			throw new RuntimeException("La cuota no es mayor que 0");
 		}
+	}
+	
+	public Iterable<Salespersonquotahistory> findAll(){
+		return spq.findAll();
 	}
 }

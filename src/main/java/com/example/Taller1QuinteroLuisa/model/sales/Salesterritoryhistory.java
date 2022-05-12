@@ -2,7 +2,7 @@ package com.example.Taller1QuinteroLuisa.model.sales;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import javax.persistence.EmbeddedId;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.PastOrPresent;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * The persistent class for the salesterritoryhistory database table.
@@ -31,9 +33,11 @@ public class Salesterritoryhistory implements Serializable {
 	private Integer businessentityid;
 	
 	@PastOrPresent
-	private Timestamp enddate;
-
-	private Timestamp modifieddate;
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	private LocalDate enddate;
+	
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	private LocalDate modifieddate;
 
 	private Integer rowguid;
 
@@ -50,7 +54,7 @@ public class Salesterritoryhistory implements Serializable {
 	public Salesterritoryhistory() {
 	}
 
-	public Timestamp getEnddate() {
+	public LocalDate getEnddate() {
 		return this.enddate;
 	}
 
@@ -62,7 +66,7 @@ public class Salesterritoryhistory implements Serializable {
 		return this.businessentityid;
 	}
 
-	public Timestamp getModifieddate() {
+	public LocalDate getModifieddate() {
 		return this.modifieddate;
 	}
 
@@ -78,7 +82,7 @@ public class Salesterritoryhistory implements Serializable {
 		return this.salesterritory;
 	}
 
-	public void setEnddate(Timestamp enddate) {
+	public void setEnddate(LocalDate enddate) {
 		this.enddate = enddate;
 	}
 
@@ -86,7 +90,7 @@ public class Salesterritoryhistory implements Serializable {
 //		this.id = id;
 //	}
 
-	public void setModifieddate(Timestamp modifieddate) {
+	public void setModifieddate(LocalDate modifieddate) {
 		this.modifieddate = modifieddate;
 	}
 

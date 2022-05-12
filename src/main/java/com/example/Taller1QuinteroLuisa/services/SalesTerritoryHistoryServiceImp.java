@@ -47,7 +47,6 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 		if(territory.getBusinessentityid()!=null) {
 			Optional<Salesterritoryhistory> optional = sth.findById(territory.getBusinessentityid());
 			if(optional.isPresent()) {
-				//validateConstrains(territory);
 				temp = save(territory, id, idPerson);
 			}	
 		}
@@ -56,7 +55,7 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 
 	@NotNull
 	private void validateConstrains(Salesterritoryhistory territory) throws Exception {
-		if(territory.getModifieddate().after(territory.getEnddate())) {
+		if(territory.getModifieddate().isAfter(territory.getEnddate())) {
 			throw new Exception("La fecha de inicio no es menor a la fecha final");
 		}
 	}

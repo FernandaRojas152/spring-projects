@@ -3,6 +3,8 @@ package com.example.Taller1QuinteroLuisa.model.sales;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.PositiveOrZero;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * The persistent class for the salespersonquotahistory database table.
@@ -33,8 +37,9 @@ public class Salespersonquotahistory implements Serializable {
 	private SalespersonquotahistoryPK id;
 	*/
 	
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	@PastOrPresent
-	private Timestamp modifieddate;
+	private LocalDate modifieddate;
 
 	private Integer rowguid;
 
@@ -52,7 +57,7 @@ public class Salespersonquotahistory implements Serializable {
 //		return this.id;
 //	}
 
-	public Timestamp getModifieddate() {
+	public LocalDate getModifieddate() {
 		return this.modifieddate;
 	}
 
@@ -76,7 +81,7 @@ public class Salespersonquotahistory implements Serializable {
 //		this.id = id;
 //	}
 
-	public void setModifieddate(Timestamp modifieddate) {
+	public void setModifieddate(LocalDate modifieddate) {
 		this.modifieddate = modifieddate;
 	}
 

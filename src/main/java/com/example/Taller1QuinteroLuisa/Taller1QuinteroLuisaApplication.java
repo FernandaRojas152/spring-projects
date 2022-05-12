@@ -15,9 +15,6 @@ import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
 import com.example.Taller1QuinteroLuisa.repository.UserRepository;
 
 @SpringBootApplication
-//@EnableJpaRepositories("com.example.Taller1QuinteroLuisa.repository")
-//@EnableAutoConfiguration
-//@EntityScan(basePackages = {"com.example.Taller1QuinteroLuisa.model"})
 @ComponentScan("com.example.Taller1QuinteroLuisa")
 public class Taller1QuinteroLuisaApplication {
 
@@ -35,7 +32,13 @@ public class Taller1QuinteroLuisaApplication {
 			u.setPassword("{noop}Fer123456");
 			u.setType(UserType.administrator);
 			
-			user.save(u);		
+			user.save(u);	
+			
+			UserApp operator= new UserApp();
+			operator.setUsername("Xiao");
+			operator.setPassword("{noop}Xiao123456");
+			operator.setType(UserType.operator);
+			user.save(operator);
 		};
 	}
 }

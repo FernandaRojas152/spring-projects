@@ -4,7 +4,7 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
 
 public interface SalesPersonQuotaHistoryService {
 	
-	public Salespersonquotahistory save(Salespersonquotahistory s, Integer id) throws Exception;
-	public Salespersonquotahistory update(Salespersonquotahistory s, Integer id) throws Exception;
+	public Salespersonquotahistory save(Salespersonquotahistory s) throws Exception;
+	public Salespersonquotahistory update(Salespersonquotahistory s) throws Exception;
 
 }
