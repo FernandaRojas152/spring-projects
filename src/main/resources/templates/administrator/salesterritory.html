@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Salesperson</title>
+<title>Salesterritory</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -16,12 +16,12 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<div th:switch="${salesperson}" class="container my-5">
+	<div th:switch="${salesterritory}" class="container my-5">
 		<div class="row">
 			<div class="col-md-6">
 				<h2 th:case="null">There are no territories added to the salesterritory</h2>
 				<div th:case="*">
-					<h2 class="my-5">Salesperson</h2>
+					<h2 class="my-5">Salesterritory</h2>
 					<table class="table table-striped table-responsive-md">
 						<thead>
 							<tr>

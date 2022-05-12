@@ -58,7 +58,7 @@ public class AdministratorControllerImp {
 		}
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("salesperson", salesperson);
-			model.addAttribute("salesterritories");
+			model.addAttribute("salesterritory");
 			return "/administrator/add-salesperson";
 		} else {
 			personService.save(salesperson);
@@ -70,7 +70,7 @@ public class AdministratorControllerImp {
 
 	@GetMapping("/salesterritory")
 	public String salesTerritory(Model model) {
-		model.addAttribute("salesterritories", territoryService.findAll());
+		model.addAttribute("salesterritory", territoryService.findAll());
 		return "administrator/salesterritory";
 	}
 
