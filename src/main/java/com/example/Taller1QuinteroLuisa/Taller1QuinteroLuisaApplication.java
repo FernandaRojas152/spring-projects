@@ -23,16 +23,6 @@ public class Taller1QuinteroLuisaApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Taller1QuinteroLuisaApplication.class, args);
-//		UserServiceImp user= context.getBean(UserServiceImp.class);
-//		
-//		UserApp u= new UserApp();
-//		u.setUsername("Fernanda");
-//		u.setPassword("{noop}Fer123456");
-//		u.setType(UserType.administrator);
-//		
-//		user.save(u);
-//		
-//		System.out.println(u.getUsername());
 	}
 	
 	@Bean

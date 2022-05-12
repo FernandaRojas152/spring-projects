@@ -19,7 +19,6 @@ import com.example.Taller1QuinteroLuisa.validation.SalesTerritoryValidation;
 
 @Controller
 public class AdministratorControllerImp {
-
 	private SalesPersonServiceImp personService;
 	private SalesTerritoryServiceImp territoryService;
 
@@ -39,7 +38,7 @@ public class AdministratorControllerImp {
 
 	@GetMapping("/salesperson")
 	public String salesperson(Model model) {
-		model.addAttribute("salespersons", personService.findAll());
+		model.addAttribute("salesperson", personService.findAll());
 		return "administrator/salesperson";
 	}
 

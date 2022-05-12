@@ -3,6 +3,7 @@ package com.example.Taller1QuinteroLuisa.model.sales;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import org.springframework.format.annotation.DateTimeFormat;
 /**
  * The persistent class for the salesperson database table.
  *
@@ -30,8 +33,9 @@ public class Salesperson implements Serializable {
 	private BigDecimal bonus;
 
 	private BigDecimal commissionpct;
-
-	private Timestamp modifieddate;
+	
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	private LocalDate modifieddate;
 
 	private Integer rowguid;
 
@@ -105,7 +109,7 @@ public class Salesperson implements Serializable {
 		return this.commissionpct;
 	}
 
-	public Timestamp getModifieddate() {
+	public LocalDate getModifieddate() {
 		return this.modifieddate;
 	}
 
@@ -185,7 +189,7 @@ public class Salesperson implements Serializable {
 		this.commissionpct = commissionpct;
 	}
 
-	public void setModifieddate(Timestamp modifieddate) {
+	public void setModifieddate(LocalDate modifieddate) {
 		this.modifieddate = modifieddate;
 	}
 
