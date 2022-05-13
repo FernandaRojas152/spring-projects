@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<div th:switch="${salespersoquotahistory}" class="container my-5">
+	<div th:switch="${salespersonquotahistory}" class="container my-5">
 		<div class="row">
 			<div class="col-md-6">
 				<h2 th:case="null">There are no people added to the salesperson quota history</h2>
@@ -37,7 +37,7 @@
 								<td th:text="${personquota.businessentityid}"></td>
 								<td th:text="${personquota.modifieddate}"></td>
 								<td th:text="${personquota.salesquota}"></td>
-								<td th:text="${personquota.salesperson.name}"></td>
+								<td th:text="${personquota.salesperson.businessentityid}"></td>
 								<td><a th:href="@{/salespersonquotahistory/update/{id}(id=${personquota.businessentityid})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 							</tr>
