@@ -17,7 +17,6 @@ import com.example.Taller1QuinteroLuisa.repository.UserRepository;
 @SpringBootApplication
 @ComponentScan("com.example.Taller1QuinteroLuisa")
 public class Taller1QuinteroLuisaApplication {
-
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Taller1QuinteroLuisaApplication.class, args);
 	}

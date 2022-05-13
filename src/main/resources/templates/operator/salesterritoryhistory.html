@@ -21,7 +21,7 @@
 			<div class="col-md-6">
 				<h2 th:case="null">There are no territories added to the salesterritory history</h2>
 				<div th:case="*">
-					<h2 class="my-5">salesterritory history</h2>
+					<h2 class="my-5">Salesterritory history</h2>
 					<table class="table table-striped table-responsive-md">
 						<thead>
 							<tr>
@@ -38,17 +38,17 @@
 								<td th:text="${territoryhistory.businessentityid}"></td>
 								<td th:text="${territoryhistory.modifieddate}"></td>
 								<td th:text="${territoryhistory.enddate}"></td>
-								<td th:text="${territoryhistory.salesperson.name}"></td>
+								<td th:text="${territoryhistory.salesperson.businessentityid}"></td>
 								<td th:text="${territoryhistory.salesterritory.name}"></td>
-								<td><a th:href="@{/salespersonquotahistory/update/{id}(id=${personquota.businessentity.entityId})}"
+								<td><a th:href="@{/salesterritoryhistory/update/{id}(id=${territoryhistory.businessentity})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<p>
-					<a href="/salespersonquotahistory/add" class="btn btn-primary"><i
-						class="fas fa-user-plus ml-2"></i> Add a salesperson quota history</a>
+					<a href="/salesterritoryhistory/add" class="btn btn-primary"><i
+						class="fas fa-user-plus ml-2"></i> Add a salesterritory history</a>
 				</p>
 				<p>
 					<a href="/operator/"><i class="fas fa-user ml-2"></i> Go to Operator Menu</a>

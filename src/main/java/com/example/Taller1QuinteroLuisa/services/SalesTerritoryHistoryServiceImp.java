@@ -25,12 +25,12 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	}
 
 	@Override
-	public Salesterritoryhistory save(Salesterritoryhistory territory, Integer id, Integer idPerson) throws Exception {
+	public Salesterritoryhistory save(Salesterritoryhistory territory) throws Exception {
 		Salesterritoryhistory temp= null;
 		validateConstrains(territory);
 		
-		Optional<Salesterritory> optional= this.st.findById(id);
-		Optional<Salesperson> optional2= this.sp.findById(idPerson);
+		Optional<Salesterritory> optional= this.st.findById(territory.getSalesterritory().getTerritoryid());
+		Optional<Salesperson> optional2= this.sp.findById(territory.getSalesperson().getBusinessentityid());
 		if(optional.isPresent() && optional2.isPresent()) {
 			territory.setSalesterritory(optional.get());
 			territory.setSalesperson(optional2.get());
@@ -41,13 +41,13 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	}
 
 	@Override
-	public Salesterritoryhistory update(Salesterritoryhistory territory, Integer id, Integer idPerson) throws Exception {
+	public Salesterritoryhistory update(Salesterritoryhistory territory) throws Exception {
 		Salesterritoryhistory temp= null;
 
 		if(territory.getBusinessentityid()!=null) {
 			Optional<Salesterritoryhistory> optional = sth.findById(territory.getBusinessentityid());
 			if(optional.isPresent()) {
-				temp = save(territory, id, idPerson);
+				temp = save(territory);
 			}	
 		}
 		return temp;
@@ -58,6 +58,10 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 		if(territory.getModifieddate().isAfter(territory.getEnddate())) {
 			throw new Exception("La fecha de inicio no es menor a la fecha final");
 		}
+	}
+	
+	public Iterable<Salesterritoryhistory> findAll(){
+		return sth.findAll();
 	}
 
 }

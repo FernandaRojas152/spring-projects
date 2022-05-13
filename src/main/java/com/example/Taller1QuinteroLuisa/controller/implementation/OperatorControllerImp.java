@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Taller1QuinteroLuisa.controller.interfaces.OperatorController;
 import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
+import com.example.Taller1QuinteroLuisa.model.sales.Salesterritoryhistory;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonQuotaHistoryServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesTerritoryHistoryServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesTerritoryServiceImp;
 import com.example.Taller1QuinteroLuisa.validation.SalesPersonQuotaHistoryValidation;
+import com.example.Taller1QuinteroLuisa.validation.SalesTerritoryHistoryValidation;
 
 @Controller
 public class OperatorControllerImp implements OperatorController{
@@ -74,11 +76,35 @@ public class OperatorControllerImp implements OperatorController{
 		}
 	}
 	
-	
 	/** Salesterritory history mapping */
 	@GetMapping("/salesterritoryhistory")
-	public String salesTerritoryHistory() {
+	public String salesTerritoryHistory(Model model) {
+		model.addAttribute("salesterritoryhistory", territoryHistoryService.findAll());
 		return "operator/salesterritoryhistory";
 	}
-
+	
+	@GetMapping("/salesterritoryhistory/add")
+	public String addSalesTerritoryHistory(Model model) {
+		model.addAttribute("salesterritoryhistory", new Salesterritoryhistory());
+		model.addAttribute("salespersons", personService.findAll());
+		model.addAttribute("salesterritories", territoryService.findAll());
+		return "/operator/add-salesterritoryhistory";
+	}
+	
+	@PostMapping("/salesterritoryhistory/add")
+	public String saveSalesTerritoryHistory(@Validated(SalesTerritoryHistoryValidation.class)
+		@ModelAttribute Salesterritoryhistory salesterritoryhistory, BindingResult bindingResult, Model model,
+		@RequestParam(value="action", required=true)String action) throws Exception {
+		if(action.equals("Cancel")) {
+			return "redirect:/salesterritoryhistory/";
+		}
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("salesterritoryhistory", salesterritoryhistory);
+			model.addAttribute("salesperson");
+			model.addAttribute("salesterritory");
+		}else {
+			territoryHistoryService.save(salesterritoryhistory);
+		}
+		return "";
+	}
 }
