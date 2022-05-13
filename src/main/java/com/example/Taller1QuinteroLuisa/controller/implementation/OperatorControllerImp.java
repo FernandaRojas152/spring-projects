@@ -43,7 +43,7 @@ public class OperatorControllerImp implements OperatorController{
 	/** Salesperson quota history mapping */
 	@GetMapping("/salespersonquotahistory")
 	public String salesPersonQuota(Model model) {
-		model.addAttribute("salespersoquotahistory", personQuotaService.findAll());
+		model.addAttribute("salespersonquotahistory", personQuotaService.findAll());
 		return "operator/salespersonquotahistory";
 	}
 	
