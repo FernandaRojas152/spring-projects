@@ -14,56 +14,74 @@
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/shards.min.css">
+<style type="text/css">
+input[type=submit] {
+	margin-left: 5px;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+</style>
 </head>
 <body>
 	<div class="container my-5">
 		<h2 class="mb-5">New Salesterritory history</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/salesterritoryhistory/add}" th:object="${salesterritoryhistory}"
-					method="post">
+				<form action="#" th:action="@{/salesterritoryhistory/add}"
+					th:object="${salesterritoryhistory}" method="post">
 					<div class="row">
-                        <div class="form-group col-md-6">
-							<label for="businessentityid" class="col-form-label">Business Entity Id</label> <input
-								type="text" th:field="*{businessentityid}" class="form-control" id="businessentityid"
+						<div class="form-group col-md-6">
+							<label for="businessentityid" class="col-form-label">Business
+								Entity Id</label> <input type="text" th:field="*{businessentityid}"
+								class="form-control" id="businessentityid"
 								placeholder="businessentityid"> <span
-								th:if="${#fields.hasErrors('businessentityid')}" th:errors="*{businessentityid}"
-								class="text-danger"></span>
-						</div>	
-						<div class="form-group col-md-6">
-							<label for="modifieddate" class="col-form-label">Modified Date</label>
-							<input type="date" th:field="*{modifieddate}" class="form-control"
-								id="modifieddate" placeholder="14/04/2001"> <span
-								th:if="${#fields.hasErrors('modifieddate')}" th:errors="*{modifieddate}" class="text-danger"></span>
+								th:if="${#fields.hasErrors('businessentityid')}"
+								th:errors="*{businessentityid}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="enddate" class="col-form-label">End Date</label>
-							<input type="date" th:field="*{enddate}" class="form-control"
+							<label for="modifieddate" class="col-form-label">Modified
+								Date</label> <input type="date" th:field="*{modifieddate}"
+								class="form-control" id="modifieddate" placeholder="14/04/2001">
+							<span th:if="${#fields.hasErrors('modifieddate')}"
+								th:errors="*{modifieddate}" class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="enddate" class="col-form-label">End Date</label> <input
+								type="date" th:field="*{enddate}" class="form-control"
 								id="enddate" placeholder="14/04/2001"> <span
-								th:if="${#fields.hasErrors('enddate')}" th:errors="*{enddate}" class="text-danger"></span>
+								th:if="${#fields.hasErrors('enddate')}" th:errors="*{enddate}"
+								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="salesperson" class="col-form-label">Salesperson </label> <select class="form-control-range"
-                                th:field="*{salesperson}"> <option th:each="person: ${salespersons}"
-                                th:value="${person.businessentityid}" th:text="${person.businessentityid}"
-                                th:selected="${salesterritoryhistory.salesperson =person}"></option></select>
+							<label for="salesperson" class="col-form-label">Salesperson
+							</label> <select class="form-control-range" th:field="*{salesperson}">
+								<option th:each="person: ${salespersons}"
+									th:value="${person.businessentityid}"
+									th:text="${person.businessentityid}"
+									th:selected="${salesterritoryhistory.salesperson =person}"></option>
+							</select>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="salesterritory" class="col-form-label">Sales Territory</label> <select class="form-control-range"
-                                th:field="*{salesterritory}"> <option th:each="territory: ${salesterritories}"
-                                th:value="${territory.territoryid}" th:text="${territory.name}"
-                                th:selected="${salesterritoryhistory.salesterritory= territory}"></option></select>
+							<label for="salesterritory" class="col-form-label">Sales
+								Territory</label> <select class="form-control-range"
+								th:field="*{salesterritory}">
+								<option th:each="territory: ${salesterritories}"
+									th:value="${territory.territoryid}" class="form-control" th:text="${territory.name}"
+									th:selected="${salesterritoryhistory.salesterritory=territory}"></option>
+							</select>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Add Salesterritory history">
+						<div class="col-md-5 mt-3">
+							<input type="submit" name="action" class="btn btn-primary"
+								value="Add Salesterritory history">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">
 						</div>
 						<div class="col-md-3 mt-3">
-							<input type="submit" name="action" class="btn btn-secondary" value="Cancel">
+							<input type="submit" name="action" class="btn btn-secondary"
+								value="Cancel">
 						</div>
 					</div>
 				</form>

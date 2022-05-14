@@ -79,7 +79,7 @@ public class OperatorControllerImp implements OperatorController{
 	/** Salesterritory history mapping */
 	@GetMapping("/salesterritoryhistory")
 	public String salesTerritoryHistory(Model model) {
-		model.addAttribute("salesterritoryhistory", territoryHistoryService.findAll());
+		model.addAttribute("salesterritoryhistories", territoryHistoryService.findAll());
 		return "operator/salesterritoryhistory";
 	}
 	
@@ -102,9 +102,12 @@ public class OperatorControllerImp implements OperatorController{
 			model.addAttribute("salesterritoryhistory", salesterritoryhistory);
 			model.addAttribute("salesperson");
 			model.addAttribute("salesterritory");
+			return "/operator/add-salesterritoryhistory";
 		}else {
 			territoryHistoryService.save(salesterritoryhistory);
+			System.out.println("aqui esta esa vaina: " + territoryHistoryService.findAll() + "valores: " + salesterritoryhistory.getSalesterritory().getName());
+			System.out.println("se guarda en el modelo: " + salesterritoryhistory.getBusinessentityid() + salesterritoryhistory.getSalesterritory().getName());
+			return "redirect:/salesterritoryhistory/";
 		}
-		return "";
 	}
 }

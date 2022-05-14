@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.formLogin().loginPage("/login").permitAll().and()
 		.authorizeRequests()
 		.antMatchers("/users/**").permitAll()
-		.antMatchers("/admin/**").hasRole(UserType.administrator.toString())
+		.antMatchers("/administrator/**").hasRole(UserType.administrator.toString())
 		.antMatchers("/operator/**").hasRole(UserType.operator.toString())
 		.anyRequest().authenticated().and()
 		.httpBasic().and().logout().invalidateHttpSession(true).clearAuthentication(true)

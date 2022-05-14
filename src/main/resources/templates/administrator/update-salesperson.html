@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Update Sales Person</title>
+<title>Edit Sales Person</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -20,20 +20,21 @@
 		<h2 class="mb-5">Update Salesperson</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/salesperson/update/{id}(id=${person.businessentity.entityId})}" th:object="${person}"
+				<form action="#" th:action="@{/salesperson/update/{id}(id=${salesperson.businessentityid})}" th:object="${salesperson}"
 					method="post">
 					<div class="row">
                         <div class="form-group col-md-6">
-							<label for="businessId" class="col-form-label">Business Entity ID</label> <select class="form-control-range"
-                                th:field="*{businessId}"> <option th:each="businessEntity: ${business}"
-                                th:value="${businessEntity.businessentityid}" th:text="${business.businessentityid}"
-                                th:selected="${business.businessId=business.businessentityid}"></option></select>
+							<label for="businessentityid" class="col-form-label">Business Entity Id</label> <input
+								type="number" th:field="*{businessentityid}" class="form-control" id="businessentityid"
+								placeholder="Id"> <span
+								th:if="${#fields.hasErrors('businessentityid')}" th:errors="*{businessentityid}"
+								class="text-danger"></span>
 						</div>
                         <div class="form-group col-md-6">
-							<label for="territoryId" class="col-form-label">Sales Territory</label> <select class="form-control-range"
-                                th:field="*{territoryId}"> <option th:each="territory: ${salesterritory}"
-                                th:value="${territory.territoryId}" th:text="${territory.name}"
-                                th:selected="${salesterritory.territoryId=territory.territoryId}"></option></select>
+							<label for="salesterritory" class="col-form-label">Sales Territory</label> <select class="form-control-range"
+                                th:field="*{salesterritory}"> <option th:each="territory: ${salesterritories}"
+                                th:value="${territory.territoryid}" th:text="${territory.name}"
+                                th:selected="${salesperson.salesterritory=territory}"></option></select>
 						</div>
                         <div class="form-group col-md-6">
 							<label for="bonus" class="col-form-label">Bonus</label> <input
@@ -43,43 +44,43 @@
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="commision" class="col-form-label">Commision</label> <input
-								type="text" th:field="*{commision}" class="form-control" id="commision"
+							<label for="commissionpct" class="col-form-label">Commision</label> <input
+								type="text" th:field="*{commissionpct}" class="form-control" id="commissionpct"
 								placeholder="Commision (Percentage)"> <span
-								th:if="${#fields.hasErrors('commision')}" th:errors="*{commision}"
+								th:if="${#fields.hasErrors('commissionpct')}" th:errors="*{commissionpct}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="modifiedDate" class="col-form-label">Modified Date</label>
-							<input type="date" th:field="*{modifiedDate}" class="form-control"
-								id="modifiedDate" placeholder="14/04/2001"> <span
-								th:if="${#fields.hasErrors('modifiedDate')}" th:errors="*{modifiedDate}" class="text-danger"></span>
+							<label for="modifieddate" class="col-form-label">Modified Date</label>
+							<input type="date" th:field="*{modifieddate}" class="form-control"
+								id="modifieddate" placeholder="14/04/2001"> <span
+								th:if="${#fields.hasErrors('modifieddate')}" th:errors="*{modifieddate}" class="text-danger"></span>
 						</div>
                         <div class="form-group col-md-6">
-							<label for="salesLastYear" class="col-form-label">Sales last year</label> <input
-								type="text" th:field="*{salesLastYear}" class="form-control" id="salesLastYear"
-								placeholder="salesLastYear"> <span
-								th:if="${#fields.hasErrors('salesLastYear')}" th:errors="*{salesLastYear}"
+							<label for="saleslastyear" class="col-form-label">Sales last year</label> <input
+								type="text" th:field="*{saleslastyear}" class="form-control" id="saleslastyear"
+								placeholder="sales Last Year"> <span
+								th:if="${#fields.hasErrors('saleslastyear')}" th:errors="*{saleslastyear}"
 								class="text-danger"></span>
 						</div>
                         <div class="form-group col-md-6">
-							<label for="salesQuota" class="col-form-label">Sales quota</label> <input
-								type="text" th:field="*{salesQuota}" class="form-control" id="salesQuota"
-								placeholder="salesQuota"> <span
-								th:if="${#fields.hasErrors('salesQuota')}" th:errors="*{salesQuota}"
+							<label for="salesquota" class="col-form-label">Sales quota</label> <input
+								type="text" th:field="*{salesquota}" class="form-control" id="salesquota"
+								placeholder="sales Quota"> <span
+								th:if="${#fields.hasErrors('salesquota')}" th:errors="*{salesquota}"
 								class="text-danger"></span>
 						</div>
                         <div class="form-group col-md-6">
-							<label for="salesTyD" class="col-form-label">Sales TyD</label> <input
-								type="text" th:field="*{salesTyD}" class="form-control" id="salesTyD"
+							<label for="salesytd" class="col-form-label">Sales TyD</label> <input
+								type="text" th:field="*{salesytd}" class="form-control" id="salesytd"
 								placeholder="salesTyD"> <span
-								th:if="${#fields.hasErrors('salesTyD')}" th:errors="*{salesTyD}"
+								th:if="${#fields.hasErrors('salesytd')}" th:errors="*{salesytd}"
 								class="text-danger"></span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Add Salesperson">
+							<input type="submit" name="action" class="btn btn-primary" value="Edit Salesperson">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">

@@ -60,4 +60,12 @@ public class SalesPersonServiceImp implements SalesPersonService{
 	public Iterable<Salesperson> findAll(){
 		return sp.findAll();
 	}
+	
+	public Iterable<Salesterritory> findAllTerritories(){
+		return st.findAll();
+	}
+	
+	public Optional<Salesperson> findById(Integer id){
+		return sp.findById(id);
+	}
 }

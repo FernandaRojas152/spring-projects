@@ -1,5 +1,7 @@
 package com.example.Taller1QuinteroLuisa.controller.implementation;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,6 +17,7 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesTerritoryServiceImp;
+import com.example.Taller1QuinteroLuisa.validation.CredentialInfoValidation;
 import com.example.Taller1QuinteroLuisa.validation.SalesPersonValidation;
 import com.example.Taller1QuinteroLuisa.validation.SalesTerritoryValidation;
 
@@ -64,6 +68,35 @@ public class AdministratorControllerImp {
 			personService.save(salesperson);
 			return "redirect:/salesperson/";
 		}
+	}
+	
+	@GetMapping("/salesperson/update/{id}")
+	public String editSalesPerson(@PathVariable("id")Integer id, Model model){
+		Optional<Salesperson> p= personService.findById(id);
+		if(p.isEmpty()){
+			throw new IllegalArgumentException("Couldn't not find the id requested");
+		}
+		model.addAttribute("salesperson", p.get());
+		model.addAttribute("salesterritories", personService.findAllTerritories());
+		
+		return "administrator/update-salesperson";
+	}
+	//"@{/salesperson/update/{id}(id=${salesperson.businessentityid})}"
+	@PostMapping("/salesperson/update/{id}")
+	public String updateSalesPerson(@PathVariable("id")Integer id,
+			@Validated(CredentialInfoValidation.class) Salesperson salesperson, BindingResult bindingResult, Model model,
+			@RequestParam(value = "action", required = true) String action) throws Exception{
+		if(!action.equals("Cancel")){
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("salesperson", personService.findById(id).get());
+				model.addAttribute("salesterritory", personService.findAllTerritories());
+				return "administrator/update-salesperson";
+			}
+			salesperson.setBusinessentityid(id);
+			personService.update(salesperson);
+			
+		}
+		return "redirect:/salesperson/";
 	}
 
 	/** Salesterritory mapping */
