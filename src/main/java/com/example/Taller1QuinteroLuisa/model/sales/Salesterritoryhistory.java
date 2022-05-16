@@ -48,7 +48,7 @@ public class Salesterritoryhistory implements Serializable {
 
 	// bi-directional many-to-one association to Salesterritory
 	@ManyToOne
-	@JoinColumn(name = "territoryid", insertable = false, updatable = false)
+	@JoinColumn(name = "territoryid")
 	private Salesterritory salesterritory;
 
 	public Salesterritoryhistory() {

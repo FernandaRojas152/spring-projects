@@ -20,9 +20,16 @@
 		<h2 class="mb-5">Update Sales Territory</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/salesperson/update/{id}(id=${salesterritory.territoryId})}" th:object="${salesterritory}"
+				<form action="#" th:action="@{/salesterritory/update/{id}(id=${salesterritory.territoryid})}" th:object="${salesterritory}"
 					method="post">
 					<div class="row">
+						<div class="form-group col-md-6">
+							<label for="territoryid" class="col-form-label">Territory ID</label> <input
+								type="number" th:field="*{territoryid}" class="form-control" id="territoryid"
+								placeholder="ID"> <span
+								th:if="${#fields.hasErrors('territoryid')}" th:errors="*{territoryid}"
+								class="text-danger"></span>
+						</div>
 						<div class="form-group col-md-6">
 							<label for="name" class="col-form-label">Territory Name</label> <input
 								type="text" th:field="*{name}" class="form-control" id="name"
@@ -30,17 +37,39 @@
 								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
 								class="text-danger"></span>
 						</div>
-                        <div class="form-group col-md-6">
-							<label for="businessentity" class="col-form-label"> Business Entity</label> <input
-								type="text" th:field="*{businessentity}" class="form-control" id="businessentity"
-								placeholder="Business Entity"> <span
-								th:if="${#fields.hasErrors('businessentity')}" th:errors="*{businessentity}"
+						<div class="form-group col-md-6">
+							<label for="costlastyear" class="col-form-label">Cost Last year</label> <input
+								type="text" th:field="*{costlastyear}" class="form-control" id="costlastyear"
+								placeholder="Cost last year"> <span
+								th:if="${#fields.hasErrors('costlastyear')}" th:errors="*{costlastyear}"
 								class="text-danger"></span>
 						</div>
+						<div class="form-group col-md-6">
+							<label for="countryregioncode" class="col-form-label">Country region code</label> <input
+								type="text" th:field="*{countryregioncode}" class="form-control" id="countryregioncode"
+								placeholder="Country region code"> <span
+								th:if="${#fields.hasErrors('countryregioncode')}" th:errors="*{countryregioncode}"
+								class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="modifieddate" class="col-form-label">Modified date</label> <input
+								type="date" th:field="*{modifieddate}" class="form-control" id="modifieddate"
+								placeholder="Date"> <span
+								th:if="${#fields.hasErrors('modifieddate')}" th:errors="*{modifieddate}"
+								class="text-danger"></span>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="saleslastyear" class="col-form-label">Sales last year</label> <input
+								type="text" th:field="*{saleslastyear}" class="form-control" id="saleslastyear"
+								placeholder="Sales last year"> <span
+								th:if="${#fields.hasErrors('saleslastyear')}" th:errors="*{saleslastyear}"
+								class="text-danger"></span>
+						</div>
+						
 					</div>
 					<div class="row">
 						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Add Territory">
+							<input type="submit" name="action" class="btn btn-primary" value="Update Territory">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">

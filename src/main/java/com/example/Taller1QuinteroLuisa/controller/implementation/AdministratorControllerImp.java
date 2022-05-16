@@ -81,6 +81,7 @@ public class AdministratorControllerImp {
 		
 		return "administrator/update-salesperson";
 	}
+	
 	//"@{/salesperson/update/{id}(id=${salesperson.businessentityid})}"
 	@PostMapping("/salesperson/update/{id}")
 	public String updateSalesPerson(@PathVariable("id")Integer id,
@@ -94,7 +95,6 @@ public class AdministratorControllerImp {
 			}
 			salesperson.setBusinessentityid(id);
 			personService.update(salesperson);
-			
 		}
 		return "redirect:/salesperson/";
 	}
@@ -127,5 +127,30 @@ public class AdministratorControllerImp {
 			territoryService.save(salesterritory);
 			return "redirect:/salesterritory/";
 		}
+	}
+	
+	@GetMapping("/salesterritory/update/{id}")
+	public String editSalesTerritory(@PathVariable("id")Integer id, Model model) {
+		Optional<Salesterritory> t= territoryService.findById(id);
+		if(t.isEmpty()) {
+			throw new IllegalArgumentException("Couldn't not find the id requested");
+		}
+		model.addAttribute("salesterritory", t.get());
+		return "administrator/update-salesterritory";
+	}
+	
+	@PostMapping("/salesterritory/update/{id}")
+	public String updateSalesTerritory(@PathVariable("id") Integer id,
+			@Validated(CredentialInfoValidation.class) Salesterritory salesterritory, BindingResult bindingResult, Model model,
+			@RequestParam(value="action", required= true) String action) throws Exception{
+		if(!action.equals("Cancel")) {
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("salesterritory", territoryService.findById(id).get());
+				return "administrator/update-salesterritory";
+			}
+			salesterritory.setTerritoryid(id);
+			territoryService.update(salesterritory);
+		}
+		return "redirect:/salesterritory";
 	}
 }

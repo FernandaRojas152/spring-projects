@@ -63,5 +63,17 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	public Iterable<Salesterritoryhistory> findAll(){
 		return sth.findAll();
 	}
+	
+	public Optional<Salesterritoryhistory> findById(Integer id){
+		return sth.findById(id);
+	}
+	
+	public Iterable<Salesperson> findAllSalesPerson(){
+		return sp.findAll();
+	}
+	
+	public Iterable<Salesterritory> findAllSalesTerritory(){
+		return st.findAll();
+	}
 
 }

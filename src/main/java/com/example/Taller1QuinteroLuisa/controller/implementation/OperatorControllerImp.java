@@ -1,5 +1,7 @@
 package com.example.Taller1QuinteroLuisa.controller.implementation;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.example.Taller1QuinteroLuisa.controller.interfaces.OperatorController;
 import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritoryhistory;
@@ -17,6 +19,7 @@ import com.example.Taller1QuinteroLuisa.services.SalesPersonQuotaHistoryServiceI
 import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesTerritoryHistoryServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesTerritoryServiceImp;
+import com.example.Taller1QuinteroLuisa.validation.CredentialInfoValidation;
 import com.example.Taller1QuinteroLuisa.validation.SalesPersonQuotaHistoryValidation;
 import com.example.Taller1QuinteroLuisa.validation.SalesTerritoryHistoryValidation;
 
@@ -76,6 +79,33 @@ public class OperatorControllerImp implements OperatorController{
 		}
 	}
 	
+	@GetMapping("/salespersonquotahistory/update/{id}")
+	public String editSalesPersonQuota(@PathVariable("id")Integer id, Model model) {
+		Optional<Salespersonquotahistory> s = personQuotaService.findById(id);
+		if(s.isEmpty()) {
+			throw new IllegalArgumentException("Couldn't not find the id requested");
+		}
+		model.addAttribute("salespersonquotahistory", s.get());
+		model.addAttribute("salespersons", personQuotaService.findAllSalesPerson());
+		return "operator/update-salespersonquotahistory";
+	}
+	
+	@PostMapping("/salespersonquotahistory/update/{id}")
+	public String updateSalesPersonQuota(@PathVariable("id")Integer id,
+			@Validated(CredentialInfoValidation.class) Salespersonquotahistory salespersonquotahistory, BindingResult bindingResult,
+			Model model, @RequestParam(value = "action", required = true) String action) throws Exception{
+		if(!action.equals("Cancel")){
+			if(bindingResult.hasErrors()){
+				model.addAttribute("salespersonquotahistory", personQuotaService.findById(id).get());
+				model.addAttribute("salesperson", personQuotaService.findAllSalesPerson());
+				return "operator/update-salespersonquotahistory";
+			}
+			salespersonquotahistory.setBusinessentityid(id);
+			personQuotaService.update(salespersonquotahistory);
+		}
+		return "redirect:/salespersonquotahistory";
+	}
+	
 	/** Salesterritory history mapping */
 	@GetMapping("/salesterritoryhistory")
 	public String salesTerritoryHistory(Model model) {
@@ -110,4 +140,35 @@ public class OperatorControllerImp implements OperatorController{
 			return "redirect:/salesterritoryhistory/";
 		}
 	}
+	
+//	@GetMapping("/salesterritoryhistory/update/{id}")
+//	public String editSalesTerritoryHistory(@PathVariable("id")Integer id, Model model){
+//		Optional<Salesterritoryhistory> tH= territoryHistoryService.findById(id);
+//		if(tH.isEmpty()) {
+//			throw new IllegalArgumentException("Couldn't not find the id requested");
+//		}
+//		model.addAttribute("salesterritoryhistory", tH.get());
+//		model.addAttribute("salespersons", territoryHistoryService.findAllSalesPerson());
+//		model.addAttribute("salesterritories", territoryHistoryService.findAllSalesTerritory());
+//		return "operator/update-salesterritoryhistory";
+//	}
+//	
+//	@PostMapping("/salesterritoryhistory/update/{id}")
+//	public String updateSalesTerritoryHistory(@PathVariable("id")Integer id,
+//			@Validated(CredentialInfoValidation.class) Salesterritoryhistory salesterritoryhistory, BindingResult bindingResult,
+//			Model model, @RequestParam(value = "action", required = true) String action) throws Exception{
+//		if(!action.equals("Cancel")) {
+//			if(bindingResult.hasErrors()) {
+//				model.addAttribute("salesterritoryhistory", territoryHistoryService.findById(id).get());
+//				model.addAttribute("salesperson", territoryHistoryService.findAllSalesPerson());
+//				model.addAttribute("salesterritory", territoryHistoryService.findAllSalesTerritory());
+//				
+//				return "operator/update-salesterritoryhistory";
+//			}
+//			salesterritoryhistory.setBusinessentityid(id);
+//			territoryHistoryService.update(salesterritoryhistory);
+//		}
+//		return "redirect:/salesterritoryhistory";
+//		
+//	}
 }

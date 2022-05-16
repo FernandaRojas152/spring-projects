@@ -54,5 +54,9 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 	public Iterable<Salesterritory> findAll(){
 		return st.findAll();
 	}
+	
+	public Optional<Salesterritory> findById(Integer id){
+		return st.findById(id);
+	}
 
 }

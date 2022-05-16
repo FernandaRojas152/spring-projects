@@ -57,4 +57,13 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	public Iterable<Salespersonquotahistory> findAll(){
 		return spq.findAll();
 	}
+	
+	public Iterable<Salesperson> findAllSalesPerson(){
+		return person.findAll();
+	}
+	
+	public Optional<Salespersonquotahistory> findById(Integer id){
+		return spq.findById(id);
+	}
+	
 }
