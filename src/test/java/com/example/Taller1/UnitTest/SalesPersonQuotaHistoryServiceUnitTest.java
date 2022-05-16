@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterAll;
@@ -69,12 +70,9 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			person= new Salesperson();
 			//business= new Businessentity();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-01-06");
 			
-			personQuota.setModifieddate(time);
+			personQuota.setModifieddate(date);
 			personQuota.setSalesquota(new BigDecimal(122));			
 		}
 		
@@ -82,7 +80,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 		@DisplayName("Save a null person quota")
 		void salesPersonQuotaNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				personQuotaService.save(null, null);
+				personQuotaService.save(null);
 			});
 		}
 		
@@ -93,7 +91,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			when(personQuotaRepo.save(personQuota)).thenReturn(personQuota);
 
 			//Method
-			Salespersonquotahistory temp = personQuotaService.save(personQuota, 152);
+			Salespersonquotahistory temp = personQuotaService.save(personQuota);
 
 			//Asserts
 			assertNotNull(temp);
@@ -134,13 +132,10 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 		@Test
 		@DisplayName("Saving a date bigger than the current one")
 		void wrongDate() throws ParseException {
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-01-06");
 			
 			try {
-				personQuota.setModifieddate(time);
+				personQuota.setModifieddate(date);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getModifieddate());
 				assertEquals("La fecha de inicio no es menor a la fecha actual", exception.getMessage());
@@ -171,12 +166,9 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			personQuota= new Salespersonquotahistory();
 			person= new Salesperson();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-01-06");
 			personQuota.setBusinessentityid(22);
-			personQuota.setModifieddate(time);
+			personQuota.setModifieddate(date);
 			personQuota.setSalesquota(new BigDecimal(122));
 			p2= new Salespersonquotahistory();
 		}
@@ -188,7 +180,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			when(personQuotaRepo.findById(22)).thenReturn(Optional.of(p2));
 			when(personQuotaRepo.save(personQuota)).thenReturn(personQuota);
 			
-			Salespersonquotahistory temp = personQuotaService.update(personQuota, 152);
+			Salespersonquotahistory temp = personQuotaService.update(personQuota);
 			assertNotNull(temp);
 			assertEquals(new BigDecimal(122), temp.getSalesquota());
 			assertEquals(personQuota.getBusinessentityid(), temp.getBusinessentityid());
@@ -201,7 +193,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 		@DisplayName("Updating a person quota to null")
 		void salesPersonQuotaUpdateNull() throws Exception{
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				personQuotaService.update(null, null);
+				personQuotaService.update(null);
 			});
 		}
 		
@@ -211,7 +203,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			Salespersonquotahistory temp= null;
 			try {
 				personQuota.setModifieddate(null);
-				temp= personQuotaService.update(personQuota, 152);
+				temp= personQuotaService.update(personQuota);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
 				assertEquals("La fecha de inicio no es menor a la fecha actual", exception.getMessage());
@@ -227,7 +219,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			Salespersonquotahistory temp= null;
 			try {
 				personQuota.setSalesquota(null);
-				temp= personQuotaService.update(personQuota, 152);
+				temp= personQuotaService.update(personQuota);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
 				assertEquals("La cuota no es mayor que 0", exception.getMessage());
@@ -240,15 +232,12 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 		@Test
 		@DisplayName("Updating a date bigger than the current one")
 		void UpdatewrongDate() throws Exception {
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-01-06");
 			Salespersonquotahistory temp= null;
 			
 			try {
-				personQuota.setModifieddate(time);
-				temp= personQuotaService.update(personQuota, 152);
+				personQuota.setModifieddate(date);
+				temp= personQuotaService.update(personQuota);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
 				assertEquals("La fecha de inicio no es menor a la fecha actual", exception.getMessage());
@@ -263,7 +252,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			Salespersonquotahistory temp= null;
 			try {
 				personQuota.setSalesquota(new BigDecimal(-5));
-				temp= personQuotaService.update(personQuota, 152);
+				temp= personQuotaService.update(personQuota);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getSalesquota());
 				assertEquals("La cuota no es mayor que 0", exception.getMessage());

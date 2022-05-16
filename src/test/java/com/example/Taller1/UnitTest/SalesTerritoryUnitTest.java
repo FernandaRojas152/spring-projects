@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterAll;
@@ -61,13 +62,10 @@ public class SalesTerritoryUnitTest {
 			//Set up
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-11-10");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("Xiao");
@@ -107,12 +105,9 @@ public class SalesTerritoryUnitTest {
 		@DisplayName("Saving a territory with a wrong name")
 		void salesTerritoryWrongName() throws ParseException {
 			st= new Salesterritory();
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			try {
 				st.setName("h");
 
@@ -126,11 +121,8 @@ public class SalesTerritoryUnitTest {
 		@DisplayName("Saving a territory with a null name")
 		void salesTerritoryNullName() throws ParseException{
 			st= new Salesterritory();
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			st.setModifieddate(time);
+			LocalDate date  = LocalDate.parse("2022-04-14");
+			st.setModifieddate(date);
 			st.setName(null);
 
 			try {
@@ -146,13 +138,10 @@ public class SalesTerritoryUnitTest {
 		void countryRegionWrong() throws Exception {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("Xiao");
@@ -169,13 +158,10 @@ public class SalesTerritoryUnitTest {
 		void salesTerritoryCostLastYearNull() throws Exception {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(null);
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("Xiao");
@@ -192,13 +178,10 @@ public class SalesTerritoryUnitTest {
 		void salesTerritoryCostTyTdNull() throws ParseException {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(null);
 			st.setSalesGroup("Xiao");
@@ -215,13 +198,10 @@ public class SalesTerritoryUnitTest {
 		void salesTerritorySalesLastYearNull() throws ParseException {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("Xiao");
@@ -238,13 +218,10 @@ public class SalesTerritoryUnitTest {
 		void salesTerritorySalesyTdNull() throws ParseException {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("Xiao");
@@ -261,13 +238,10 @@ public class SalesTerritoryUnitTest {
 		void salesTerritoryGroupEmpty() throws Exception {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("");
@@ -286,13 +260,10 @@ public class SalesTerritoryUnitTest {
 		void salesTerritoryGroupNull() throws Exception {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup(null);
@@ -315,14 +286,11 @@ public class SalesTerritoryUnitTest {
 		void updateSalesTerritoryCorrect() throws Exception {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 
 			st.setName("Sarumi");
 			st.setTerritoryid(57);
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("Xiao");
@@ -367,13 +335,10 @@ public class SalesTerritoryUnitTest {
 		void updateSalesTerritoryWrongName() throws Exception {
 			st= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-14");
 			
 			st.setTerritoryid(57);
-			st.setModifieddate(time);
+			st.setModifieddate(date);
 			st.setCostlastyear(new BigDecimal(200));
 			st.setCostytd(new BigDecimal(30));
 			st.setSalesGroup("Xiao");

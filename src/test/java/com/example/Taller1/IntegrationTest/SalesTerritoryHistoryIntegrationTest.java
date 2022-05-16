@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -36,12 +37,12 @@ public class SalesTerritoryHistoryIntegrationTest{
 	private Salesterritoryhistory territoryHistory;
 	private Salesperson person;
 	private Salesterritory territory;
-	
 	private SalesTerritoryHistoryRepository territoryHistoryRepo;
 	private SalesPersonRepository personRepo;
 	private SalesTerritoryRepository territoryRepo;
-
 	private SalesTerritoryHistoryServiceImp territoryService;
+	
+	private LocalDate date, date2;
 	
 	@Autowired
 	public SalesTerritoryHistoryIntegrationTest(SalesTerritoryHistoryRepository territoryHistoryRepo,
@@ -68,17 +69,12 @@ public class SalesTerritoryHistoryIntegrationTest{
 			person= new Salesperson();
 			territory= new Salesterritory();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			Date date2= df.parse("14-04-2022");
-			long time1 = date.getTime();
-			long time2= date2.getTime();
-			Timestamp time = new Timestamp(time1);
-			Timestamp timeEnd= new Timestamp(time2);
+			date= LocalDate.parse("2022-01-06");
+			date2= LocalDate.parse("2022-04-14");
 			
 			territoryHistory.setBusinessentityid(152);
-			territoryHistory.setModifieddate(time);
-			territoryHistory.setEnddate(timeEnd);
+			territoryHistory.setModifieddate(date);
+			territoryHistory.setEnddate(date2);
 			
 			territoryRepo.save(territory);
 			territoryHistory.setSalesterritory(territory);
@@ -97,14 +93,14 @@ public class SalesTerritoryHistoryIntegrationTest{
 			aux.setBusinessentityid(2215);
 			territoryHistory.setSalesperson(person);
 			
-			territoryService.save(territoryHistory, 57, 2215);
+			territoryService.save(territoryHistory);
 			assertNotNull(territoryService);
 		}
 		
 		@Test
 		void salesPersonNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				territoryService.save(null, null, null);
+				territoryService.save(null);
 			});
 		}
 		
@@ -112,12 +108,10 @@ public class SalesTerritoryHistoryIntegrationTest{
 		@DisplayName("Saving a date bigger than the end one")
 		void wrongInitialDate() throws ParseException {
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("16-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-
+			date= LocalDate.parse("2022-01-06");
+			
 			try {
-				territoryHistory.setModifieddate(time);
+				territoryHistory.setModifieddate(date);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getModifieddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());
@@ -128,12 +122,10 @@ public class SalesTerritoryHistoryIntegrationTest{
 		@DisplayName("Saving a end date smaller than the initial one")
 		void wrongEndDate() throws ParseException {
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("01-01-2021");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			date= LocalDate.parse("2021-01-01");
 
 			try {
-				territoryHistory.setEnddate(time);;
+				territoryHistory.setEnddate(date);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getEnddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());
@@ -151,16 +143,12 @@ public class SalesTerritoryHistoryIntegrationTest{
 			territory= new Salesterritory();
 
 			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			Date date2= df.parse("14-04-2022");
-			long time1 = date.getTime();
-			long time2= date2.getTime();
-			Timestamp time = new Timestamp(time1);
-			Timestamp timeEnd= new Timestamp(time2);
+			date= LocalDate.parse("2022-01-06");
+			date2= LocalDate.parse("2022-04-14");
 			
 			territoryHistory.setBusinessentityid(152);
-			territoryHistory.setModifieddate(time);
-			territoryHistory.setEnddate(timeEnd);
+			territoryHistory.setModifieddate(date);
+			territoryHistory.setEnddate(date2);
 			
 			territoryRepo.save(territory);
 			territoryHistory.setSalesterritory(territory);
@@ -178,13 +166,13 @@ public class SalesTerritoryHistoryIntegrationTest{
 			person2.setBusinessentityid(2215);
 			t2.setSalesterritory(temp);
 			t2.setSalesperson(person2);
-			territoryService.update(territoryHistory, 57, 2215);
+			territoryService.update(territoryHistory);
 		}
 		
 		@Test
 		void salesTerritoryUpdateNull() throws Exception{
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				territoryService.update(null, null, null);
+				territoryService.update(null);
 			});
 		}		
 	}

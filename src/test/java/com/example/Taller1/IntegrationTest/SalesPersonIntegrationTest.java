@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -39,7 +37,7 @@ public class SalesPersonIntegrationTest {
 	//private EmployeeRepository ep;
 	private SalesTerritoryRepository st;
 	
-	private Timestamp time;
+	private LocalDate date;
 
 	@Autowired
 	public SalesPersonIntegrationTest(SalesPersonRepository salesPerson, SalesTerritoryRepository st, SalesPersonServiceImp sp) {
@@ -61,10 +59,7 @@ public class SalesPersonIntegrationTest {
 			s = new Salesperson();
 			t= new Salesterritory();
 			s.setBusinessentityid(2215);
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			time = new Timestamp(time1);
+			date= LocalDate.parse("2022-01-22");
 //			s.setModifieddate(time);
 //			s.setSalesquota(new BigDecimal(152));
 //			s.setCommissionpct(BigDecimal.ZERO);
@@ -76,7 +71,7 @@ public class SalesPersonIntegrationTest {
 		
 		@Test
 		void saveCorrectly() throws Exception {
-			s.setModifieddate(time);
+			s.setModifieddate(date);
 			s.setSalesquota(new BigDecimal(152));
 			s.setCommissionpct(BigDecimal.ZERO);
 			s.setBonus(BigDecimal.ONE);	
@@ -143,11 +138,8 @@ public class SalesPersonIntegrationTest {
 			s = new Salesperson();
 			t= new Salesterritory();
 			s.setBusinessentityid(2215);
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			s.setModifieddate(time);
+			date= LocalDate.parse("2022-01-22");
+			s.setModifieddate(date);
 			s.setSalesquota(new BigDecimal(152));
 			s.setCommissionpct(BigDecimal.ZERO);
 			s.setBonus(BigDecimal.ONE);

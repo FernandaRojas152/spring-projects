@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterAll;
@@ -65,24 +66,18 @@ public class SalesTerritoryHistoryServiceUnitTest {
 			territoryHistory= new Salesterritoryhistory();
 			person= new Salesperson();
 			territory= new Salesterritory();
+			LocalDate date  = LocalDate.parse("2022-01-06");
+			LocalDate date2  = LocalDate.parse("2022-04-16");
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			Date date2= df.parse("14-04-2022");
-			long time1 = date.getTime();
-			long time2= date2.getTime();
-			Timestamp time = new Timestamp(time1);
-			Timestamp timeEnd= new Timestamp(time2);
-
-			territoryHistory.setModifieddate(time);
-			territoryHistory.setEnddate(timeEnd);
+			territoryHistory.setModifieddate(date);
+			territoryHistory.setEnddate(date2);
 		}
 
 		@Test
 		@DisplayName("Save a null person quota")
 		void saveTerritoryHistoryNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				territoryService.save(null, null, null);
+				territoryService.save(null);
 			});
 		}
 
@@ -94,7 +89,7 @@ public class SalesTerritoryHistoryServiceUnitTest {
 			when(territoryHistoryRepo.save(territoryHistory)).thenReturn(territoryHistory);
 
 			//Method
-			Salesterritoryhistory temp = territoryService.save(territoryHistory, 57, 152);
+			Salesterritoryhistory temp = territoryService.save(territoryHistory);
 
 			//Asserts
 			assertNotNull(temp);
@@ -114,13 +109,9 @@ public class SalesTerritoryHistoryServiceUnitTest {
 		@Test
 		@DisplayName("Saving a date bigger than the end one")
 		void wrongInitialDate() throws ParseException {
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("16-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-
+			LocalDate date  = LocalDate.parse("2022-04-16");
 			try {
-				territoryHistory.setModifieddate(time);
+				territoryHistory.setModifieddate(date);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getModifieddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());
@@ -131,13 +122,10 @@ public class SalesTerritoryHistoryServiceUnitTest {
 		@Test
 		@DisplayName("Saving a end date smaller than the initial one")
 		void wrongEndDate() throws ParseException {
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("01-01-2021");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2021-01-01");
 
 			try {
-				territoryHistory.setEnddate(time);;
+				territoryHistory.setEnddate(date);;
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getEnddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());
@@ -178,17 +166,13 @@ public class SalesTerritoryHistoryServiceUnitTest {
 			territoryHistory= new Salesterritoryhistory();
 			person= new Salesperson();
 			territory= new Salesterritory();
+			
+			LocalDate date  = LocalDate.parse("2022-01-06");
+			LocalDate date2  = LocalDate.parse("2022-04-14");
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			Date date2= df.parse("14-04-2022");
-			long time1 = date.getTime();
-			long time2= date2.getTime();
-			Timestamp time = new Timestamp(time1);
-			Timestamp timeEnd= new Timestamp(time2);
 			territoryHistory.setBusinessentityid(2215);
-			territoryHistory.setModifieddate(time);
-			territoryHistory.setEnddate(timeEnd);
+			territoryHistory.setModifieddate(date);
+			territoryHistory.setEnddate(date2);
 			t2= new Salesterritoryhistory();
 		}
 		
@@ -196,7 +180,7 @@ public class SalesTerritoryHistoryServiceUnitTest {
 		@DisplayName("Save a null territory history")
 		void updateTerritoryHistoryNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				territoryService.update(null, null, null);
+				territoryService.update(null);
 			});
 		}
 
@@ -209,7 +193,7 @@ public class SalesTerritoryHistoryServiceUnitTest {
 			when(territoryHistoryRepo.save(territoryHistory)).thenReturn(territoryHistory);
 
 			//Method
-			Salesterritoryhistory temp = territoryService.update(territoryHistory, 57, 152);
+			Salesterritoryhistory temp = territoryService.update(territoryHistory);
 
 			//Asserts
 			assertNotNull(temp);
@@ -229,14 +213,11 @@ public class SalesTerritoryHistoryServiceUnitTest {
 		@Test
 		@DisplayName("Saving a date bigger than the end one")
 		void updateWrongInitialDate() throws Exception {
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("16-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2022-04-16");
 
 			try {
-				territoryHistory.setModifieddate(time);
-				Salesterritoryhistory temp = territoryService.update(territoryHistory, 57, 152);
+				territoryHistory.setModifieddate(date);
+				Salesterritoryhistory temp = territoryService.update(territoryHistory);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getModifieddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());
@@ -247,14 +228,11 @@ public class SalesTerritoryHistoryServiceUnitTest {
 		@Test
 		@DisplayName("Saving a end date smaller than the initial one")
 		void updateWrongEndDate() throws Exception {
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("01-01-2021");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			LocalDate date  = LocalDate.parse("2021-01-11");
 
 			try {
-				territoryHistory.setEnddate(time);;
-				Salesterritoryhistory temp = territoryService.update(territoryHistory, 57, 152);
+				territoryHistory.setEnddate(date);;
+				Salesterritoryhistory temp = territoryService.update(territoryHistory);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getEnddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());
@@ -267,7 +245,7 @@ public class SalesTerritoryHistoryServiceUnitTest {
 		void updateNullInitialDate() throws Exception {
 			try {
 				territoryHistory.setEnddate(null);
-				Salesterritoryhistory temp = territoryService.update(territoryHistory, 57, 152);
+				Salesterritoryhistory temp = territoryService.update(territoryHistory);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getEnddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());
@@ -280,7 +258,7 @@ public class SalesTerritoryHistoryServiceUnitTest {
 		void updateNullEndDate() throws Exception {
 			try {
 				territoryHistory.setEnddate(null);
-				Salesterritoryhistory temp = territoryService.update(territoryHistory, 57, 152);
+				Salesterritoryhistory temp = territoryService.update(territoryHistory);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> territoryHistory.getEnddate());
 				assertEquals("La fecha de inicio no es menor a la fecha final", exception.getMessage());

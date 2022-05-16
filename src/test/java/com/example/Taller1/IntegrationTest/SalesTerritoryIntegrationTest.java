@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -34,11 +35,11 @@ import com.example.Taller1QuinteroLuisa.services.SalesTerritoryServiceImp;
 public class SalesTerritoryIntegrationTest{
 	private Salesterritory t;
 	private Countryregion cr;
-	
 	private SalesTerritoryRepository territoryRepo;
 	private CountryRegionRepository countryRepo;
-	
 	private SalesTerritoryServiceImp territoryService;
+	
+	private LocalDate date;
 	
 	@Autowired
 	public SalesTerritoryIntegrationTest(SalesTerritoryRepository territoryRepo,
@@ -61,11 +62,9 @@ public class SalesTerritoryIntegrationTest{
 			t= new Salesterritory();
 			cr= new Countryregion();
 			t.setTerritoryid(57);
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			t.setModifieddate(time);
+			date= LocalDate.parse("2022-01-22");
+			
+			t.setModifieddate(date);
 			t.setName("Sarumi");
 			t.setCostlastyear(new BigDecimal(200));
 			t.setCostytd(new BigDecimal(30));
@@ -123,11 +122,9 @@ public class SalesTerritoryIntegrationTest{
 			t= new Salesterritory();
 			cr= new Countryregion();
 			t.setTerritoryid(57);
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			t.setModifieddate(time);
+			date= LocalDate.parse("2022-10-11");
+			
+			t.setModifieddate(date);
 			t.setName("Sarumi");
 			t.setCostlastyear(new BigDecimal(200));
 			t.setCostytd(new BigDecimal(30));

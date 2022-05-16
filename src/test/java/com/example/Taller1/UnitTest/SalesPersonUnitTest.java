@@ -3,6 +3,7 @@ package com.example.Taller1.UnitTest;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterAll;
@@ -69,11 +70,8 @@ class SalesPersonUnitTest {
 			person= new Salesperson();
 			employee= new Employee();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			person.setModifieddate(time);
+			LocalDate date  = LocalDate.parse("2022-11-10");
+			person.setModifieddate(date);
 			person.setSalesquota(new BigDecimal(152));
 			person.setCommissionpct(BigDecimal.ZERO);
 			person.setBonus(BigDecimal.ONE);
@@ -111,11 +109,8 @@ class SalesPersonUnitTest {
 			person= new Salesperson();
 			employee= new Employee();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			person.setModifieddate(time);
+			LocalDate date  = LocalDate.parse("2022-11-10");
+			person.setModifieddate(date);
 			try {
 				person.setSalesquota(new BigDecimal(-152));
 			} catch (RuntimeException e) {
@@ -132,11 +127,8 @@ class SalesPersonUnitTest {
 			person= new Salesperson();
 			employee= new Employee();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			person.setModifieddate(time);
+			LocalDate date  = LocalDate.parse("2022-11-10");
+			person.setModifieddate(date);
 			person.setSalesquota(null);
 			person.setCommissionpct(BigDecimal.ZERO);
 			person.setBonus(BigDecimal.ONE);
@@ -151,11 +143,8 @@ class SalesPersonUnitTest {
 			person= new Salesperson();
 			employee= new Employee();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			person.setModifieddate(time);
+			LocalDate date  = LocalDate.parse("2022-11-10");
+			person.setModifieddate(date);
 			person.setSalesquota(new BigDecimal(42));
 			person.setCommissionpct(null);
 			person.setBonus(BigDecimal.ONE);
@@ -170,11 +159,8 @@ class SalesPersonUnitTest {
 			person= new Salesperson();
 			employee= new Employee();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			person.setModifieddate(time);
+			LocalDate date  = LocalDate.parse("2022-11-10");
+			person.setModifieddate(date);
 			person.setSalesquota(new BigDecimal(152));
 			try {
 				person.setCommissionpct(new BigDecimal(80));
@@ -202,11 +188,8 @@ class SalesPersonUnitTest {
 			person= new Salesperson();
 			employee= new Employee();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("10-11-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
-			person.setModifieddate(time);
+			LocalDate date  = LocalDate.parse("2022-11-10");
+			person.setModifieddate(date);
 			person.setBusinessentityid(2215);
 			person.setSalesquota(new BigDecimal(152));
 			person.setCommissionpct(BigDecimal.ZERO);

@@ -3,15 +3,9 @@ package com.example.Taller1.IntegrationTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.time.LocalDate;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
@@ -39,11 +32,11 @@ import com.example.Taller1QuinteroLuisa.services.SalesPersonQuotaHistoryServiceI
 public class SalesPersonQuotaHistoryIntegrationTest {
 	private Salespersonquotahistory personQuota;
 	private Salesperson person;
-	
 	private SalesPersonQuotaHistoryRepository personQuotaRepo;
 	private SalesPersonRepository personRepo;
-	
 	private SalesPersonQuotaHistoryServiceImp personQuotaService;
+	
+	private LocalDate date;
 	
 	@Autowired
 	public SalesPersonQuotaHistoryIntegrationTest(SalesPersonQuotaHistoryRepository personQuotaRepo,
@@ -67,12 +60,9 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 			personQuota= new Salespersonquotahistory();
 			person= new Salesperson();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
 			personQuota.setBusinessentityid(2215);
-			personQuota.setModifieddate(time);
+			date= LocalDate.parse("2022-01-06");
+			personQuota.setModifieddate(date);
 			personQuota.setSalesquota(new BigDecimal(122));
 			
 			personRepo.save(person);
@@ -84,7 +74,7 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 			Salesperson temp = new Salesperson();
 			temp.setBusinessentityid(152);
 			personQuota.setSalesperson(temp);
-			personQuotaService.save(personQuota, 152);
+			personQuotaService.save(personQuota);
 			assertNotNull(temp);
 			assertNotNull(personQuotaService);
 		}
@@ -92,7 +82,7 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 		@Test
 		void salesPersonNull() {
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				personQuotaService.save(null, null);
+				personQuotaService.save(null);
 			});
 		}
 		
@@ -108,13 +98,10 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 		
 		@Test
 		void wrongDate() throws ParseException {
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("14-04-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			date= LocalDate.parse("2022-04-14");
 			
 			try {
-				personQuota.setModifieddate(time);
+				personQuota.setModifieddate(date);
 			} catch (RuntimeException e) {
 				Throwable exception = assertThrows(RuntimeException.class, () -> personQuota.getModifieddate());
 				assertEquals("La fecha de inicio no es menor a la fecha actual", exception.getMessage());
@@ -130,12 +117,9 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 			personQuota= new Salespersonquotahistory();
 			person= new Salesperson();
 
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			Date date  = df.parse("06-01-2022");
-			long time1 = date.getTime();
-			Timestamp time = new Timestamp(time1);
+			date= LocalDate.parse("2022-01-06");
 			personQuota.setBusinessentityid(2215);
-			personQuota.setModifieddate(time);
+			personQuota.setModifieddate(date);
 			personQuota.setSalesquota(new BigDecimal(122));
 			
 			personRepo.save(person);
@@ -148,14 +132,14 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 			Salesperson temp= new Salesperson();
 			temp.setBusinessentityid(152);
 			p2.setSalesperson(temp);
-			personQuotaService.update(personQuota, 152);
+			personQuotaService.update(personQuota);
 			assertNotNull(personQuotaService);
 		}
 		
 		@Test
 		void salesPersonUpdateNull() throws Exception{
 			Assertions.assertThrows(NullPointerException.class, () -> {
-				personQuotaService.update(null, null);
+				personQuotaService.update(null);
 			});
 		}
 	}
