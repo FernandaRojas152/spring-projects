@@ -136,7 +136,7 @@ public class OperatorControllerImp implements OperatorController{
 		}else {
 			territoryHistoryService.save(salesterritoryhistory);
 			System.out.println("aqui esta esa vaina: " + territoryHistoryService.findAll() + "valores: " + salesterritoryhistory.getSalesterritory().getName());
-			System.out.println("se guarda en el modelo: " + salesterritoryhistory.getBusinessentityid() + salesterritoryhistory.getSalesterritory().getName());
+			System.out.println("se guarda en el modelo: " + salesterritoryhistory.getId() + salesterritoryhistory.getSalesterritory().getName());
 			return "redirect:/salesterritoryhistory/";
 		}
 	}

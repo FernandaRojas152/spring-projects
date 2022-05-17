@@ -35,12 +35,12 @@
 						</thead>
 						<tbody>
 							<tr th:each="territoryhistory : ${salesterritoryhistories}">
-								<td th:text="${territoryhistory.businessentityid}"></td>
+								<td th:text="${territoryhistory.id}"></td>
 								<td th:text="${territoryhistory.modifieddate}"></td>
 								<td th:text="${territoryhistory.enddate}"></td>
 								<td th:text="${territoryhistory.salesperson.businessentityid}"></td>
 								<td th:text="${territoryhistory.salesterritory.name}"></td>
-								<td><a th:href="@{/salesterritoryhistory/update/{id}(id=${territoryhistory.businessentity})}"
+								<td><a th:href="@{/salesterritoryhistory/update/{id}(id=${territoryhistory.id})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 							</tr>
 						</tbody>

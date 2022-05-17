@@ -30,12 +30,12 @@ input[type=submit] {
 				<form action="#" th:action="@{/salesterritoryhistory/add}" th:object="${salesterritoryhistory}" method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="businessentityid" class="col-form-label">Business
-								Entity Id</label> <input type="text" th:field="*{businessentityid}"
-								class="form-control" id="businessentityid"
-								placeholder="businessentityid"> <span
-								th:if="${#fields.hasErrors('businessentityid')}"
-								th:errors="*{businessentityid}" class="text-danger"></span>
+							<label for="id" class="col-form-label">Business
+								Entity Id</label> <input type="text" th:field="*{id}"
+								class="form-control" id="id"
+								placeholder="id"> <span
+								th:if="${#fields.hasErrors('id')}"
+								th:errors="*{id}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="modifieddate" class="col-form-label">Modified

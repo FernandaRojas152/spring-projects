@@ -170,7 +170,7 @@ public class SalesTerritoryHistoryServiceUnitTest {
 			LocalDate date  = LocalDate.parse("2022-01-06");
 			LocalDate date2  = LocalDate.parse("2022-04-14");
 
-			territoryHistory.setBusinessentityid(2215);
+			territoryHistory.setId(2215);
 			territoryHistory.setModifieddate(date);
 			territoryHistory.setEnddate(date2);
 			t2= new Salesterritoryhistory();

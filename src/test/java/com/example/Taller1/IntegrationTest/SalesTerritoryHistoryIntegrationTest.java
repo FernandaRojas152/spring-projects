@@ -3,11 +3,9 @@ package com.example.Taller1.IntegrationTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -72,7 +70,7 @@ public class SalesTerritoryHistoryIntegrationTest{
 			date= LocalDate.parse("2022-01-06");
 			date2= LocalDate.parse("2022-04-14");
 			
-			territoryHistory.setBusinessentityid(152);
+			territoryHistory.setId(152);
 			territoryHistory.setModifieddate(date);
 			territoryHistory.setEnddate(date2);
 			
@@ -146,7 +144,7 @@ public class SalesTerritoryHistoryIntegrationTest{
 			date= LocalDate.parse("2022-01-06");
 			date2= LocalDate.parse("2022-04-14");
 			
-			territoryHistory.setBusinessentityid(152);
+			territoryHistory.setId(152);
 			territoryHistory.setModifieddate(date);
 			territoryHistory.setEnddate(date2);
 			

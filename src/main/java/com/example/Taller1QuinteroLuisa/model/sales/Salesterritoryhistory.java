@@ -28,9 +28,9 @@ public class Salesterritoryhistory implements Serializable {
 //	private SalesterritoryhistoryPK id;
 	
 	@Id
-	@SequenceGenerator(name = "SALESTERRITORYHISTORY_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESTERRITORYHISTORY_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESTERRITORYHISTORY_BUSINESSENTITYID_GENERATOR")
-	private Integer businessentityid;
+	@SequenceGenerator(name = "SALESTERRITORYHISTORY_ID_GENERATOR", allocationSize = 1, sequenceName = "SALESTERRITORYHISTORY_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESTERRITORYHISTORY_ID_GENERATOR")
+	private Integer id;
 	
 	@PastOrPresent
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
@@ -74,8 +74,8 @@ public class Salesterritoryhistory implements Serializable {
 //		return this.id;
 //	}
 	
-	public Integer getBusinessentityid() {
-		return this.businessentityid;
+	public Integer getId() {
+		return this.id;
 	}
 
 	public LocalDate getModifieddate() {
@@ -118,8 +118,8 @@ public class Salesterritoryhistory implements Serializable {
 		this.salesterritory = salesterritory;
 	}
 	
-	public void setBusinessentityid(Integer businessentityid) {
-		this.businessentityid = businessentityid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

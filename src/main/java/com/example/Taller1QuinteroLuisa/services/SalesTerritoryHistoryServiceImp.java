@@ -4,6 +4,8 @@ import java.util.Optional;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritoryhistory;
@@ -24,6 +26,7 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 		this.st= st;
 	}
 
+	@Transactional
 	@Override
 	public Salesterritoryhistory save(Salesterritoryhistory territory) throws Exception {
 		Salesterritoryhistory temp= null;
@@ -40,12 +43,13 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 		return temp;
 	}
 
+	@Transactional
 	@Override
 	public Salesterritoryhistory update(Salesterritoryhistory territory) throws Exception {
 		Salesterritoryhistory temp= null;
 
-		if(territory.getBusinessentityid()!=null) {
-			Optional<Salesterritoryhistory> optional = sth.findById(territory.getBusinessentityid());
+		if(territory.getId()!=null) {
+			Optional<Salesterritoryhistory> optional = sth.findById(territory.getId());
 			if(optional.isPresent()) {
 				temp = save(territory);
 			}	
