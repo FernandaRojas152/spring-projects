@@ -1,5 +1,55 @@
 package com.example.Taller1QuinteroLuisa.dao;
 
-public class SalesPersonDaoImp {
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
+
+@Repository
+@Scope("Singleton")
+public class SalesPersonDaoImp implements SalesPersonDAO{
+	
+	@PersistenceContext
+	@Autowired
+	private EntityManager entityManager;
+	
+	@Override
+	@Transactional
+	public void save(Salesperson salesperson) {
+		entityManager.persist(salesperson);
+		
+	}
+
+	@Override
+	@Transactional
+	public void update(Salesperson salesperson) {
+		entityManager.merge(salesperson);
+		
+	}
+
+	@Override
+	@Transactional
+	public List<Salesperson> findAll() {
+		Query query= entityManager.createQuery("SELECT s FROM Salesperson s");
+		return query.getResultList();
+	}
+
+	@Override
+	@Transactional
+	public Salesperson findById(Integer id) {
+		return entityManager.find(Salesperson.class, id);
+	}
+
+	@Override
+	@Transactional
+	public List<Salesperson> findBySalesTerritory(Integer territoryid) {
+		String jpql= "SELECT s FROM Salesperson s WHERE s.salesterritory.territoryid = '"+territoryid+"'";
+		return entityManager.createQuery(jpql, Salesperson.class).getResultList();
+	}
 }

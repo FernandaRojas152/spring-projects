@@ -58,5 +58,4 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 	public Optional<Salesterritory> findById(Integer id){
 		return st.findById(id);
 	}
-
 }
