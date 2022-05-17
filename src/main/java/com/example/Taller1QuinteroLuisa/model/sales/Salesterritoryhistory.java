@@ -36,6 +36,18 @@ public class Salesterritoryhistory implements Serializable {
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate enddate;
 	
+	@PastOrPresent
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	private LocalDate startdate;
+	
+	public LocalDate getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(LocalDate startdate) {
+		this.startdate = startdate;
+	}
+
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate modifieddate;
 
