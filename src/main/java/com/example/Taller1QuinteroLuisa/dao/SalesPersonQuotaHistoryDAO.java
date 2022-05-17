@@ -1,5 +1,6 @@
 package com.example.Taller1QuinteroLuisa.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
@@ -10,5 +11,6 @@ public interface SalesPersonQuotaHistoryDAO {
 	public List<Salespersonquotahistory> findAll();
 	public Salespersonquotahistory findById(Integer id);
 	public List<Salespersonquotahistory> findBySalesPerson(Integer salespersonid);
+	public List<Salespersonquotahistory> findBySalesQuota(BigDecimal salesquota);
 
 }

@@ -13,6 +13,4 @@ public interface SalesTerritoryHistoryDAO{
 	//Joins
 	public List<Salesterritoryhistory> findBySalesPerson(Integer salespersonid);
 	public List<Salesterritoryhistory> findBySalesTerritory(Integer salesterritoryid);
-	
-
 }
