@@ -1,5 +1,7 @@
 package com.example.Taller1.DaoTest;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
@@ -78,6 +80,24 @@ class SalesPersonDaoTest{
 			assertNotNull(salespersonDAO);
 			salespersonDAO.save(salesperson);
 			assertTrue(salespersonDAO.findById(salesperson.getBusinessentityid()).equals(salesperson));
+		}
+		
+		@Test
+		@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+		void update() {
+			assertNotNull(salespersonDAO);
+			salespersonDAO.save(salesperson);
+			
+			date= LocalDate.parse("2022-04-16");
+			
+			salesperson.setSalesquota(new BigDecimal(600));
+			salesperson.setBonus(new BigDecimal(30));
+			salesperson.setModifieddate(date);
+			salesperson.setCommissionpct(new BigDecimal(0.3));
+			
+			Salesperson temp= salespersonDAO.findById(salesperson.getBusinessentityid());
+			assertAll(()-> assertEquals(600, temp.getSalesquota()));
+			
 		}
 	}
 }
