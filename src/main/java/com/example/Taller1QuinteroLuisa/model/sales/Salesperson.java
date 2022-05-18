@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-
+import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 /**
  * The persistent class for the salesperson database table.
@@ -25,12 +25,13 @@ public class Salesperson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SALESPERSON_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESPERSON_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESPERSON_BUSINESSENTITYID_GENERATOR")
+//	@SequenceGenerator(name = "SALESPERSON_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESPERSON_SEQ")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESPERSON_BUSINESSENTITYID_GENERATOR")
 	private Integer businessentityid;
 
 	private BigDecimal bonus;
-
+	
+	@NotNull
 	private BigDecimal commissionpct;
 	
 	@DateTimeFormat(pattern= "yyyy-MM-dd")

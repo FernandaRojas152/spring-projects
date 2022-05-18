@@ -15,7 +15,7 @@ import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 
 @Repository
-@Scope("Singleton")
+@Scope("singleton")
 public class SalesPersonDaoImp implements SalesPersonDAO{
 	
 	@PersistenceContext

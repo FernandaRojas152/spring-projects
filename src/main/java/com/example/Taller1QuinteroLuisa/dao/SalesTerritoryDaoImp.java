@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 
 @Repository
-@Scope("Singleton")
+@Scope("singleton")
 public class SalesTerritoryDaoImp implements SalesTerritoryDAO{
 	@PersistenceContext
 	private EntityManager entityManager;
