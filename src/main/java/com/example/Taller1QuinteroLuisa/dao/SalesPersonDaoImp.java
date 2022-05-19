@@ -45,7 +45,7 @@ public class SalesPersonDaoImp implements SalesPersonDAO{
 
 	@Override
 	@Transactional
-	public Salesperson findById(Integer id) {
+	public Salesperson findById(Integer id){
 		return entityManager.find(Salesperson.class, id);
 	}
 
