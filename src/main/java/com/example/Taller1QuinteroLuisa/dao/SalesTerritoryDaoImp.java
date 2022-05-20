@@ -42,8 +42,7 @@ public class SalesTerritoryDaoImp implements SalesTerritoryDAO{
 
 	@Override
 	public List<Salesterritory> findTwoSalesPersonWithQuota() {
-		String jpql= "SELECT st FROM Salesterritory st WHERE (SELECT COUNT(s) FROM Salesperson s"
-				+"WHERE s MEMBER OF st.salesperson AND s.salesquota>10000)>=2";
+		String jpql= "SELECT st FROM Salesterritory st WHERE SIZE st.salesperson >2 AND s.salesquota>1000";
 		return entityManager.createQuery(jpql).getResultList();
 	}
 
