@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -33,8 +35,6 @@ class SalesPersonDaoTest{
 	//Attributes
 	private SalesPersonDaoImp salespersonDAO;
 	private SalesTerritoryDaoImp salesterritoryDAO;
-	private SalesPersonRepository personRepo;
-	private SalesTerritoryRepository territoryRepo;
 	private Salesperson salesperson;
 	private Salesterritory salesterritory;
 	
@@ -168,9 +168,36 @@ class SalesPersonDaoTest{
 		}
 		
 		@Test
-		
-		void findByTerritory() {
+		@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+		void findByTerritory(){
+			assertNotNull(salespersonDAO);
+			salespersonDAO.save(salesperson);
 			
+			Salesperson salesperson1= new Salesperson();
+			Salesterritory salesterritory1= new Salesterritory();
+			LocalDate date1= LocalDate.parse("2022-02-22");
+			
+			salesterritory1.setName("Canada");
+			salesterritory1.setCountryregioncode("CAN");
+			salesterritory1.setCostlastyear(new BigDecimal(4000));
+			salesterritoryDAO.save(salesterritory1);
+			
+			//salesperson1.setBusinessentityid(2);
+			salesperson1.setBonus(new BigDecimal(152));
+			salesperson1.setCommissionpct(BigDecimal.ZERO);
+			salesperson1.setModifieddate(date1);
+			salesperson1.setSalesquota(new BigDecimal(700));
+			salesperson1.setSalesterritory(salesterritory1);
+			salespersonDAO.save(salesperson1);
+			
+			List<Salesperson> listPerson= salespersonDAO.findBySalesTerritory(salesperson1.getSalesterritory().getTerritoryid());
+			
+			assertEquals(1, listPerson.size());
 		}
+	}
+	
+	@AfterAll
+	static void end() {
+		System.out.println("--------------- SALESPERSON TEST ENDED -----------------");
 	}
 }

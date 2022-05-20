@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
 
 @Repository
-@Scope("Singleton")
+@Scope("singleton")
 public class SalesPersonQuotaHistoryDaoImp implements SalesPersonQuotaHistoryDAO{
 	@PersistenceContext
 	private EntityManager entityManager;

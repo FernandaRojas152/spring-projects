@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
 
