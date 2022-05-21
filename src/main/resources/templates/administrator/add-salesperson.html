@@ -24,13 +24,6 @@
 					method="post">
 					<div class="row">
                         <div class="form-group col-md-6">
-							<label for="businessentityid" class="col-form-label">Business Entity Id</label> <input
-								type="number" th:field="*{businessentityid}" class="form-control" id="businessentityid"
-								placeholder="Id"> <span
-								th:if="${#fields.hasErrors('businessentityid')}" th:errors="*{businessentityid}"
-								class="text-danger"></span>
-						</div>
-                        <div class="form-group col-md-6">
 							<label for="salesterritory" class="col-form-label">Sales Territory</label> <select class="form-control-range"
                                 th:field="*{salesterritory}"> <option th:each="territory: ${salesterritories}"
                                 th:value="${territory.territoryid}" th:text="${territory.name}"

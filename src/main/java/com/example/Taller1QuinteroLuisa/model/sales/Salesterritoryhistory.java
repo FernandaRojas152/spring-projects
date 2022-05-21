@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +33,7 @@ public class Salesterritoryhistory implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESTERRITORYHISTORY_ID_GENERATOR")
 	private Integer id;
 	
-	@PastOrPresent
+	@FutureOrPresent
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate enddate;
 	

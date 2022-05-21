@@ -80,7 +80,7 @@ public class SalesTerritoryHistoryDaoTest {
 		@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 		void save() {
 			assertNotNull(salesterritoryDAO);
-			salesterritoryDAO.save(salesterritory);;
+			salesterritoryDAO.save(salesterritory);
 		}
 	}
 

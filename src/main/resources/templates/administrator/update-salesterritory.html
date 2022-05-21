@@ -24,13 +24,6 @@
 					method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="territoryid" class="col-form-label">Territory ID</label> <input
-								type="number" th:field="*{territoryid}" class="form-control" id="territoryid"
-								placeholder="ID"> <span
-								th:if="${#fields.hasErrors('territoryid')}" th:errors="*{territoryid}"
-								class="text-danger"></span>
-						</div>
-						<div class="form-group col-md-6">
 							<label for="name" class="col-form-label">Territory Name</label> <input
 								type="text" th:field="*{name}" class="form-control" id="name"
 								placeholder="Name"> <span

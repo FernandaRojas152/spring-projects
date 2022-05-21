@@ -74,7 +74,7 @@ public class OperatorControllerImp implements OperatorController{
 			personQuotaService.save(salespersonquotahistory);
 			System.out.println("aqui ta: "+ personQuotaService.findAll().toString() + salespersonquotahistory.getSalesquota());
 			System.out.println("persona:"+ salespersonquotahistory.getSalesperson().getBusinessentityid()
-					+ "id: " + salespersonquotahistory.getBusinessentityid());
+					+ "id: " + salespersonquotahistory.getId());
 			return "redirect:/salespersonquotahistory/";
 		}
 	}
@@ -100,16 +100,18 @@ public class OperatorControllerImp implements OperatorController{
 				model.addAttribute("salesperson", personQuotaService.findAllSalesPerson());
 				return "operator/update-salespersonquotahistory";
 			}
-			salespersonquotahistory.setBusinessentityid(id);
+			salespersonquotahistory.setId(id);
 			personQuotaService.update(salespersonquotahistory);
 		}
 		return "redirect:/salespersonquotahistory";
 	}
 	
+	
+	
 	/** Salesterritory history mapping */
 	@GetMapping("/salesterritoryhistory")
 	public String salesTerritoryHistory(Model model) {
-		model.addAttribute("salesterritoryhistories", territoryHistoryService.findAll());
+		model.addAttribute("salesterritoryhistory", territoryHistoryService.findAll());
 		return "operator/salesterritoryhistory";
 	}
 	
@@ -137,6 +139,7 @@ public class OperatorControllerImp implements OperatorController{
 			territoryHistoryService.save(salesterritoryhistory);
 			System.out.println("aqui esta esa vaina: " + territoryHistoryService.findAll() + "valores: " + salesterritoryhistory.getSalesterritory().getName());
 			System.out.println("se guarda en el modelo: " + salesterritoryhistory.getId() + salesterritoryhistory.getSalesterritory().getName());
+			System.out.println("el salesperson: "+ salesterritoryhistory.getSalesperson() + "y: "+salesterritoryhistory.getSalesperson().getBusinessentityid());
 			return "redirect:/salesterritoryhistory/";
 		}
 	}

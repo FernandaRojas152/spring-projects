@@ -26,7 +26,7 @@ public class Salespersonquotahistory implements Serializable {
 	@Id
 	@SequenceGenerator(name = "SALESPERSONQUOTAHISTORY_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESPERSONQUOTAHISTORY_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESPERSONQUOTAHISTORY_BUSINESSENTITYID_GENERATOR")
-	private Integer businessentityid;
+	private Integer id;
 	
 	/**@EmbeddedId
 	private SalespersonquotahistoryPK id;
@@ -64,8 +64,8 @@ public class Salespersonquotahistory implements Serializable {
 		return this.salesperson;
 	}
 	
-	public Integer getBusinessentityid() {
-		return this.businessentityid;
+	public Integer getId() {
+		return this.id;
 	}
 
 	public BigDecimal getSalesquota() {
@@ -92,8 +92,8 @@ public class Salespersonquotahistory implements Serializable {
 		this.salesquota = salesquota;
 	}
 	
-	public void setBusinessentityid(Integer businessentityid) {
-		this.businessentityid = businessentityid;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
