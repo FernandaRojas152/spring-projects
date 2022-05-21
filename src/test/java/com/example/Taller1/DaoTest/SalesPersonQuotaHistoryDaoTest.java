@@ -71,7 +71,7 @@ public class SalesPersonQuotaHistoryDaoTest{
 			assertNotNull(salespersonQuotaDAO);
 			salespersonQuotaDAO.save(salespersonquotahistory);
 			
-			assertTrue(salespersonQuotaDAO.findById(salespersonquotahistory.getBusinessentityid()).equals(salespersonquotahistory));
+			assertTrue(salespersonQuotaDAO.findById(salespersonquotahistory.getId()).equals(salespersonquotahistory));
 		}
 		
 		@Test
@@ -84,7 +84,7 @@ public class SalesPersonQuotaHistoryDaoTest{
 			salespersonquotahistory.setModifieddate(date);
 			salespersonquotahistory.setSalesquota(new BigDecimal(999));
 			
-			Salespersonquotahistory temp= salespersonQuotaDAO.findById(salespersonquotahistory.getBusinessentityid());
+			Salespersonquotahistory temp= salespersonQuotaDAO.findById(salespersonquotahistory.getId());
 			assertAll(
 					()-> assertEquals(new BigDecimal(999), temp.getSalesquota()));
 		}
