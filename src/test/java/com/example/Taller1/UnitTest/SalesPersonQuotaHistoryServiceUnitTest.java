@@ -96,7 +96,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			//Asserts
 			assertNotNull(temp);
 			assertEquals(new BigDecimal(122), temp.getSalesquota());
-			assertEquals(personQuota.getId(), temp.getId());
+			assertEquals(personQuota.getBusinessentityid(), temp.getBusinessentityid());
 			
 			verify(personRepo).findById(152);
 			verify(personQuotaRepo).save(personQuota);
@@ -167,7 +167,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			person= new Salesperson();
 
 			LocalDate date  = LocalDate.parse("2022-01-06");
-			personQuota.setId(22);
+			personQuota.setBusinessentityid(22);
 			personQuota.setModifieddate(date);
 			personQuota.setSalesquota(new BigDecimal(122));
 			p2= new Salespersonquotahistory();
@@ -183,7 +183,7 @@ public class SalesPersonQuotaHistoryServiceUnitTest {
 			Salespersonquotahistory temp = personQuotaService.update(personQuota);
 			assertNotNull(temp);
 			assertEquals(new BigDecimal(122), temp.getSalesquota());
-			assertEquals(personQuota.getId(), temp.getId());
+			assertEquals(personQuota.getBusinessentityid(), temp.getBusinessentityid());
 			
 			verify(personRepo).findById(152);
 			verify(personQuotaRepo, times(1)).save(personQuota);

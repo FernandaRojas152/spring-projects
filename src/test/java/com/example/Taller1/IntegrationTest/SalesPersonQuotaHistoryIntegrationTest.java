@@ -60,7 +60,7 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 			personQuota= new Salespersonquotahistory();
 			person= new Salesperson();
 
-			personQuota.setId(2215);
+			personQuota.setBusinessentityid(2215);
 			date= LocalDate.parse("2022-01-06");
 			personQuota.setModifieddate(date);
 			personQuota.setSalesquota(new BigDecimal(122));
@@ -118,7 +118,7 @@ public class SalesPersonQuotaHistoryIntegrationTest {
 			person= new Salesperson();
 
 			date= LocalDate.parse("2022-01-06");
-			personQuota.setId(2215);
+			personQuota.setBusinessentityid(2215);
 			personQuota.setModifieddate(date);
 			personQuota.setSalesquota(new BigDecimal(122));
 			

@@ -39,7 +39,7 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	public Salespersonquotahistory update(Salespersonquotahistory sales) throws Exception {
 		Salespersonquotahistory temp = null;
 		
-		Optional<Salespersonquotahistory> optional = spq.findById(sales.getId());
+		Optional<Salespersonquotahistory> optional = spq.findById(sales.getBusinessentityid());
 		if(optional.isPresent()) {
 			//validateConstraints(sales);
 			temp= save(sales);

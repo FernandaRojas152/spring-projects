@@ -26,18 +26,19 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 		this.st= st;
 	}
 
-	@Transactional
 	@Override
 	public Salesterritoryhistory save(Salesterritoryhistory territory) throws Exception {
 		Salesterritoryhistory temp= null;
 		validateConstrains(territory);
 		
 		Optional<Salesterritory> optional= this.st.findById(territory.getSalesterritory().getTerritoryid());
+		
 		Optional<Salesperson> optional2= this.sp.findById(territory.getSalesperson().getBusinessentityid());
 		if(optional.isPresent() && optional2.isPresent()) {
 			territory.setSalesterritory(optional.get());
 			territory.setSalesperson(optional2.get());
 			
+			System.out.println("Aqui esta: " + territory.getSalesperson().getBusinessentityid());
 			temp= this.sth.save(territory);
 		}
 		return temp;

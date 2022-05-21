@@ -74,7 +74,7 @@ public class OperatorControllerImp implements OperatorController{
 			personQuotaService.save(salespersonquotahistory);
 			System.out.println("aqui ta: "+ personQuotaService.findAll().toString() + salespersonquotahistory.getSalesquota());
 			System.out.println("persona:"+ salespersonquotahistory.getSalesperson().getBusinessentityid()
-					+ "id: " + salespersonquotahistory.getId());
+					+ "id: " + salespersonquotahistory.getBusinessentityid());
 			return "redirect:/salespersonquotahistory/";
 		}
 	}
@@ -100,7 +100,7 @@ public class OperatorControllerImp implements OperatorController{
 				model.addAttribute("salesperson", personQuotaService.findAllSalesPerson());
 				return "operator/update-salespersonquotahistory";
 			}
-			salespersonquotahistory.setId(id);
+			salespersonquotahistory.setBusinessentityid(id);
 			personQuotaService.update(salespersonquotahistory);
 		}
 		return "redirect:/salespersonquotahistory";
@@ -139,6 +139,7 @@ public class OperatorControllerImp implements OperatorController{
 			territoryHistoryService.save(salesterritoryhistory);
 			System.out.println("aqui esta esa vaina: " + territoryHistoryService.findAll() + "valores: " + salesterritoryhistory.getSalesterritory().getName());
 			System.out.println("se guarda en el modelo: " + salesterritoryhistory.getId() + salesterritoryhistory.getSalesterritory().getName());
+			System.out.println("lista de personas:" + territoryHistoryService.findAllSalesPerson());
 			System.out.println("el salesperson: "+ salesterritoryhistory.getSalesperson() + "y: "+salesterritoryhistory.getSalesperson().getBusinessentityid());
 			return "redirect:/salesterritoryhistory/";
 		}
