@@ -1,5 +1,6 @@
 package com.example.Taller1QuinteroLuisa.services;
 
+import java.util.List;
 import java.util.Optional;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 
 	@NotNull
 	private void validateConstrains(Salesterritoryhistory territory) throws Exception {
-		if(territory.getModifieddate().isAfter(territory.getEnddate())) {
+		if(territory.getStartdate().isAfter(territory.getEnddate())) {
 			throw new Exception("La fecha de inicio no es menor a la fecha final");
 		}
 	}
@@ -79,6 +80,14 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	
 	public Iterable<Salesterritory> findAllSalesTerritory(){
 		return st.findAll();
+	}
+	
+	public Iterable<Salesterritoryhistory> findByTerritory(Integer id){
+		Salesterritory t= st.findById(id).get();
+		List<Salesterritoryhistory> territoryList= t.getSalesterritoryhistories();
+		Iterable<Salesterritoryhistory> territoryI= territoryList;
+		
+		return territoryI;
 	}
 
 }

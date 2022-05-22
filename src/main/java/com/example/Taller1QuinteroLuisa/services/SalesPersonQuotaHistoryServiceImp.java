@@ -1,6 +1,7 @@
 package com.example.Taller1QuinteroLuisa.services;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,15 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	
 	public Optional<Salespersonquotahistory> findById(Integer id){
 		return spq.findById(id);
+	}
+	
+	public Iterable<Salespersonquotahistory> findBySalesPerson(Integer id){
+		Salesperson p= person.findById(id).get();
+		List<Salespersonquotahistory> quotaList= p.getSalespersonquotahistories();
+		Iterable<Salespersonquotahistory> quotaI= quotaList;
+		
+		return quotaI;
+		
 	}
 	
 }

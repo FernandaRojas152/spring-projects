@@ -145,34 +145,34 @@ public class OperatorControllerImp implements OperatorController{
 		}
 	}
 	
-//	@GetMapping("/salesterritoryhistory/update/{id}")
-//	public String editSalesTerritoryHistory(@PathVariable("id")Integer id, Model model){
-//		Optional<Salesterritoryhistory> tH= territoryHistoryService.findById(id);
-//		if(tH.isEmpty()) {
-//			throw new IllegalArgumentException("Couldn't not find the id requested");
-//		}
-//		model.addAttribute("salesterritoryhistory", tH.get());
-//		model.addAttribute("salespersons", territoryHistoryService.findAllSalesPerson());
-//		model.addAttribute("salesterritories", territoryHistoryService.findAllSalesTerritory());
-//		return "operator/update-salesterritoryhistory";
-//	}
-//	
-//	@PostMapping("/salesterritoryhistory/update/{id}")
-//	public String updateSalesTerritoryHistory(@PathVariable("id")Integer id,
-//			@Validated(CredentialInfoValidation.class) Salesterritoryhistory salesterritoryhistory, BindingResult bindingResult,
-//			Model model, @RequestParam(value = "action", required = true) String action) throws Exception{
-//		if(!action.equals("Cancel")) {
-//			if(bindingResult.hasErrors()) {
-//				model.addAttribute("salesterritoryhistory", territoryHistoryService.findById(id).get());
-//				model.addAttribute("salesperson", territoryHistoryService.findAllSalesPerson());
-//				model.addAttribute("salesterritory", territoryHistoryService.findAllSalesTerritory());
-//				
-//				return "operator/update-salesterritoryhistory";
-//			}
-//			salesterritoryhistory.setBusinessentityid(id);
-//			territoryHistoryService.update(salesterritoryhistory);
-//		}
-//		return "redirect:/salesterritoryhistory";
-//		
-//	}
+	@GetMapping("/salesterritoryhistory/update/{id}")
+	public String editSalesTerritoryHistory(@PathVariable("id")Integer id, Model model){
+		Optional<Salesterritoryhistory> tH= territoryHistoryService.findById(id);
+		if(tH.isEmpty()) {
+			throw new IllegalArgumentException("Couldn't not find the id requested");
+		}
+		model.addAttribute("salesterritoryhistory", tH.get());
+		model.addAttribute("salespersons", territoryHistoryService.findAllSalesPerson());
+		model.addAttribute("salesterritories", territoryHistoryService.findAllSalesTerritory());
+		return "operator/update-salesterritoryhistory";
+	}
+	
+	@PostMapping("/salesterritoryhistory/update/{id}")
+	public String updateSalesTerritoryHistory(@PathVariable("id")Integer id,
+			@Validated(CredentialInfoValidation.class) Salesterritoryhistory salesterritoryhistory, BindingResult bindingResult,
+			Model model, @RequestParam(value = "action", required = true) String action) throws Exception{
+		if(!action.equals("Cancel")) {
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("salesterritoryhistory", territoryHistoryService.findById(id).get());
+				model.addAttribute("salesperson", territoryHistoryService.findAllSalesPerson());
+				model.addAttribute("salesterritory", territoryHistoryService.findAllSalesTerritory());
+				
+				return "operator/update-salesterritoryhistory";
+			}
+			salesterritoryhistory.setId(id);
+			territoryHistoryService.update(salesterritoryhistory);
+		}
+		return "redirect:/salesterritoryhistory";
+		
+	}
 }

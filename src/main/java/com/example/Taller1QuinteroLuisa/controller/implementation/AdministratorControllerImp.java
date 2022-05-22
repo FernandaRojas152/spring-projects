@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
+import com.example.Taller1QuinteroLuisa.services.SalesPersonQuotaHistoryServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
+import com.example.Taller1QuinteroLuisa.services.SalesTerritoryHistoryServiceImp;
 import com.example.Taller1QuinteroLuisa.services.SalesTerritoryServiceImp;
 import com.example.Taller1QuinteroLuisa.validation.CredentialInfoValidation;
 import com.example.Taller1QuinteroLuisa.validation.SalesPersonValidation;
@@ -25,6 +27,11 @@ import com.example.Taller1QuinteroLuisa.validation.SalesTerritoryValidation;
 public class AdministratorControllerImp {
 	private SalesPersonServiceImp personService;
 	private SalesTerritoryServiceImp territoryService;
+	
+	@Autowired
+	private SalesTerritoryHistoryServiceImp territoryHistoryService;
+	@Autowired
+	private SalesPersonQuotaHistoryServiceImp personQuotaService;
 
 	@Autowired
 	public AdministratorControllerImp(SalesPersonServiceImp personService, SalesTerritoryServiceImp territoryService) {
@@ -155,14 +162,22 @@ public class AdministratorControllerImp {
 	}
 	
 	//Parent to child
-//	@GetMapping("/Productsubcategory/{id}")
-//    public String queryProductsubcategoriesByProductcategory(@PathVariable("id") Integer id, Model model) {
-//		model.addAttribute("prodcutsubcategories", productsubcategoryService.findByProductcategory(id));
-//        return "admin/productsubcategoriesByProductcategory";
-//    }
+
 	@GetMapping("/salesperson/{id}")
 	public String querySalesPersons(@PathVariable("id")Integer id, Model model) {
 		model.addAttribute("salesperson", personService.findByTerritory(id));
 		return "administrator/salesperson-query";
+	}
+	
+	@GetMapping("/salesterritoryhistory/{id}")
+	public String querySalesTerritoryHistory(@PathVariable("id")Integer id, Model model) {
+		model.addAttribute("salesterritoryhistory", territoryHistoryService.findByTerritory(id));
+		return "administrator/salesterritoryhistory-query";
+	}
+	
+	@GetMapping("/salespersonquotahistory/{id}")
+	public String querySalesPersonQuota(@PathVariable("id")Integer id, Model model){
+		model.addAttribute("salespersonquotahistory", personQuotaService.findBySalesPerson(id));
+		return "administrator/salesquotahistory-query";
 	}
 }
