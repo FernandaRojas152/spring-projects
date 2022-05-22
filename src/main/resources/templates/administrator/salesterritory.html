@@ -31,6 +31,7 @@
 								<th>Modified date</th>
 								<th>Country region code</th>
 								<th>Sales last year</th>
+								<th> Salesperson </th>
 								<th>Edit</th>
 							</tr>
 						</thead>
@@ -42,6 +43,8 @@
 								<td th:text="${territory.modifieddate}"></td>
 								<td th:text="${territory.countryregioncode}"></td>
 								<td th:text="${territory.saleslastyear}"></td>
+								<td><a th:href="@{/salesperson/{id}(id=${territory.territoryid})}"
+									class="btn btn-primary"> <i class="fas fa-user-edit ml-2"></i> </a></td>
 								<td><a th:href="@{/salesterritory/update/{id}(id=${territory.territoryid})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 							</tr>

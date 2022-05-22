@@ -153,4 +153,16 @@ public class AdministratorControllerImp {
 		}
 		return "redirect:/salesterritory";
 	}
+	
+	//Parent to child
+//	@GetMapping("/Productsubcategory/{id}")
+//    public String queryProductsubcategoriesByProductcategory(@PathVariable("id") Integer id, Model model) {
+//		model.addAttribute("prodcutsubcategories", productsubcategoryService.findByProductcategory(id));
+//        return "admin/productsubcategoriesByProductcategory";
+//    }
+	@GetMapping("/salesperson/{id}")
+	public String querySalesPersons(@PathVariable("id")Integer id, Model model) {
+		model.addAttribute("salesperson", personService.findByTerritory(id));
+		return "administrator/salesperson-query";
+	}
 }

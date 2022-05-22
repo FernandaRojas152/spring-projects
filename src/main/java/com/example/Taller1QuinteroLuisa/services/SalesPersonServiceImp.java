@@ -1,6 +1,7 @@
 package com.example.Taller1QuinteroLuisa.services;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,13 @@ public class SalesPersonServiceImp implements SalesPersonService{
 	
 	public Optional<Salesperson> findById(Integer id){
 		return sp.findById(id);
+	}
+	
+	public Iterable<Salesperson> findByTerritory(Integer id){
+		Salesterritory t= st.findById(id).get();
+		List<Salesperson> personList= t.getSalespersons();
+		
+		Iterable<Salesperson> personI= personList;
+		return personI;
 	}
 }
