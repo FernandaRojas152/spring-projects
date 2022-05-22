@@ -11,10 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.Taller1QuinteroLuisa.validation.SalesTerritoryHistoryValidation;
 
 /**
  * The persistent class for the salesterritoryhistory database table.
@@ -33,11 +37,11 @@ public class Salesterritoryhistory implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESTERRITORYHISTORY_ID_GENERATOR")
 	private Integer id;
 	
-	@FutureOrPresent
+	@Future(groups= SalesTerritoryHistoryValidation.class)
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate enddate;
 	
-	@PastOrPresent
+	@PastOrPresent(groups= SalesTerritoryHistoryValidation.class, message= "Date cannot be greater than the currrent date")
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate startdate;
 	
@@ -62,6 +66,7 @@ public class Salesterritoryhistory implements Serializable {
 	// bi-directional many-to-one association to Salesterritory
 	@ManyToOne
 	@JoinColumn(name = "territoryid")
+	@NotNull(groups= SalesTerritoryHistoryValidation.class)
 	private Salesterritory salesterritory;
 
 	public Salesterritoryhistory() {

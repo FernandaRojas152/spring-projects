@@ -27,7 +27,7 @@
 							<tr>
 								<th>Business Entity Id</th>
 								<th>Modified date</th>
-                                <th>End date</th>
+                                <th>Start date</th>
 								<th>Sales Person</th>
 								<th>Sales Territory</th>
 								<th>Edit</th>
@@ -36,7 +36,7 @@
 						<tbody>
 							<tr th:each="territoryhistory : ${salesterritoryhistory}">
 								<td th:text="${territoryhistory.id}"></td>
-								<td th:text="${territoryhistory.modifieddate}"></td>
+								<td th:text="${territoryhistory.startdate}"></td>
 								<td th:text="${territoryhistory.enddate}"></td>
 								<td th:text="${territoryhistory.salesperson?.businessentityid}"></td>
 								<td th:text="${territoryhistory.salesterritory.name}"></td>

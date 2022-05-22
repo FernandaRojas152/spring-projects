@@ -12,8 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.Taller1QuinteroLuisa.validation.SalesTerritoryValidation;
 
 /**
  * The persistent class for the salesterritory database table.
@@ -33,6 +37,7 @@ public class Salesterritory implements Serializable {
 
 	private BigDecimal costytd;
 
+	@NotBlank(groups= SalesTerritoryValidation.class, message="Must be a valid code")
 	private String countryregioncode;
 
 	private String salesgroup;
@@ -40,6 +45,7 @@ public class Salesterritory implements Serializable {
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate modifieddate;
 	
+	@Size(min = 5, groups= {SalesTerritoryValidation.class}, message="Name has to be at least 5 characteres")
 	private String name;
 
 	private Integer rowguid;

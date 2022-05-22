@@ -13,8 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.Taller1QuinteroLuisa.validation.SalesPersonValidation;
 /**
  * The persistent class for the salesperson database table.
  *
@@ -27,20 +35,24 @@ public class Salesperson implements Serializable {
 	@Id
 	@SequenceGenerator(name = "SALESPERSON_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "SALESPERSON_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESPERSON_BUSINESSENTITYID_GENERATOR")
+	@NotNull
 	private Integer businessentityid;
 
 	private BigDecimal bonus;
 	
 	@NotNull
+	@Min(value=0, groups= {SalesPersonValidation.class})
+	@Max(value=1, groups= {SalesPersonValidation.class})
 	private BigDecimal commissionpct;
 	
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate modifieddate;
 
 	private Integer rowguid;
-
+	
 	private BigDecimal saleslastyear;
 
+	@PositiveOrZero(groups= SalesPersonValidation.class)
 	private BigDecimal salesquota;
 
 	private BigDecimal salesytd;
@@ -52,6 +64,7 @@ public class Salesperson implements Serializable {
 	// bi-directional many-to-one association to Salesterritory
 	@ManyToOne
 	@JoinColumn(name = "territoryid")
+	@NotNull(groups= SalesPersonValidation.class, message="territory can't be null, create a territory first")
 	private Salesterritory salesterritory;
 
 	// bi-directional many-to-one association to Salespersonquotahistory

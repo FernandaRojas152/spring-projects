@@ -11,8 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.PositiveOrZero;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.Taller1QuinteroLuisa.validation.SalesPersonQuotaHistoryValidation;
 
 /**
  * The persistent class for the salespersonquotahistory database table.
@@ -33,16 +38,18 @@ public class Salespersonquotahistory implements Serializable {
 	*/
 	
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
-	@PastOrPresent
+	@PastOrPresent(groups= SalesPersonQuotaHistoryValidation.class, message= "Date cannot be greater than the currrent date")
 	private LocalDate modifieddate;
 
 	private Integer rowguid;
 
+	@PositiveOrZero(groups= SalesPersonQuotaHistoryValidation.class, message="It has to be greater than zero")
 	private BigDecimal salesquota;
 
 	// bi-directional many-to-one association to Salesperson
 	@ManyToOne
 	@JoinColumn(name = "businessentityid", insertable = false, updatable = false)
+	@NotNull
 	private Salesperson salesperson;
 
 	public Salespersonquotahistory() {
