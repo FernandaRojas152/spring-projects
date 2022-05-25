@@ -98,15 +98,21 @@ public class SalesTerritoryDaoTest {
 			assertEquals(salesterritoryDAO.findAll().size(), 1);
 		}
 		
-		/**@Test
+		
+		/** SPECIAL QUERY TEST*/
+		@Test
 		@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 		void findTwoSalesPersonWithQuota(){
 			assertNotNull(salesterritoryDAO);
 			Salesperson salesperson1= new Salesperson();
 			Salesperson salesperson2= new Salesperson();
 			
-			salesperson1.setSalesterritory(salesterritory);
+			
 			salesperson1.setSalesquota(new BigDecimal(12000));
+			salesperson1.setCommissionpct(new BigDecimal(0.5));
+			salesperson2.setSalesquota(new BigDecimal(120000));
+			salesperson2.setCommissionpct(new BigDecimal(0.5));
+			salesperson1.setSalesterritory(salesterritory);
 			salesperson2.setSalesterritory(salesterritory);
 
 			personRepo.save(salesperson1);
@@ -119,7 +125,6 @@ public class SalesTerritoryDaoTest {
 			assertEquals(1, territory.size());
 			
 		}
-		*/
 	
 	}
 	
