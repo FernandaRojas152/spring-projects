@@ -28,7 +28,7 @@ public class SalespersonRestController{
 		return personService.findAll();
 	}
 	
-	@PostMapping("/salespersonRest/add-person")
+	@PostMapping("/salespersonRest/add")
 	public Salesperson addSalesperson(@RequestBody Salesperson salesperson) throws Exception {
 		return personService.save(salesperson);	
 	}
