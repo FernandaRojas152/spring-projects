@@ -26,13 +26,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import org.springframework.test.context.ContextConfiguration;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.model.hr.Employee;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
-import com.example.Taller1QuinteroLuisa.repository.EmployeeRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
-import com.example.Taller1QuinteroLuisa.services.SalesPersonServiceImp;
+import com.example.Taller1QuinteroLuisa.backend.model.hr.Employee;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
+import com.example.Taller1QuinteroLuisa.backend.repository.EmployeeRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.services.SalesPersonServiceImp;
 
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)
 @ExtendWith(MockitoExtension.class)

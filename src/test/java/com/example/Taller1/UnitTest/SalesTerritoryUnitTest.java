@@ -27,11 +27,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ContextConfiguration;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.model.person.Countryregion;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
-import com.example.Taller1QuinteroLuisa.repository.CountryRegionRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
-import com.example.Taller1QuinteroLuisa.services.SalesTerritoryServiceImp;
+import com.example.Taller1QuinteroLuisa.backend.model.person.Countryregion;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
+import com.example.Taller1QuinteroLuisa.backend.repository.CountryRegionRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceImp;
 
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)
 @ExtendWith(MockitoExtension.class)

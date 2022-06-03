@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.dao.SalesPersonDaoImp;
-import com.example.Taller1QuinteroLuisa.dao.SalesTerritoryDaoImp;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesterritoryhistory;
+import com.example.Taller1QuinteroLuisa.backend.dao.SalesPersonDaoImp;
+import com.example.Taller1QuinteroLuisa.backend.dao.SalesTerritoryDaoImp;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritoryhistory;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

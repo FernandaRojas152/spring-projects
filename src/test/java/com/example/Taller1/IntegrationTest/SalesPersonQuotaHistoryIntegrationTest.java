@@ -20,11 +20,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
-import com.example.Taller1QuinteroLuisa.model.sales.Salespersonquotahistory;
-import com.example.Taller1QuinteroLuisa.repository.SalesPersonQuotaHistoryRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
-import com.example.Taller1QuinteroLuisa.services.SalesPersonQuotaHistoryServiceImp;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salespersonquotahistory;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonQuotaHistoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository;
+import com.example.Taller1QuinteroLuisa.backend.services.SalesPersonQuotaHistoryServiceImp;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)

@@ -6,13 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import com.example.Taller1QuinteroLuisa.model.person.UserApp;
-import com.example.Taller1QuinteroLuisa.model.person.UserType;
-import com.example.Taller1QuinteroLuisa.repository.SalesPersonQuotaHistoryRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryHistoryRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
-import com.example.Taller1QuinteroLuisa.repository.UserRepository;
+
+import com.example.Taller1QuinteroLuisa.backend.model.person.UserApp;
+import com.example.Taller1QuinteroLuisa.backend.model.person.UserType;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonQuotaHistoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryHistoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.UserRepository;
 
 @SpringBootApplication
 @ComponentScan("com.example.Taller1QuinteroLuisa")

@@ -20,13 +20,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesterritoryhistory;
-import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryHistoryRepository;
-import com.example.Taller1QuinteroLuisa.repository.SalesTerritoryRepository;
-import com.example.Taller1QuinteroLuisa.services.SalesTerritoryHistoryServiceImp;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritoryhistory;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryHistoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryRepository;
+import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryHistoryServiceImp;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)

@@ -24,10 +24,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
-import com.example.Taller1QuinteroLuisa.dao.SalesTerritoryDaoImp;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesperson;
-import com.example.Taller1QuinteroLuisa.model.sales.Salesterritory;
-import com.example.Taller1QuinteroLuisa.repository.SalesPersonRepository;
+import com.example.Taller1QuinteroLuisa.backend.dao.SalesTerritoryDaoImp;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
+import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -123,7 +123,6 @@ public class SalesTerritoryDaoTest {
 			List<Salesterritory> territory= salesterritoryDAO.findTwoSalesPersonWithQuota();
 			
 			assertEquals(1, territory.size());
-			
 		}
 	
 	}
