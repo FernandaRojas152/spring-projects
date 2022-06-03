@@ -10,6 +10,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +30,12 @@ public class BusinessDelegate {
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
         messageConverters.add(converter);
         this.restTemplate.setMessageConverters(messageConverters);
+	}
+	
+	/** DELEGATE CLASSES */
+	//Salesperson
+	public Iterable<Salesperson> findAllPerson(){
+		return null;
 	}
 	
 

@@ -48,6 +48,10 @@ public class SalesPersonServiceImp implements SalesPersonService{
 		}
 		return temp;
 	}
+	
+	public void delete(Integer id){
+		sp.delete(sp.findById(id).get());
+	}
 
 	@NotNull
 	private void validateConstrains(Salesperson s) throws Exception{
