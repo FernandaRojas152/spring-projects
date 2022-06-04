@@ -1,6 +1,5 @@
 package com.example.Taller1QuinteroLuisa.backend.services;
 
-import java.time.LocalDate;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
 
 public interface CurrencyService {
