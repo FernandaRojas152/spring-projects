@@ -49,8 +49,6 @@ public class CurrencyDAOImp implements CurrencyDAO{
 	@Override
 	public void deleteAll() {
 		Query query= entityManager.createQuery("DELETE FROM Currency");
-		query.executeUpdate();
-		
+		query.executeUpdate();	
 	}
-
 }

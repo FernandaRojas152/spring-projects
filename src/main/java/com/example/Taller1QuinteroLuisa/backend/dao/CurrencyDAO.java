@@ -1,7 +1,6 @@
 package com.example.Taller1QuinteroLuisa.backend.dao;
 
 import java.util.List;
-
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
 
 public interface CurrencyDAO{
