@@ -25,8 +25,8 @@ public class CurrencyRateServiceImp implements CurrencyRateService{
 	}
 
 	@Override
-	public void deleteCurrencyRate(Currencyrate currencyrate) {
-		this.currencyrateDao.delete(currencyrate);
+	public void deleteCurrencyRate(Integer id) {
+		this.currencyrateDao.delete(currencyrateDao.findById(id));
 	}
 
 	@Override

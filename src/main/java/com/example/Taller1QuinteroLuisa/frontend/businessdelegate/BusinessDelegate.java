@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Currencyrate;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salespersonquotahistory;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
@@ -146,9 +147,47 @@ public class BusinessDelegate {
 	
 	/** DELEGATE CLASSES FOR FINAL PROJECT*/
 	//Currency
+	public List<Currency> getCurrency(){
+		Currency[] currencyArray= restTemplate.getForObject(URLCURRENCY, Currency[].class);
+		return Arrays.asList(currencyArray);
+	}
 	
+	public Currency addCurrency(Currency currency) {
+		return restTemplate.postForObject(URLCURRENCY, currency, Currency.class);
+	}
 	
+	public void updateCurrency(Currency currency) {
+		restTemplate.put(URLCURRENCY+currency.getCurrencycode(), currency, Currency.class);
+	}
+	
+	public void deleteCurrency(String id) {
+		restTemplate.delete(URLCURRENCY+id);
+	}
+	
+	public Currency findbyIdCurrency(String id) {
+		return restTemplate.getForObject(URLCURRENCY+id, Currency.class);
+	}
 	
 	//Currencyrate
+	public List<Currencyrate> getCurrencyrate(){
+		Currencyrate[] currencyrateArray= restTemplate.getForObject(URLCURRENCYRATE, Currencyrate[].class);
+		return Arrays.asList(currencyrateArray);
+	}
+	
+	public Currencyrate addCurrencyrate(Currencyrate currencyrate) {
+		return restTemplate.postForObject(URLCURRENCYRATE, currencyrate, Currencyrate.class);
+	}
+	
+	public void updateCurrencyrate(Currencyrate currencyrate) {
+		restTemplate.put(URLCURRENCYRATE+currencyrate.getCurrencyrateid(), currencyrate, Currencyrate.class);
+	}
+	
+	public void deleteCurrencyrate(Integer id) {
+		restTemplate.delete(URLCURRENCYRATE+id);
+	}
+	
+	public Currencyrate findbyIdCurrencyRate(Integer id) {
+		return restTemplate.getForObject(URLCURRENCYRATE+id, Currencyrate.class);
+	}
 
 }
