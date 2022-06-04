@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salespersonquotahistory;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritoryhistory;
 import com.example.Taller1QuinteroLuisa.backend.restController.CurrencyRateRestController;
 import com.example.Taller1QuinteroLuisa.backend.restController.CurrencyRestController;
 import com.example.Taller1QuinteroLuisa.backend.restController.SalespersonQuotaRestController;
@@ -33,15 +35,14 @@ public class BusinessDelegate {
 	private SalesterritoryRestController territoryRest;
 	private SalespersonQuotaRestController personquotaRest;
 	private SalesterritoryHistoryRestController territoryHistoryRest;
-	
-	
 	private CurrencyRestController currencyRest;
 	private CurrencyRateRestController currencyrateRest;
 	
 	
 	private final String URLPERSON= "http://localhost:8080/api/salespersonRest/list";
-	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonRest/list";
-	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salespersonRest/list";
+	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotaRest/list";
+	private final String URLTERRITORY= "http://localhost:8080/api/salesterritoryRest/list";
+	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salesterritoryhistoryRest/list";
 	private final String URLCURRENCY= "http://localhost:8080/api/salespersonRest/list";
 	private final String URLCURRENCYRATE= "http://localhost:8080/api/salespersonRest/list";
 	
@@ -56,7 +57,6 @@ public class BusinessDelegate {
 	
 	/** DELEGATE CLASSES FROM PREVIOUS WORK*/
 	//Salesperson
-	
 	public List<Salesperson> getSalesPerson() {
 		Salesperson[] personArray= restTemplate.getForObject(URLPERSON, Salesperson[].class);
 		return Arrays.asList(personArray);
@@ -70,16 +70,85 @@ public class BusinessDelegate {
 		restTemplate.put(URLPERSON+salesperson.getBusinessentityid(), salesperson, Salesperson.class);
 	}
 	
-	public void delete(Integer id){
+	public void deleteSalesperson(Integer id){
 		restTemplate.delete(URLPERSON+id);
 	}
 	
-	public Salesperson findById(Integer id) {
+	public Salesperson findByIdSalesperson(Integer id) {
 		return restTemplate.getForObject(URLPERSON+id, Salesperson.class);
 	}
 	
+	//Salesterritory
+	public List<Salesterritory> getSalesterritory(){
+		Salesterritory[] territoryArray= restTemplate.getForObject(URLTERRITORY, Salesterritory[].class);
+		return Arrays.asList(territoryArray);
+	}
 	
+	public Salesterritory addSalesterritory(Salesterritory salesterritory) {
+		return restTemplate.postForObject(URLTERRITORY, salesterritory, Salesterritory.class);
+	}
+	
+	public void updateSalesterritory(Salesterritory salesterritory) {
+		restTemplate.put(URLTERRITORY+salesterritory.getTerritoryid(), salesterritory, Salesterritory.class);
+	}
+	
+	public void deleteSalesterritory(Integer id) {
+		restTemplate.delete(URLTERRITORY+id);
+	}
+	
+	public Salesterritory findByIdTerritory(Integer id) {
+		return restTemplate.getForObject(URLTERRITORY+id, Salesterritory.class);
+	}
+	
+	//Salespersonquotahistory
+	public List<Salespersonquotahistory> getSalespersonQuota(){
+		Salespersonquotahistory[] personquotaArray= restTemplate.getForObject(URLPERSONQUOTA, Salespersonquotahistory[].class);
+		return Arrays.asList(personquotaArray);
+	}
+	
+	public Salespersonquotahistory addPersonQuota(Salespersonquotahistory salespersonquotahistory) {
+		return restTemplate.postForObject(URLPERSONQUOTA, salespersonquotahistory, Salespersonquotahistory.class);
+	}
+	
+	public void updatePersonQuota(Salespersonquotahistory salespersonquotahistory) {
+		restTemplate.put(URLPERSONQUOTA+salespersonquotahistory.getBusinessentityid(), salespersonquotahistory, Salespersonquotahistory.class);
+	}
+	
+	public void deletePersonQuota(Integer id) {
+		restTemplate.delete(URLPERSONQUOTA+id);
+	}
+	
+	public Salespersonquotahistory findByIdPersonQuota(Integer id){
+		return restTemplate.getForObject(URLPERSONQUOTA+id, Salespersonquotahistory.class);
+	}
+	
+	//Salesterritoryhistory
+	public List<Salesterritoryhistory> getSalesterritoryHistory(){
+		Salesterritoryhistory[] territoryhistoryArray= restTemplate.getForObject(URLTERRITORYHISTORY, Salesterritoryhistory[].class);
+		return Arrays.asList(territoryhistoryArray);
+	}
+	
+	public Salesterritoryhistory addTerritoryHistory(Salesterritoryhistory salesterritoryhistory){
+		return restTemplate.postForObject(URLTERRITORYHISTORY, salesterritoryhistory, Salesterritoryhistory.class);
+	}
+	
+	public void updateTerritoryHistory(Salesterritoryhistory salesterritoryhistory) {
+		restTemplate.put(URLTERRITORYHISTORY+salesterritoryhistory.getId(), salesterritoryhistory, Salesterritoryhistory.class);
+	}
+	
+	public void deleteTerritoryHistory(Integer id) {
+		restTemplate.delete(URLTERRITORYHISTORY+id);
+	}
+	
+	public Salesterritoryhistory findByIdTerritoryHistory(Integer id){
+		return restTemplate.getForObject(URLTERRITORYHISTORY+id, Salesterritoryhistory.class);
+	}
 	
 	/** DELEGATE CLASSES FOR FINAL PROJECT*/
+	//Currency
+	
+	
+	
+	//Currencyrate
 
 }
