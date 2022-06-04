@@ -1,6 +1,7 @@
 package com.example.Taller1QuinteroLuisa.frontend.businessdelegate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,7 +39,11 @@ public class BusinessDelegate {
 	private CurrencyRateRestController currencyrateRest;
 	
 	
-	private final String URL= "http://localhost:8080/api/";
+	private final String URLPERSON= "http://localhost:8080/api/salespersonRest/list";
+	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonRest/list";
+	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salespersonRest/list";
+	private final String URLCURRENCY= "http://localhost:8080/api/salespersonRest/list";
+	private final String URLCURRENCYRATE= "http://localhost:8080/api/salespersonRest/list";
 	
 	public BusinessDelegate() {
 		this.restTemplate= new RestTemplate();
@@ -51,9 +56,28 @@ public class BusinessDelegate {
 	
 	/** DELEGATE CLASSES FROM PREVIOUS WORK*/
 	//Salesperson
-	public Iterable<Salesperson> findAllPerson(){
-		return personRest.getSalesPerson();
+	
+	public List<Salesperson> getSalesPerson() {
+		Salesperson[] personArray= restTemplate.getForObject(URLPERSON, Salesperson[].class);
+		return Arrays.asList(personArray);
 	}
+	
+	public Salesperson addSalesperson(Salesperson salesperson) {
+		return restTemplate.postForObject(URLPERSON, salesperson, Salesperson.class);
+	}
+	
+	public void updateSalesperson(Salesperson salesperson){
+		restTemplate.put(URLPERSON+salesperson.getBusinessentityid(), salesperson, Salesperson.class);
+	}
+	
+	public void delete(Integer id){
+		restTemplate.delete(URLPERSON+id);
+	}
+	
+	public Salesperson findById(Integer id) {
+		return restTemplate.getForObject(URLPERSON+id, Salesperson.class);
+	}
+	
 	
 	
 	/** DELEGATE CLASSES FOR FINAL PROJECT*/
