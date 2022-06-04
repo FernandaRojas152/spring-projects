@@ -58,6 +58,10 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 		}
 		return temp;
 	}
+	
+	public void delete(Integer id) {
+		sth.delete(sth.findById(id).get());
+	}
 
 	@NotNull
 	private void validateConstrains(Salesterritoryhistory territory) throws Exception {

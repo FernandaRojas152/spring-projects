@@ -49,6 +49,10 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 		return temp;
 	}
 	
+	public void delete(Integer id){
+		spq.delete(spq.findById(id).get());
+	}
+	
 	@NotNull
 	private void validateConstraints(Salespersonquotahistory sales) throws RuntimeException{
 		if(!(sales.getSalesquota().compareTo(BigDecimal.ZERO) > 0)){

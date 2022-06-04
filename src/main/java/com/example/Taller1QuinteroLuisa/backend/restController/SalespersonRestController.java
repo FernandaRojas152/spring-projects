@@ -14,7 +14,7 @@ import com.example.Taller1QuinteroLuisa.backend.services.SalesPersonServiceImp;
 //import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceImp;
 
 @RestController
-@RequestMapping("/api/salesperson")
+@RequestMapping("/api")
 public class SalespersonRestController{
 	private SalesPersonServiceImp personService;
 	

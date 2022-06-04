@@ -44,6 +44,11 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 
 		return temp;
 	}
+	
+	
+	public void delete(Integer id){
+		st.delete(st.findById(id).get());
+	}
 
 	@NotNull
 	private void validateConstraints(Salesterritory t) throws Exception{
