@@ -24,7 +24,5 @@ public interface CurrencyService {
 	public void deleteCurrency(String id);
 	public Currency findById(String id);
 	public Iterable<Currency> findAll();
-//	public Iterable<Currency> findByStartDate(LocalDate startdate);
-//	public Iterable<Currency> findByEndDate(LocalDate enddate);
 }
 >>>>>>> b3620eaf0c7fe27cfe43b25719cfd0bac11d1364
