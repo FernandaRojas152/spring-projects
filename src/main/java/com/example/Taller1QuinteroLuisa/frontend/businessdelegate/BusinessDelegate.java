@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -71,7 +73,9 @@ public class BusinessDelegate {
 	}
 	
 	public Salesterritory addSalesterritory(Salesterritory salesterritory) {
+		//HttpEntity<Salesterritory> request = new HttpEntity<>(salesterritory);
 		return restTemplate.postForObject(URLTERRITORY, salesterritory, Salesterritory.class);
+		//return restTemplate.postForObject(URLTERRITORY, request, Salesterritory.class);
 	}
 	
 	public void updateSalesterritory(Salesterritory salesterritory) {
