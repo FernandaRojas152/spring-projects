@@ -231,8 +231,31 @@ public class BusinessDelegateTest {
 			territory.setCountryregioncode("COL");
 			territory.setName("Colombia");
 			
+			territoryhistory.setSalesterritory(territory);
+			
 			delegate= new BusinessDelegate();
 			delegate.setRestTemplate(restTemplate);
+		}
+		
+		@Test
+		void findAllSalesTerritoryHistoryTest() {
+			Salesterritoryhistory[] territoryhistoryList= new Salesterritoryhistory[3];
+			for (int i = 0; i < territoryhistoryList.length; i++) {
+				Salesterritoryhistory territoryhistory= new Salesterritoryhistory();
+				territoryhistoryList[i]= territoryhistory;
+				delegate.addTerritoryHistory(territoryhistory);
+			}
+			when(restTemplate.getForObject(URLTERRITORYHISTORY,Salesterritoryhistory[].class)).thenReturn(territoryhistoryList);
+			assertEquals(delegate.getSalesterritoryHistory().size(),10);
+		}
+		
+		@Test
+		void addSalesTerritoryHistoryTest() {
+			Salesterritoryhistory th= new Salesterritoryhistory();
+			th.setSalesterritory(territory);
+			
+			when(restTemplate.postForObject(URLTERRITORYHISTORY, th, Salesterritoryhistory.class)).thenReturn(th);
+			assertEquals(delegate.addTerritoryHistory(th).getId(), th.getId());
 		}
 	}
 	
