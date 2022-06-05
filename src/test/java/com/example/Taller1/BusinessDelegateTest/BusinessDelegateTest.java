@@ -173,6 +173,69 @@ public class BusinessDelegateTest {
 		}
 	}
 	
+	@Nested
+	@DisplayName("Test methods for sales personquota")
+	class SalesPersonQuotaTest{
+		@BeforeEach
+		void setUp() {
+			person= new Salesperson();
+			person.setBusinessentityid(1);
+			person.setCommissionpct(new BigDecimal(1));
+			person.setSalesquota(new BigDecimal(30));
+			
+			personquota= new Salespersonquotahistory();
+			personquota.setSalesquota(new BigDecimal(40));
+			personquota.setSalesperson(person);
+			
+			delegate= new BusinessDelegate();
+			delegate.setRestTemplate(restTemplate);
+		}
+		
+		@Test
+		void findAllPersonQuotaTest() {
+			Salespersonquotahistory[] personquotaList= new Salespersonquotahistory[10];
+			for (int i = 0; i < personquotaList.length; i++) {
+				Salespersonquotahistory personquota= new Salespersonquotahistory();
+				personquotaList[i]= personquota;
+				delegate.addPersonQuota(personquota);
+			}
+			when(restTemplate.getForObject(URLPERSONQUOTA,Salespersonquotahistory[].class)).thenReturn(personquotaList);
+			assertEquals(delegate.getSalespersonQuota().size(),10);
+		}
+		
+		@Test
+		void addSalesPersonQuotaTest(){
+			Salespersonquotahistory pq= new Salespersonquotahistory();
+			personquota.setSalesquota(new BigDecimal(66));
+			personquota.setSalesperson(person);
+			
+			when(restTemplate.postForObject(URLPERSONQUOTA, pq, Salespersonquotahistory.class)).thenReturn(pq);
+			assertEquals(delegate.addPersonQuota(pq).getBusinessentityid(), pq.getBusinessentityid());
+		}
+		
+		@Test
+		void findByIdPersonQuotaTest() {
+			when(restTemplate.getForObject(URLPERSONQUOTA+personquota.getBusinessentityid(), Salespersonquotahistory.class)).thenReturn(personquota);	
+			assertEquals(delegate.findByIdPersonQuota(personquota.getBusinessentityid()).getBusinessentityid(), personquota.getBusinessentityid());
+		}
+	}
+	
+	@Nested
+	@DisplayName("Test methods for salesterritory history")
+	class SalesTerritoryHistoryTest{
+		@BeforeEach
+		void setUp() {
+			territoryhistory= new Salesterritoryhistory();
+			territory= new Salesterritory();
+			territory.setTerritoryid(1);
+			territory.setCountryregioncode("COL");
+			territory.setName("Colombia");
+			
+			delegate= new BusinessDelegate();
+			delegate.setRestTemplate(restTemplate);
+		}
+	}
+	
 	@AfterAll
 	static void end() {
 		System.out.println(" ");
