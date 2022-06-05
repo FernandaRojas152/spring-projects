@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-package com.example.Taller1QuinteroLuisa.backend.services;
-
-public interface CurrencyRateService {
-
-}
-=======
 package com.example.Taller1QuinteroLuisa.backend.services;
 
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Currencyrate;
@@ -18,4 +11,4 @@ public interface CurrencyRateService{
 	
 
 }
->>>>>>> b3620eaf0c7fe27cfe43b25719cfd0bac11d1364
+

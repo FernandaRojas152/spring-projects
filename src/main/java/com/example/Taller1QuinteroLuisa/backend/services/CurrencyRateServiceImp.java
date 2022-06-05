@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-package com.example.Taller1QuinteroLuisa.backend.services;
-
-public interface CurrencyRateServiceImp {
-
-}
-=======
 package com.example.Taller1QuinteroLuisa.backend.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +39,3 @@ public class CurrencyRateServiceImp implements CurrencyRateService{
 		return currencyrateDao.findAll();
 	}
 }
->>>>>>> b3620eaf0c7fe27cfe43b25719cfd0bac11d1364

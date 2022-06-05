@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-package com.example.Taller1QuinteroLuisa.backend.restController;
-
-public class CurrencyRestController {
-
-}
-=======
 package com.example.Taller1QuinteroLuisa.backend.restController;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +47,4 @@ public class CurrencyRestController{
 		return currencyService.findById(id);
 	}
 }
->>>>>>> b3620eaf0c7fe27cfe43b25719cfd0bac11d1364
+
