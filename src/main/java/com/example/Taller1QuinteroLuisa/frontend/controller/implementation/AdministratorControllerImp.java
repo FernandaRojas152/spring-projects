@@ -22,9 +22,14 @@ import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceIm
 import com.example.Taller1QuinteroLuisa.backend.validation.CredentialInfoValidation;
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesPersonValidation;
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesTerritoryValidation;
+import com.example.Taller1QuinteroLuisa.frontend.businessdelegate.BusinessDelegate;
 
+import lombok.extern.java.Log;
+
+@Log
 @Controller
 public class AdministratorControllerImp {
+	
 	private SalesPersonServiceImp personService;
 	private SalesTerritoryServiceImp territoryService;
 	
@@ -32,7 +37,10 @@ public class AdministratorControllerImp {
 	private SalesTerritoryHistoryServiceImp territoryHistoryService;
 	@Autowired
 	private SalesPersonQuotaHistoryServiceImp personQuotaService;
-
+	
+	@Autowired
+	private BusinessDelegate businessDelegate;
+	
 	@Autowired
 	public AdministratorControllerImp(SalesPersonServiceImp personService, SalesTerritoryServiceImp territoryService) {
 		this.personService = personService;
@@ -48,15 +56,16 @@ public class AdministratorControllerImp {
 	/** Salesperson mapping */
 
 	@GetMapping("/salesperson")
-	public String salesperson(Model model) {
-		model.addAttribute("salesperson", personService.findAll());
+	public String salesperson(@RequestParam(required = false, value = "id") Integer id, Model model) {
+		model.addAttribute("salesperson", businessDelegate.getSalesPerson());
+		//model.addAttribute("salesperson", personService.findAll());
 		return "administrator/salesperson";
 	}
 
 	@GetMapping("/salesperson/add")
 	public String addSalesPerson(Model model) {
 		model.addAttribute("salesperson", new Salesperson());
-		model.addAttribute("salesterritories", territoryService.findAll());
+		model.addAttribute("salesterritories", businessDelegate.getSalesterritory());
 		return "administrator/add-salesperson";
 	}
 
@@ -69,7 +78,7 @@ public class AdministratorControllerImp {
 		}
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("salesperson", salesperson);
-			model.addAttribute("salesterritory");
+			model.addAttribute("salesterritory", businessDelegate.getSalesterritory());
 			return "/administrator/add-salesperson";
 		} else {
 			personService.save(salesperson);
@@ -110,7 +119,8 @@ public class AdministratorControllerImp {
 
 	@GetMapping("/salesterritory")
 	public String salesTerritory(Model model) {
-		model.addAttribute("salesterritory", territoryService.findAll());
+		//model.addAttribute("salesterritory", territoryService.findAll());
+		model.addAttribute("salesterritory", businessDelegate.getSalesterritory());
 		return "administrator/salesterritory";
 	}
 
@@ -131,7 +141,7 @@ public class AdministratorControllerImp {
 		if (bindingResult.hasErrors()) {
 			return "/administrator/add-salesterritory";
 		} else {
-			territoryService.save(salesterritory);
+			businessDelegate.addSalesterritory(salesterritory);
 			return "redirect:/salesterritory/";
 		}
 	}
