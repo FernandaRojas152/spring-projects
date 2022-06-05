@@ -1,6 +1,7 @@
 package com.example.Taller1.BusinessDelegateTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
@@ -58,11 +60,11 @@ public class BusinessDelegateTest {
 			
 			delegate= new BusinessDelegate();
 			delegate.setRestTemplate(restTemplate);
-			delegate.addSalesperson(person);
+//			delegate.addSalesperson(person);
 		}
 		
 		@Test
-		void findAllSalesPerson() {
+		void findAllSalesPersonTest() {
 			Salesperson[] personList= new Salesperson[4];
 			for (int i = 0; i < personList.length; i++) {
 				Salesperson person= new Salesperson();
@@ -74,6 +76,60 @@ public class BusinessDelegateTest {
 			
 			assertEquals(delegate.getSalesPerson().size(),4);
 		}
+		
+		@Test
+		void addSalesPersonTest() {
+			Salesperson p= new Salesperson();
+			p.setBusinessentityid(2);
+			p.setCommissionpct(new BigDecimal(0.6));
+			p.setSalesquota(new BigDecimal(300));
+			
+			//HttpEntity<Salesperson> request= new HttpEntity<>(p);
+			when(restTemplate.postForObject(URLPERSON, p, Salesperson.class)).thenReturn(p);
+			
+			assertEquals(delegate.addSalesperson(p).getBusinessentityid(), p.getBusinessentityid());
+		}
+		
+		@Test
+		void findByIdSalesPersonTest() {
+			when(restTemplate.getForObject(URLPERSON+person.getBusinessentityid(), Salesperson.class)).thenReturn(person);
+			
+			assertEquals(delegate.findByIdSalesperson(person.getBusinessentityid()).getBusinessentityid(), person.getBusinessentityid());
+		}
+		
+		/**
+		 * !!
+		 * NEEDS TO BE FIXED !!
+		 * !!
+		 */
+//		@Test
+//		void updateSalesPersonTest(){
+//			delegate.addSalesperson(person);
+//			person.setCommissionpct(new BigDecimal(0.6));
+//			delegate.updateSalesperson(person);
+//			
+//			verify(restTemplate).put(URLPERSON, person, Salesperson.class);
+//		}
+		
+//		@Test
+//		void deleteSalesPersonTest() {
+//			Salesperson p= new Salesperson();
+//			p.setBusinessentityid(2);
+//			p.setCommissionpct(new BigDecimal(0.6));
+//			p.setSalesquota(new BigDecimal(300));
+//			delegate.addSalesperson(p);
+//			
+//			delegate.deleteSalesperson(p.getBusinessentityid());
+//			verify(restTemplate).put(URLPERSON+p.getBusinessentityid(), p, Salesperson.class);
+//		}
+		
+		
+			
+	}
+	
+	@Nested
+	@DisplayName("Test methods for sales territory")
+	class SalesTerritoryTest{
 		
 	}
 

@@ -8,6 +8,4 @@ public interface CurrencyService {
 	public void deleteCurrency(String id);
 	public Currency findById(String id);
 	public Iterable<Currency> findAll();
-//	public Iterable<Currency> findByStartDate(LocalDate startdate);
-//	public Iterable<Currency> findByEndDate(LocalDate enddate);
 }
