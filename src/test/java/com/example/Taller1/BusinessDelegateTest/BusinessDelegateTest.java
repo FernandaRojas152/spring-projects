@@ -24,6 +24,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import com.example.Taller1QuinteroLuisa.Taller1QuinteroLuisaApplication;
 import com.example.Taller1QuinteroLuisa.frontend.businessdelegate.BusinessDelegate;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Currencyrate;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salespersonquotahistory;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
@@ -48,6 +50,8 @@ public class BusinessDelegateTest {
 	Salesterritory territory;
 	Salespersonquotahistory personquota;
 	Salesterritoryhistory territoryhistory;
+	Currency currency;
+	Currencyrate currencyrate;
 	
 	@BeforeAll
 	static void init() {
@@ -246,7 +250,7 @@ public class BusinessDelegateTest {
 				delegate.addTerritoryHistory(territoryhistory);
 			}
 			when(restTemplate.getForObject(URLTERRITORYHISTORY,Salesterritoryhistory[].class)).thenReturn(territoryhistoryList);
-			assertEquals(delegate.getSalesterritoryHistory().size(),10);
+			assertEquals(delegate.getSalesterritoryHistory().size(),3);
 		}
 		
 		@Test
@@ -256,6 +260,91 @@ public class BusinessDelegateTest {
 			
 			when(restTemplate.postForObject(URLTERRITORYHISTORY, th, Salesterritoryhistory.class)).thenReturn(th);
 			assertEquals(delegate.addTerritoryHistory(th).getId(), th.getId());
+		}
+		
+		@Test
+		void findByIdSalesTerritoryHistoryTest() {
+			when(restTemplate.getForObject(URLTERRITORYHISTORY+territoryhistory.getId(), Salesterritoryhistory.class)).thenReturn(territoryhistory);	
+			assertEquals(delegate.findByIdTerritoryHistory(territoryhistory.getId()).getId(), territoryhistory.getId());
+		}
+	}
+	
+	@Nested
+	@DisplayName("Test methods for currency")
+	class CurrencyTest{
+		@BeforeEach
+		void setUp(){
+			currency= new Currency();
+			currency.setCurrencycode("USD");
+			currency.setName("Dolares");
+			
+			delegate= new BusinessDelegate();
+			delegate.setRestTemplate(restTemplate);
+		}
+		
+		@Test
+		void findAllCurrenciesTest() {
+			Currency[] currencyList= new Currency[6];
+			for (int i = 0; i < currencyList.length; i++) {
+				Currency currency= new Currency();
+				currencyList[i]= currency;
+				delegate.addCurrency(currency);
+			}
+			when(restTemplate.getForObject(URLCURRENCY,Currency[].class)).thenReturn(currencyList);
+			assertEquals(delegate.getCurrency().size(),6);
+		}
+		
+		@Test
+		void addCurrencyTest() {
+			Currency c= new Currency();
+			
+			when(restTemplate.postForObject(URLCURRENCY, c, Currency.class)).thenReturn(c);
+			assertEquals(delegate.addCurrency(c).getCurrencycode(), c.getCurrencycode());
+		}
+		
+		@Test
+		void findByIdCurrencyTest() {
+			when(restTemplate.getForObject(URLCURRENCY+currency.getCurrencycode(), Currency.class)).thenReturn(currency);	
+			assertEquals(delegate.findbyIdCurrency(currency.getCurrencycode()).getCurrencycode(), currency.getCurrencycode());
+		}
+	}
+	
+	@Nested
+	@DisplayName("Test methods for currencyrate")
+	class CurrencyRateTest{
+		@BeforeEach
+		void setUp() {
+			currencyrate= new Currencyrate();
+			currencyrate.setAveragerate(new BigDecimal(5));
+			
+			delegate= new BusinessDelegate();
+			delegate.setRestTemplate(restTemplate);
+		}
+		
+		@Test
+		void findAllCurrencyRateTest(){
+			Currencyrate[] currencyrateList= new Currencyrate[2];
+			for (int i = 0; i < currencyrateList.length; i++) {
+				Currencyrate currencyrate= new Currencyrate();
+				currencyrateList[i]= currencyrate;
+				delegate.addCurrencyrate(currencyrate);
+			}
+			when(restTemplate.getForObject(URLCURRENCYRATE,Currencyrate[].class)).thenReturn(currencyrateList);
+			assertEquals(delegate.getCurrencyrate().size(),2);
+		}
+
+		@Test
+		void addCurrencyRateTest() {
+			Currencyrate cr= new Currencyrate();
+			
+			when(restTemplate.postForObject(URLCURRENCYRATE, cr, Currencyrate.class)).thenReturn(cr);
+			assertEquals(delegate.addCurrencyrate(cr).getCurrencyrateid(), cr.getCurrencyrateid());
+		}
+		
+		@Test
+		void findByIdCurrencyRateTest() {
+			when(restTemplate.getForObject(URLCURRENCYRATE+currencyrate.getCurrencyrateid(), Currencyrate.class)).thenReturn(currencyrate);	
+			assertEquals(delegate.findbyIdCurrencyRate(currencyrate.getCurrencyrateid()).getCurrencyrateid(), currencyrate.getCurrencyrateid());
 		}
 	}
 	

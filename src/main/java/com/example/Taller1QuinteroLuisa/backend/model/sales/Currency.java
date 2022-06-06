@@ -42,7 +42,7 @@ public class Currency implements Serializable {
 	@OneToMany(mappedBy = "currency2")
 	private List<Currencyrate> currencyrates2;
 
-	public Currency() {
+	public Currency(){
 	}
 
 	public Countryregioncurrency addCountryregioncurrency(Countryregioncurrency countryregioncurrency) {
