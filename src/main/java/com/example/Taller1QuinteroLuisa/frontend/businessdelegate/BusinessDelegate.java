@@ -26,7 +26,6 @@ public class BusinessDelegate {
 	@Setter
 	private RestTemplate restTemplate;
 	
-	
 	private final String URLPERSON= "http://localhost:8080/api/salespersonRest/list";
 	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotaRest/list";
 	private final String URLTERRITORY= "http://localhost:8080/api/salesterritoryRest/list";
@@ -51,6 +50,7 @@ public class BusinessDelegate {
 	}
 	
 	public Salesperson addSalesperson(Salesperson salesperson) {
+		
 		return restTemplate.postForObject(URLPERSON, salesperson, Salesperson.class);
 	}
 	

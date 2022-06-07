@@ -2,8 +2,12 @@ package com.example.Taller1QuinteroLuisa.backend.model.sales;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -22,12 +26,14 @@ public class Currencyrate implements Serializable {
 	private Integer currencyrateid;
 
 	private BigDecimal averagerate;
-
-	private Timestamp currencyratedate;
+	
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	private LocalDate currencyratedate;
 
 	private BigDecimal endofdayrate;
-
-	private Timestamp modifieddate;
+	
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	private LocalDate modifieddate;
 
 	//bi-directional many-to-one association to Currency
 	@ManyToOne
@@ -62,11 +68,11 @@ public class Currencyrate implements Serializable {
 		this.averagerate = averagerate;
 	}
 
-	public Timestamp getCurrencyratedate() {
+	public LocalDate getCurrencyratedate() {
 		return this.currencyratedate;
 	}
 
-	public void setCurrencyratedate(Timestamp currencyratedate) {
+	public void setCurrencyratedate(LocalDate currencyratedate) {
 		this.currencyratedate = currencyratedate;
 	}
 
@@ -78,11 +84,11 @@ public class Currencyrate implements Serializable {
 		this.endofdayrate = endofdayrate;
 	}
 
-	public Timestamp getModifieddate() {
+	public LocalDate getModifieddate() {
 		return this.modifieddate;
 	}
 
-	public void setModifieddate(Timestamp modifieddate) {
+	public void setModifieddate(LocalDate modifieddate) {
 		this.modifieddate = modifieddate;
 	}
 

@@ -2,6 +2,7 @@ package com.example.Taller1QuinteroLuisa.backend.model.sales;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * The persistent class for the currency database table.
@@ -26,8 +30,10 @@ public class Currency implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CURRENCY_CURRENCYCODE_GENERATOR")
 	private String currencycode;
 
-	private Timestamp modifieddate;
+	@DateTimeFormat(pattern= "yyyy-MM-dd")
+	private LocalDate modifieddate;
 
+	@NotBlank
 	private String name;
 
 	// bi-directional many-to-one association to Countryregioncurrency
@@ -82,7 +88,7 @@ public class Currency implements Serializable {
 		return this.currencyrates2;
 	}
 
-	public Timestamp getModifieddate() {
+	public LocalDate getModifieddate() {
 		return this.modifieddate;
 	}
 
@@ -127,7 +133,7 @@ public class Currency implements Serializable {
 		this.currencyrates2 = currencyrates2;
 	}
 
-	public void setModifieddate(Timestamp modifieddate) {
+	public void setModifieddate(LocalDate modifieddate) {
 		this.modifieddate = modifieddate;
 	}
 
