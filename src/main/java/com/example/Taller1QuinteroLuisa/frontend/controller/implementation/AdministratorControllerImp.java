@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Currencyrate;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.backend.services.SalesPersonQuotaHistoryServiceImp;
@@ -20,6 +22,8 @@ import com.example.Taller1QuinteroLuisa.backend.services.SalesPersonServiceImp;
 import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryHistoryServiceImp;
 import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceImp;
 import com.example.Taller1QuinteroLuisa.backend.validation.CredentialInfoValidation;
+import com.example.Taller1QuinteroLuisa.backend.validation.CurrencyRateValidation;
+import com.example.Taller1QuinteroLuisa.backend.validation.CurrencyValidation;
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesPersonValidation;
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesTerritoryValidation;
 import com.example.Taller1QuinteroLuisa.frontend.businessdelegate.BusinessDelegate;
@@ -143,10 +147,7 @@ public class AdministratorControllerImp {
 		} else {
 			this.businessDelegate.addSalesterritory(salesterritory);
 			//this.territoryService.save(salesterritory);
-			System.out.println("ola"+ businessDelegate.getSalesterritory());
-			System.out.println("No deberia estar vacio "+this.businessDelegate.addSalesterritory(salesterritory));
-			return "redirect:/salesterritory/";
-			
+			return "redirect:/salesterritory/";		
 		}
 	}
 	
@@ -195,5 +196,109 @@ public class AdministratorControllerImp {
 	public String querySalesPersonQuota(@PathVariable("id")Integer id, Model model){
 		model.addAttribute("salespersonquotahistory", personQuotaService.findBySalesPerson(id));
 		return "administrator/salesquotahistory-query";
+	}
+	
+	
+	//New classes
+	/** Currency Mapping */
+	@GetMapping("/currency")
+	public String currency(Model model) {
+		model.addAttribute("currency", businessDelegate.getCurrency());
+		return "administrator/currency";
+	}
+	
+	@GetMapping("/currency/add")
+	public String addCurrency(Model model) {
+		model.addAttribute("currency", new Currency());
+		return "administrator/add-currency";
+	}
+
+	@PostMapping("/currency/add")
+	public String saveCurrency(@Validated(CurrencyValidation.class) @ModelAttribute Currency currency,
+			BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action){
+		if(action.equals("Cancel")) {
+			return "redirect:/currency/";
+		}
+		if(bindingResult.hasErrors()) {
+			return "/administrator/add-currency";
+		}else {
+			this.businessDelegate.addCurrency(currency);
+			return "redirect:/currency/";
+		}
+	}
+	
+	@GetMapping("/currency/update/{id}")
+	public String editCurrency(@PathVariable("id")String id, Model model){
+		Currency t= businessDelegate.findbyIdCurrency(id);
+		if(t.equals(null)) {
+			throw new IllegalArgumentException("Couldn't not find the id requested");
+		}
+		model.addAttribute("currency", t);
+		return "administrator/update-currency";
+	}
+
+	@PostMapping("/currency/update/{id}")
+	public String updateCurrency(@PathVariable("id") String id, @Validated(CredentialInfoValidation.class) Currency currency,
+			BindingResult bindingResult, Model model, @RequestParam(value="action", required= true) String action){
+		if(!action.equals("Cancel")){
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("currency", currency);
+				return "administrator/update-currency";
+			}
+			currency.setCurrencycode(id);
+			businessDelegate.updateCurrency(currency);
+		}
+		return "redirect:/currency";
+	}
+	
+	/**Currency rate Mapping*/
+	@GetMapping("/currencyrate")
+	public String currencyRate(Model model) {
+		model.addAttribute("currencyrate", businessDelegate.getCurrencyrate());
+		return "administrator/currencyrate";
+	}
+	
+	@GetMapping("/currencyrate/add")
+	public String addCurrencyRate(Model model) {
+		model.addAttribute("currencyrate", new Currencyrate());
+		return "administrator/add-currencyrate";
+	}
+
+	@PostMapping("/currencyrate/add")
+	public String saveCurrencyRate(@Validated(CurrencyRateValidation.class) @ModelAttribute Currencyrate currencyrate,
+			BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
+		if(action.equals("Cancel")){
+			return "redirect:/currencyrate/";
+		}
+		if(bindingResult.hasErrors()) {
+			return "/administrator/add-currencyrate";
+		}else {
+			this.businessDelegate.addCurrencyrate(currencyrate);
+			return "redirect:/currencyrate/";
+		}
+	}
+	
+	@GetMapping("/currencyrate/update/{id}")
+	public String editCurrencyRate(@PathVariable("id")Integer id, Model model) {
+		Currencyrate t= businessDelegate.findbyIdCurrencyRate(id);
+		if(t.equals(null)){
+			throw new IllegalArgumentException("Couldn't not find the id requested");
+		}
+		model.addAttribute("currencyrate", t);
+		return "administrator/update-currencyrate";
+	}
+	
+	@PostMapping("/currencyrate/update/{id}")
+	public String updateCurrencyRate(@PathVariable("id")Integer id, @Validated(CredentialInfoValidation.class) Currencyrate currencyrate,
+			BindingResult bindingResult, Model model, @RequestParam(value="action", required= true) String action) {
+		if(!action.equals("Cancel")) {
+			if(bindingResult.hasErrors()) {
+				model.addAttribute("currencyrate", currencyrate);
+				return "administrator/update-currencyrate";
+			}
+			currencyrate.setCurrencyrateid(id);
+			businessDelegate.updateCurrencyrate(currencyrate);
+		}
+		return "redirect:/currencyrate";
 	}
 }
