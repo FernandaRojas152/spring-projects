@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Taller1QuinteroLuisa.backend.dao.SalesPersonDaoImp;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository;
@@ -18,6 +19,9 @@ public class SalesPersonServiceImp implements SalesPersonService{
 	private SalesTerritoryRepository st;
 	
 	@Autowired
+	private SalesPersonDaoImp salespersonDao;
+	
+	@Autowired
 	public SalesPersonServiceImp(SalesPersonRepository sp, SalesTerritoryRepository st) {
 		this.sp= sp;
 		this.st= st;
@@ -25,28 +29,29 @@ public class SalesPersonServiceImp implements SalesPersonService{
 
 	@Override
 	public Salesperson save(Salesperson s) throws Exception {
-		Salesperson temp= null;
+		//Salesperson temp= null;
 		
 		validateConstrains(s);
 
 		Optional<Salesterritory> optional = this.st.findById(s.getSalesterritory().getTerritoryid());
 		if(optional.isPresent()) {
 			s.setSalesterritory(optional.get());
-			temp= this.sp.save(s);
+			this.salespersonDao.save(s);
 		}
-		return temp;
+		return s;
 	}
 
 	@Override
 	public Salesperson update(Salesperson s) throws Exception {
-		Salesperson temp= null;
+		//Salesperson temp= null;
 		if(s.getBusinessentityid()!=null) {
 			Optional<Salesperson> optional = sp.findById(s.getBusinessentityid());
 			if(optional.isPresent()) {
-				temp= save(s);
+				//temp= save(s);
+				salespersonDao.update(s);
 			}
 		}
-		return temp;
+		return s;
 	}
 	
 	public void delete(Integer id){

@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesTerritoryValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The persistent class for the salesterritory database table.
@@ -56,18 +57,22 @@ public class Salesterritory implements Serializable {
 
 	// bi-directional many-to-one association to Customer
 	@OneToMany(mappedBy = "salesterritory")
+	@JsonIgnore
 	private List<Customer> customers;
 
 	// bi-directional many-to-one association to Salesorderheader
 	@OneToMany(mappedBy = "salesterritory")
+	@JsonIgnore
 	private List<Salesorderheader> salesorderheaders;
 
 	// bi-directional many-to-one association to Salesperson
 	@OneToMany(mappedBy = "salesterritory")
+	@JsonIgnore
 	private List<Salesperson> salespersons;
 
 	// bi-directional many-to-one association to Salesterritoryhistory
 	@OneToMany(mappedBy = "salesterritory")
+	@JsonIgnore
 	private List<Salesterritoryhistory> salesterritoryhistories;
 
 	public Salesterritory() {

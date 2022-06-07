@@ -16,6 +16,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the currency database table.
  *
@@ -28,6 +30,16 @@ public class Currency implements Serializable {
 	@Id
 	@SequenceGenerator(name = "CURRENCY_CURRENCYCODE_GENERATOR", allocationSize = 1, sequenceName = "CURRENCY_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CURRENCY_CURRENCYCODE_GENERATOR")
+	private Integer currencyid;
+	
+	public Integer getCurrencyid() {
+		return currencyid;
+	}
+
+	public void setCurrencyid(Integer currencyid) {
+		this.currencyid = currencyid;
+	}
+
 	private String currencycode;
 
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
@@ -38,14 +50,17 @@ public class Currency implements Serializable {
 
 	// bi-directional many-to-one association to Countryregioncurrency
 	@OneToMany(mappedBy = "currency")
+	@JsonIgnore
 	private List<Countryregioncurrency> countryregioncurrencies;
 
 	// bi-directional many-to-one association to Currencyrate
 	@OneToMany(mappedBy = "currency1")
+	@JsonIgnore
 	private List<Currencyrate> currencyrates1;
 
 	// bi-directional many-to-one association to Currencyrate
 	@OneToMany(mappedBy = "currency2")
+	@JsonIgnore
 	private List<Currencyrate> currencyrates2;
 
 	public Currency(){

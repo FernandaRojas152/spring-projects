@@ -22,22 +22,22 @@ public class SalespersonQuotaRestController{
 		this.personQuotaService= personQuotaService;
 	}
 	
-	@GetMapping("/salespersonquotaRest/list")
+	@GetMapping("/salespersonquotahistory/")
 	public Iterable<Salespersonquotahistory> getSalespersonquotahistory(){
 		return personQuotaService.findAll();
 	}
 	
-	@PostMapping("/salespersonquotaRest/add")
+	@PostMapping("/salespersonquotahistory/")
 	public Salespersonquotahistory addSalespersonquota(@RequestBody Salespersonquotahistory salespersonquotahistory) throws Exception {
 		return personQuotaService.save(salespersonquotahistory);
 	}
 	
-	@PutMapping("/salespersonquotaRest/update/{id}")
+	@PutMapping("/salespersonquotahistory/{id}")
 	public void updateSalespersonquota(@RequestBody Salespersonquotahistory salespersonquotahistory) throws Exception {
 		personQuotaService.update(salespersonquotahistory);
 	}
 	
-	@DeleteMapping("/salespersonquotaRest/delete/{id}")
+	@DeleteMapping("/salespersonquotahistory/{id}")
 	public void deleteSalespersonquota(@PathVariable("id")Integer id){
 		personQuotaService.delete(id);
 		

@@ -111,7 +111,7 @@ public class AdministratorControllerImp {
 		if(!action.equals("Cancel")){
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("salesperson", salesperson);
-				model.addAttribute("salesterritory", personService.findAllTerritories());
+				model.addAttribute("salesterritory", businessDelegate.getSalesterritory());
 				return "administrator/update-salesperson";
 			}
 			salesperson.setBusinessentityid(id);
@@ -230,7 +230,7 @@ public class AdministratorControllerImp {
 	}
 	
 	@GetMapping("/currency/update/{id}")
-	public String editCurrency(@PathVariable("id")String id, Model model){
+	public String editCurrency(@PathVariable("id")Integer id, Model model){
 		Currency t= businessDelegate.findbyIdCurrency(id);
 		if(t.equals(null)) {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
@@ -240,14 +240,14 @@ public class AdministratorControllerImp {
 	}
 
 	@PostMapping("/currency/update/{id}")
-	public String updateCurrency(@PathVariable("id") String id, @Validated(CredentialInfoValidation.class) Currency currency,
+	public String updateCurrency(@PathVariable("id") Integer id, @Validated(CredentialInfoValidation.class) Currency currency,
 			BindingResult bindingResult, Model model, @RequestParam(value="action", required= true) String action){
 		if(!action.equals("Cancel")){
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("currency", currency);
 				return "administrator/update-currency";
 			}
-			currency.setCurrencycode(id);
+			currency.setCurrencyid(id);
 			businessDelegate.updateCurrency(currency);
 		}
 		return "redirect:/currency";

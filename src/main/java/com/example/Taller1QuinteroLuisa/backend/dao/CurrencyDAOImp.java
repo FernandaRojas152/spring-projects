@@ -42,7 +42,7 @@ public class CurrencyDAOImp implements CurrencyDAO{
 	}
 
 	@Override
-	public Currency findById(String id) {
+	public Currency findById(Integer id) {
 		return entityManager.find(Currency.class, id);
 	}
 

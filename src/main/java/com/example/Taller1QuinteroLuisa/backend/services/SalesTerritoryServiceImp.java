@@ -28,7 +28,7 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService{
 		//Salesterritory temp = null;
 		validateConstraints(t);
 
-		this.salesTerritoryDao.save(t);;
+		this.salesTerritoryDao.save(t);
 
 		return t;
 	}

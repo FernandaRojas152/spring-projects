@@ -24,22 +24,22 @@ public class CurrencyRateRestController{
 		this.currencyrateService= currencyrateService;
 	}
 	
-	@GetMapping("/currencyrateRest/list")
+	@GetMapping("/currencyrate/")
 	public Iterable<Currencyrate> getCurrencyRate(){
 		return currencyrateService.findAll();
 	}
 	
-	@PostMapping("/currencyrateRest/add")
+	@PostMapping("/currencyrate/")
 	public void addCurrencyrate(@RequestBody Currencyrate currencyrate) {
 		currencyrateService.saveCurrencyRate(currencyrate);
 	}
 	
-	@PutMapping("/currencyrateRest/update/{id}")
+	@PutMapping("/currencyrate/{id}")
 	public void updateCurrencyrate(@RequestBody Currencyrate currencyrate) {
 		currencyrateService.updateCurrencyRate(currencyrate);
 	}
 	
-	@DeleteMapping("/currencyrateRest/delete/{id}")
+	@DeleteMapping("/currencyrate/{id}")
 	public void deleteCurrencyrate(@PathVariable("id")Integer id) {
 		currencyrateService.deleteCurrencyRate(id);
 	}
