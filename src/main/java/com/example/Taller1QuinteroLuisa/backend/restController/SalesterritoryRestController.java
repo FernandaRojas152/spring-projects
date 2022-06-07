@@ -13,7 +13,7 @@ import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceImp;
 
 @RestController
-@RequestMapping("/api/salesterritoryRest/list")
+@RequestMapping("/api")
 public class SalesterritoryRestController{
 	private SalesTerritoryServiceImp territoryService;
 	
@@ -22,31 +22,30 @@ public class SalesterritoryRestController{
 		this.territoryService= territoryService;
 	}
 	
-	//@GetMapping("/salesterritoryRest/list")
-	@GetMapping
+	@GetMapping("/salesterritory")
+	//@GetMapping
 	public Iterable<Salesterritory> getSalesTerritory(){
 		return territoryService.findAll();
 	}
 	
-	//@PostMapping("/salesterritoryRest/add")
-	@PostMapping
+	@PostMapping("/salesterritory")
 	public Salesterritory addSalesterritory(@RequestBody Salesterritory salesterritory) throws Exception {
 		return territoryService.save(salesterritory);
 	}
 	
-	//@PutMapping("/salesterritoryRest/update/{id}")
-	@PutMapping
+	@PutMapping("/salesterritoryRest/update/{id}")
+	//@PutMapping
 	public void updateSalesterritory(@RequestBody Salesterritory salesterritory) throws Exception{
 		territoryService.update(salesterritory);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/salesterritory/{id}")
     public Salesterritory getById(@PathVariable("id") Integer id) {
 		return territoryService.findById(id).get();
 	}
 	
-	//@DeleteMapping("/salesterritoryRest/delete/{id}")
-	@DeleteMapping
+	@DeleteMapping("/salesterritory/delete/{id}")
+	//@DeleteMapping
 	public void deleteSalesterritory(@PathVariable("id")Integer id) {
 		territoryService.delete(id);
 	}

@@ -30,7 +30,7 @@ public class BusinessDelegate {
 	
 	private final String URLPERSON= "http://localhost:8080/api/salespersonRest/list";
 	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotaRest/list";
-	private final String URLTERRITORY= "http://localhost:8080/api/salesterritoryRest/list/";
+	private final String URLTERRITORY= "http://localhost:8080/api/salesterritory";
 	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salesterritoryhistoryRest/list";
 	private final String URLCURRENCY= "http://localhost:8080/api/salespersonRest/list";
 	private final String URLCURRENCYRATE= "http://localhost:8080/api/salespersonRest/list";
@@ -75,9 +75,9 @@ public class BusinessDelegate {
 	}
 	
 	public Salesterritory addSalesterritory(Salesterritory salesterritory) {
-		HttpEntity<Salesterritory> request = new HttpEntity<>(salesterritory);
-		//return restTemplate.postForObject(URLTERRITORY, salesterritory, Salesterritory.class);
-		return restTemplate.postForObject(URLTERRITORY, request, Salesterritory.class);
+		//HttpEntity<Salesterritory> request = new HttpEntity<>(salesterritory);
+		return restTemplate.postForObject(URLTERRITORY, salesterritory, Salesterritory.class);
+		//return restTemplate.postForObject(URLTERRITORY, request, Salesterritory.class);
 	}
 	
 	public void updateSalesterritory(Salesterritory salesterritory) {

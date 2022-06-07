@@ -26,7 +26,6 @@ import com.example.Taller1QuinteroLuisa.frontend.businessdelegate.BusinessDelega
 
 import lombok.extern.java.Log;
 
-@Log
 @Controller
 public class AdministratorControllerImp {
 	
@@ -126,7 +125,7 @@ public class AdministratorControllerImp {
 	}
 
 	@GetMapping("/salesterritory/add")
-	public String addSalesTerritory(Model model) {
+	public String addSalesTerritory(Model model){
 		model.addAttribute("salesterritory", new Salesterritory());
 		return "administrator/add-salesterritory";
 	}
@@ -142,10 +141,12 @@ public class AdministratorControllerImp {
 		if (bindingResult.hasErrors()) {
 			return "/administrator/add-salesterritory";
 		} else {
-			//this.businessDelegate.addSalesterritory(salesterritory);
-			this.territoryService.save(salesterritory);
-			System.out.println(this.businessDelegate.addSalesterritory(salesterritory));
+			this.businessDelegate.addSalesterritory(salesterritory);
+			//this.territoryService.save(salesterritory);
+			System.out.println("ola"+ businessDelegate.getSalesterritory());
+			System.out.println("No deberia estar vacio "+this.businessDelegate.addSalesterritory(salesterritory));
 			return "redirect:/salesterritory/";
+			
 		}
 	}
 	
