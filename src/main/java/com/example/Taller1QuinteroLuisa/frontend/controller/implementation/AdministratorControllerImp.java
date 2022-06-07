@@ -59,7 +59,7 @@ public class AdministratorControllerImp {
 	/** Salesperson mapping */
 
 	@GetMapping("/salesperson")
-	public String salesperson(@RequestParam(required = false, value = "id") Integer id, Model model) {
+	public String salesperson(Model model) {
 		model.addAttribute("salesperson", businessDelegate.getSalesPerson());
 		//model.addAttribute("salesperson", personService.findAll());
 		return "administrator/salesperson";
@@ -85,19 +85,20 @@ public class AdministratorControllerImp {
 			return "/administrator/add-salesperson";
 		} else {
 			//personService.save(salesperson);
-			businessDelegate.addSalesperson(salesperson);
+			this.businessDelegate.addSalesperson(salesperson);
 			return "redirect:/salesperson/";
 		}
 	}
 	
 	@GetMapping("/salesperson/update/{id}")
 	public String editSalesPerson(@PathVariable("id")Integer id, Model model){
-		Optional<Salesperson> p= personService.findById(id);
-		if(p.isEmpty()){
+		//Optional<Salesperson> p= personService.findById(id);
+		Salesperson p= businessDelegate.findByIdSalesperson(id);
+		if(p.equals(null)){
 			throw new IllegalArgumentException("Couldn't not find the id requested");
 		}
-		model.addAttribute("salesperson", p.get());
-		model.addAttribute("salesterritories", personService.findAllTerritories());
+		model.addAttribute("salesperson", p);
+		model.addAttribute("salesterritories", businessDelegate.getSalesterritory());
 		
 		return "administrator/update-salesperson";
 	}
@@ -109,12 +110,13 @@ public class AdministratorControllerImp {
 			@RequestParam(value = "action", required = true) String action) throws Exception{
 		if(!action.equals("Cancel")){
 			if(bindingResult.hasErrors()) {
-				model.addAttribute("salesperson", personService.findById(id).get());
+				model.addAttribute("salesperson", salesperson);
 				model.addAttribute("salesterritory", personService.findAllTerritories());
 				return "administrator/update-salesperson";
 			}
 			salesperson.setBusinessentityid(id);
-			personService.update(salesperson);
+			//personService.update(salesperson);
+			businessDelegate.updateSalesperson(salesperson);
 		}
 		return "redirect:/salesperson/";
 	}

@@ -22,19 +22,17 @@ public class SalesterritoryRestController{
 		this.territoryService= territoryService;
 	}
 	
-	@GetMapping("/salesterritory")
-	//@GetMapping
+	@GetMapping("/salesterritory/")
 	public Iterable<Salesterritory> getSalesTerritory(){
 		return territoryService.findAll();
 	}
 	
-	@PostMapping("/salesterritory")
+	@PostMapping("/salesterritory/")
 	public Salesterritory addSalesterritory(@RequestBody Salesterritory salesterritory) throws Exception {
 		return territoryService.save(salesterritory);
 	}
 	
-	@PutMapping("/salesterritoryRest/update/{id}")
-	//@PutMapping
+	@PutMapping("/salesterritory/{id}")
 	public void updateSalesterritory(@RequestBody Salesterritory salesterritory) throws Exception{
 		territoryService.update(salesterritory);
 	}
@@ -44,8 +42,7 @@ public class SalesterritoryRestController{
 		return territoryService.findById(id).get();
 	}
 	
-	@DeleteMapping("/salesterritory/delete/{id}")
-	//@DeleteMapping
+	@DeleteMapping("/salesterritory/{id}")
 	public void deleteSalesterritory(@PathVariable("id")Integer id) {
 		territoryService.delete(id);
 	}

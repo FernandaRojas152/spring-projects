@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.services.SalesPersonServiceImp;
-//import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceImp;
 
 @RestController
 @RequestMapping("/api")
@@ -23,23 +22,28 @@ public class SalespersonRestController{
 		this.personService= personService;
 	}
 	
-	@GetMapping("/salespersonRest/list")
+	@GetMapping("/salesperson/")
 	public Iterable<Salesperson> getSalesPerson(){
 		return personService.findAll();
 	}
 	
-	@PostMapping("/salespersonRest/add")
+	@PostMapping("/salesperson/")
 	public Salesperson addSalesperson(@RequestBody Salesperson salesperson) throws Exception {
 		return personService.save(salesperson);	
 	}
 	
-	@PutMapping("/salespersonRest/update/{id}")
+	@PutMapping("/salesperson/{id}")
 	public void updateSalesPerson(@RequestBody Salesperson salesperson) throws Exception{
 		personService.update(salesperson);
 	}
 	
-	@DeleteMapping("/salespersonRest/delete/{id}")
+	@DeleteMapping("/salesperson/{id}")
 	public void deleteSalesPerson(@PathVariable("id")Integer id) {
 		personService.delete(id);
+	}
+	
+	@GetMapping("/salesperson/{id}")
+    public Salesperson getById(@PathVariable("id") Integer id) {
+		return personService.findById(id).get();
 	}
 }

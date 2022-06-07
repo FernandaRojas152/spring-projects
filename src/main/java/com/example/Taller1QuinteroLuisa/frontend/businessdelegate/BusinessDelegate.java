@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import javax.validation.constraints.NotNull;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -28,12 +26,12 @@ public class BusinessDelegate {
 	@Setter
 	private RestTemplate restTemplate;
 	
-	private final String URLPERSON= "http://localhost:8080/api/salespersonRest/list";
-	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotaRest/list";
-	private final String URLTERRITORY= "http://localhost:8080/api/salesterritory";
-	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salesterritoryhistoryRest/list";
-	private final String URLCURRENCY= "http://localhost:8080/api/salespersonRest/list";
-	private final String URLCURRENCYRATE= "http://localhost:8080/api/salespersonRest/list";
+	private final String URLPERSON= "http://localhost:8080/api/salesperson/";
+	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotahistory/";
+	private final String URLTERRITORY= "http://localhost:8080/api/salesterritory/";
+	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salesterritoryhistory/";
+	private final String URLCURRENCY= "http://localhost:8080/api/currency/";
+	private final String URLCURRENCYRATE= "http://localhost:8080/api/currencyrate/";
 	
 	public BusinessDelegate() {
 		this.restTemplate= new RestTemplate();
@@ -52,7 +50,6 @@ public class BusinessDelegate {
 	}
 	
 	public Salesperson addSalesperson(Salesperson salesperson) {
-		
 		return restTemplate.postForObject(URLPERSON, salesperson, Salesperson.class);
 	}
 	
@@ -81,7 +78,7 @@ public class BusinessDelegate {
 	}
 	
 	public void updateSalesterritory(Salesterritory salesterritory) {
-		restTemplate.put(URLTERRITORY, salesterritory, Salesterritory.class);
+		restTemplate.put(URLTERRITORY+salesterritory.getTerritoryid(), salesterritory, Salesterritory.class);
 	}
 	
 	public void deleteSalesterritory(Integer id) {

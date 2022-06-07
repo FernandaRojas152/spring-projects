@@ -12,7 +12,6 @@ import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryReposit
 
 @Service
 public class SalesTerritoryServiceImp implements SalesTerritoryService{
-	
 	private SalesTerritoryRepository st;
 	
 	@Autowired
