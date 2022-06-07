@@ -81,7 +81,8 @@ public class AdministratorControllerImp {
 			model.addAttribute("salesterritory", businessDelegate.getSalesterritory());
 			return "/administrator/add-salesperson";
 		} else {
-			personService.save(salesperson);
+			//personService.save(salesperson);
+			businessDelegate.addSalesperson(salesperson);
 			return "redirect:/salesperson/";
 		}
 	}
@@ -141,18 +142,21 @@ public class AdministratorControllerImp {
 		if (bindingResult.hasErrors()) {
 			return "/administrator/add-salesterritory";
 		} else {
-			businessDelegate.addSalesterritory(salesterritory);
+			//this.businessDelegate.addSalesterritory(salesterritory);
+			this.territoryService.save(salesterritory);
+			System.out.println(this.businessDelegate.addSalesterritory(salesterritory));
 			return "redirect:/salesterritory/";
 		}
 	}
 	
 	@GetMapping("/salesterritory/update/{id}")
 	public String editSalesTerritory(@PathVariable("id")Integer id, Model model) {
-		Optional<Salesterritory> t= territoryService.findById(id);
-		if(t.isEmpty()) {
+		//Optional<Salesterritory> t= territoryService.findById(id);
+		Salesterritory t = businessDelegate.findByIdTerritory(id);
+		if(t.equals(null)) {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
 		}
-		model.addAttribute("salesterritory", t.get());
+		model.addAttribute("salesterritory", t);
 		return "administrator/update-salesterritory";
 	}
 	
@@ -162,11 +166,12 @@ public class AdministratorControllerImp {
 			@RequestParam(value="action", required= true) String action) throws Exception{
 		if(!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				model.addAttribute("salesterritory", territoryService.findById(id).get());
+				model.addAttribute("salesterritory", salesterritory);
 				return "administrator/update-salesterritory";
 			}
 			salesterritory.setTerritoryid(id);
-			territoryService.update(salesterritory);
+			//territoryService.update(salesterritory);
+			businessDelegate.updateSalesterritory(salesterritory);
 		}
 		return "redirect:/salesterritory";
 	}
