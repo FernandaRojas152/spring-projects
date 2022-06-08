@@ -35,11 +35,11 @@ import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritoryhistor
 @ContextConfiguration(classes= Taller1QuinteroLuisaApplication.class)
 public class BusinessDelegateTest {
 	private final String URLPERSON= "http://localhost:8080/api/salesperson/";
-	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquota/";
+	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotahistory/";
 	private final String URLTERRITORY= "http://localhost:8080/api/salesterritory/";
 	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salesterritoryhistory/";
-	private final String URLCURRENCY= "http://localhost:8080/api/salesperson/";
-	private final String URLCURRENCYRATE= "http://localhost:8080/api/salesperson/";
+	private final String URLCURRENCY= "http://localhost:8080/api/currency/";
+	private final String URLCURRENCYRATE= "http://localhost:8080/api/currencyrate/";
 	
 	@Mock
 	private RestTemplate restTemplate;
