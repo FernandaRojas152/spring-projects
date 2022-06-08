@@ -4,6 +4,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +14,9 @@ import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
 @Repository
 @Scope("singleton")
 public class SalesTerritoryDaoImp implements SalesTerritoryDAO{
+
 	@PersistenceContext
+	@Autowired
 	private EntityManager entityManager;
 	
 	@Transactional
@@ -29,6 +33,7 @@ public class SalesTerritoryDaoImp implements SalesTerritoryDAO{
 	
 	@Transactional
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Salesterritory> findAll() {
 		Query query = entityManager.createQuery("SELECT st FROM Salesterritory st");
 		return query.getResultList();

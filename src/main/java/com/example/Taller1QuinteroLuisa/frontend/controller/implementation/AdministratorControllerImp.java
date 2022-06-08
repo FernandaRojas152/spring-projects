@@ -144,7 +144,7 @@ public class AdministratorControllerImp {
 		} else {
 			//this.businessDelegate.addSalesterritory(salesterritory);
 			this.territoryService.save(salesterritory);
-			System.out.println(this.businessDelegate.addSalesterritory(salesterritory));
+			//System.out.println(this.businessDelegate.addSalesterritory(salesterritory));
 			return "redirect:/salesterritory/";
 		}
 	}
