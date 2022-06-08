@@ -17,6 +17,7 @@ import com.example.Taller1QuinteroLuisa.backend.services.CurrencyRateServiceImp;
 @RestController
 @RequestMapping("/api")
 public class CurrencyRateRestController{
+
 	private CurrencyRateServiceImp currencyrateService;
 	
 	@Autowired
@@ -44,7 +45,7 @@ public class CurrencyRateRestController{
 		currencyrateService.deleteCurrencyRate(id);
 	}
 	
-	@GetMapping("/currencyrateRest/list/{id}")
+	@GetMapping("/currencyrate/{id}")
 	public Currencyrate findById(@PathVariable("id")Integer id) {
 		return currencyrateService.findById(id);
 	}

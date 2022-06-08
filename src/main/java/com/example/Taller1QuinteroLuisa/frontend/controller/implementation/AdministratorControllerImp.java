@@ -283,7 +283,7 @@ public class AdministratorControllerImp {
 		}
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("currencyrate", currencyrate);
-			model.addAttribute("currency", businessDelegate.getCurrency());
+			model.addAttribute("currencies", businessDelegate.getCurrency());
 			return "/administrator/add-currencyrate";
 		}else {
 			this.businessDelegate.addCurrencyrate(currencyrate);
