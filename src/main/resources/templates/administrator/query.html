@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Query</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div th:switch="${salesperson}" class="container my-5">
+		<div class="row">
+			<div class="col-md-6">
+				<h2 th:case="null">There are no queries here. Check it out again.</h2>
+				<div th:case="*">
+					<h2 class="my-5">Query</h2>
+					<table class="table table-striped table-responsive-md">
+						<thead>
+							<tr>
+								<th>Business Entity Id</th>
+								<th>Bonus</th>
+								<th>Comission percentage</th>
+								<th>Modified date</th>
+								<th>Sales last year</th>
+								<th>Sales quota</th>
+								<th>Sales tyd</th>
+								<th>Sales Territory</th>
+								<th>Salesperson quota history</th>
+								<th> Edit </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="person : ${salesperson}">
+								<td th:text="${person.businessentityid}"></td>
+								<td th:text="${person.bonus}"></td>
+								<td th:text="${person.commissionpct}"></td>
+								<td th:text="${person.modifieddate}"></td>
+								<td th:text="${person.saleslastyear}"></td>
+								<td th:text="${person.salesquota}"></td>
+								<td th:text="${person.salesytd}"></td>
+								<td th:text="${person.salesterritory.name}"></td>
+								<td><a th:href="@{/salespersonquotahistory/{id}(id=${person.businessentityid})}"
+									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+								<td><a th:href="@{/salesperson/update/{id}(id=${person.businessentityid})}"
+									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>
+					<a href="/salesperson/add" class="btn btn-primary"><i
+						class="fas fa-user-plus ml-2"></i> Add a salesperson</a>
+				</p>
+				<p>
+					<a href="/administrator/"><i class="fas fa-user ml-2"></i> Go to Administrator Menu</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
