@@ -14,12 +14,13 @@ import com.example.Taller1QuinteroLuisa.backend.model.sales.Currencyrate;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class CurrencyRateDAOImp implements CurrencyRateDAO{
 	@PersistenceContext
 	@Autowired
 	private EntityManager entityManager;
 
-	@Transactional
+	//@Transactional
 	@Override
 	public void save(Currencyrate currencyRate) {
 		entityManager.persist(currencyRate);

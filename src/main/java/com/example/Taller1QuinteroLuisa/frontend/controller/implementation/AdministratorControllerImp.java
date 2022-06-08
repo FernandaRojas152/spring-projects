@@ -239,6 +239,14 @@ public class AdministratorControllerImp {
 		return "administrator/update-currency";
 	}
 
+	@GetMapping("/currency/delete/{id}")
+	public String deleteCurrency(@PathVariable("id")Integer id, Model model){
+		//Currency currency = businessDelegate.findbyIdCurrency(id);
+		businessDelegate.deleteCurrency(id);
+		model.addAttribute("currency", businessDelegate.getCurrency());
+		return "administrator/currency";
+	}
+
 	@PostMapping("/currency/update/{id}")
 	public String updateCurrency(@PathVariable("id") Integer id, @Validated(CredentialInfoValidation.class) Currency currency,
 			BindingResult bindingResult, Model model, @RequestParam(value="action", required= true) String action){

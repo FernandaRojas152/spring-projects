@@ -4,10 +4,13 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.Taller1QuinteroLuisa.backend.dao.CurrencyDAOImp;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
 
 @Service
+@Transactional
 public class CurrencyServiceImp implements CurrencyService{
 	private CurrencyDAOImp currencyDao;
 	

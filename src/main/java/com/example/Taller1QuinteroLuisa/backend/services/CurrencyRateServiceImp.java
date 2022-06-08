@@ -2,21 +2,36 @@ package com.example.Taller1QuinteroLuisa.backend.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.Taller1QuinteroLuisa.backend.dao.CurrencyDAOImp;
 import com.example.Taller1QuinteroLuisa.backend.dao.CurrencyRateDAOImp;
+import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Currencyrate;
 
 @Service
+@Transactional
 public class CurrencyRateServiceImp implements CurrencyRateService{
+
 	private CurrencyRateDAOImp currencyrateDao;
-	
+	private CurrencyDAOImp currencyDAOImp;
+
 	@Autowired
-	public CurrencyRateServiceImp(CurrencyRateDAOImp currencyrateDao) {
+	public CurrencyRateServiceImp(CurrencyRateDAOImp currencyrateDao, CurrencyDAOImp currencyDAOImp) {
 		this.currencyrateDao= currencyrateDao;
+		this.currencyDAOImp = currencyDAOImp;
 	}
 
 	@Override
 	public void saveCurrencyRate(Currencyrate currencyrate) {
-		this.currencyrateDao.save(currencyrate);
+		Currency currency1 = this.currencyDAOImp.findById(currencyrate.getCurrency1().getCurrencycode());
+		Currency currency2 = this.currencyDAOImp.findById(currencyrate.getCurrency2().getCurrencycode());
+		if (!currency1.equals(null) && !currency2.equals(null)) {
+			currencyrate.setCurrency1(currency1);
+			currencyrate.setCurrency2(currency2);
+			currencyrateDao.save(currencyrate);
+		}
+		//this.currencyrateDao.save(currencyrate);
 	}
 
 	@Override
