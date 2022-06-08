@@ -230,7 +230,7 @@ public class AdministratorControllerImp {
 	}
 	
 	@GetMapping("/currency/update/{id}")
-	public String editCurrency(@PathVariable("id")String id, Model model){
+	public String editCurrency(@PathVariable("id")Integer id, Model model){
 		Currency t= businessDelegate.findbyIdCurrency(id);
 		if(t.equals(null)) {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
@@ -263,7 +263,7 @@ public class AdministratorControllerImp {
 	@GetMapping("/currencyrate/add")
 	public String addCurrencyRate(Model model) {
 		model.addAttribute("currencyrate", new Currencyrate());
-		model.addAttribute("currencies", businessDelegate.getCurrencyrate());
+		model.addAttribute("currencies", businessDelegate.getCurrency());
 		return "administrator/add-currencyrate";
 	}
 

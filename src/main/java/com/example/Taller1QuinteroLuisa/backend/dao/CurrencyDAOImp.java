@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,17 +15,19 @@ import com.example.Taller1QuinteroLuisa.backend.model.sales.Currency;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class CurrencyDAOImp implements CurrencyDAO{
 	@PersistenceContext
+	@Autowired
 	private EntityManager entityManager;
 	
-	@Transactional
+	//@Transactional
 	@Override
 	public void save(Currency currency) {
 		entityManager.persist(currency);	
 	}
 
-	@Transactional
+	//@Transactional
 	@Override
 	public void update(Currency currency) {
 		entityManager.merge(currency);
@@ -42,7 +45,7 @@ public class CurrencyDAOImp implements CurrencyDAO{
 	}
 
 	@Override
-	public Currency findById(String id) {
+	public Currency findById(Integer id) {
 		return entityManager.find(Currency.class, id);
 	}
 

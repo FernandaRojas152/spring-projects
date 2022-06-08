@@ -8,6 +8,6 @@ public interface CurrencyDAO{
 	public void update(Currency currency);
 	public void delete(Currency currency);
 	public List<Currency> findAll();
-	public Currency findById(String id);
+	public Currency findById(Integer id);
 	public void deleteAll();
 }

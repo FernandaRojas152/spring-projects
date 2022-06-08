@@ -27,12 +27,12 @@ public class CurrencyServiceImp implements CurrencyService{
 	}
 
 	@Override
-	public void deleteCurrency(String id) {
+	public void deleteCurrency(Integer id) {
 		this.currencyDao.delete(currencyDao.findById(id));
 	}
 
 	@Override
-	public Currency findById(String id) {
+	public Currency findById(Integer id) {
 		return currencyDao.findById(id);
 	}
 
