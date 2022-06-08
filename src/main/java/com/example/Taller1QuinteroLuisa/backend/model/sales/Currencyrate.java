@@ -5,6 +5,8 @@ import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -47,6 +49,7 @@ public class Currencyrate implements Serializable {
 
 	//bi-directional many-to-one association to Salesorderheader
 	@OneToMany(mappedBy="currencyrate")
+	@JsonIgnore
 	private List<Salesorderheader> salesorderheaders;
 
 	public Currencyrate() {

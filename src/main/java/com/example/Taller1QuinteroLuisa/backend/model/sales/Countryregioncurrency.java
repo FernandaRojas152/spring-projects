@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the countryregioncurrency database table.
  *
@@ -26,6 +28,7 @@ public class Countryregioncurrency implements Serializable {
 	// bi-directional many-to-one association to Currency
 	@ManyToOne
 	@JoinColumn(name = "currencycode", insertable = false, updatable = false)
+	@JsonIgnore
 	private Currency currency;
 
 	public Countryregioncurrency() {

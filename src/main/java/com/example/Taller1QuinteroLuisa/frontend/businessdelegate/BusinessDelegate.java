@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
 import javax.validation.constraints.NotNull;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,12 +29,12 @@ public class BusinessDelegate {
 	@Setter
 	private RestTemplate restTemplate;
 	
-	private final String URLPERSON= "http://localhost:8080/api/salespersonRest/list";
-	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotaRest/list";
-	private final String URLTERRITORY= "http://localhost:8080/api/salesterritoryRest/list/";
-	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salesterritoryhistoryRest/list";
-	private final String URLCURRENCY= "http://localhost:8080/api/salespersonRest/list";
-	private final String URLCURRENCYRATE= "http://localhost:8080/api/salespersonRest/list";
+	private final String URLPERSON= "http://localhost:8080/api/salesperson/";
+	private final String URLPERSONQUOTA= "http://localhost:8080/api/salespersonquotahistory/";
+	private final String URLTERRITORY= "http://localhost:8080/api/salesterritory/";
+	private final String URLTERRITORYHISTORY= "http://localhost:8080/api/salesterritoryhistory/";
+	private final String URLCURRENCY= "http://localhost:8080/api/currency/";
+	private final String URLCURRENCYRATE= "http://localhost:8080/api/currencyrate/";
 	
 	public BusinessDelegate() {
 		this.restTemplate= new RestTemplate();
@@ -55,7 +53,6 @@ public class BusinessDelegate {
 	}
 	
 	public Salesperson addSalesperson(Salesperson salesperson) {
-		
 		return restTemplate.postForObject(URLPERSON, salesperson, Salesperson.class);
 	}
 	
@@ -78,14 +75,13 @@ public class BusinessDelegate {
 	}
 	
 	public Salesterritory addSalesterritory(Salesterritory salesterritory) {
-		HttpEntity<Salesterritory> request = new HttpEntity<>(salesterritory);
-		// //return restTemplate.postForObject(URLTERRITORY, salesterritory, Salesterritory.class);
-		return restTemplate.postForObject(URLTERRITORY, request, Salesterritory.class);
-		
+		//HttpEntity<Salesterritory> request = new HttpEntity<>(salesterritory);
+		return restTemplate.postForObject(URLTERRITORY, salesterritory, Salesterritory.class);
+		//return restTemplate.postForObject(URLTERRITORY, request, Salesterritory.class);
 	}
 	
 	public void updateSalesterritory(Salesterritory salesterritory) {
-		restTemplate.put(URLTERRITORY, salesterritory, Salesterritory.class);
+		restTemplate.put(URLTERRITORY+salesterritory.getTerritoryid(), salesterritory, Salesterritory.class);
 	}
 	
 	public void deleteSalesterritory(Integer id) {
@@ -155,7 +151,7 @@ public class BusinessDelegate {
 		restTemplate.put(URLCURRENCY+currency.getCurrencycode(), currency, Currency.class);
 	}
 	
-	public void deleteCurrency(String id) {
+	public void deleteCurrency(Integer id) {
 		restTemplate.delete(URLCURRENCY+id);
 	}
 	

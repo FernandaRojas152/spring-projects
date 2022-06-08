@@ -22,27 +22,27 @@ public class CurrencyRestController{
 		this.currencyService= currencyService;
 	}
 	
-	@GetMapping("/currencyRest/list")
+	@GetMapping("/currency/")
 	public Iterable<Currency> getCurrency(){
 		return currencyService.findAll();
 	}
 	
-	@PostMapping("/currencyRest/add")
+	@PostMapping("/currency/")
 	public void addCurrency(@RequestBody Currency currency) {
 		currencyService.saveCurrency(currency);
 	}
 	
-	@PutMapping("/currencyRest/update/{id}")
+	@PutMapping("/currency/{id}")
 	public void updateCurrency(@RequestBody Currency currency) {
 		currencyService.updateCurrency(currency);
 	}
 	
-	@DeleteMapping("/currencyRest/delete/{id}")
+	@DeleteMapping("/currency/{id}")
 	public void deleteCurrency(@PathVariable("id")String id) {
 		currencyService.deleteCurrency(id);
 	}
 	
-	@GetMapping("/currencyRest/list/{id}")
+	@GetMapping("/currency/{id}")
 	public Currency findById(@PathVariable("id")String id) {
 		return currencyService.findById(id);
 	}

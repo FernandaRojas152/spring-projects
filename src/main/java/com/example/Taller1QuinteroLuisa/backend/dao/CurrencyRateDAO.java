@@ -13,5 +13,5 @@ public interface CurrencyRateDAO{
 	public void deleteAll();
 	
 	//Join
-	public List<Currencyrate> findByCurrency(String code);
+	public List<Currencyrate> findByCurrency(Integer code);
 }

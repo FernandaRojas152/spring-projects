@@ -23,22 +23,22 @@ public class SalesterritoryHistoryRestController{
 		this.territoryHistoryService=territoryHistoryService;
 	}
 	
-	@GetMapping("/salesterritoryhistoryRest/list")
+	@GetMapping("/salesterritoryhistory/")
 	public Iterable<Salesterritoryhistory> getTerritoryHistory(){
 		return territoryHistoryService.findAll();
 	}
 	
-	@PostMapping("/salesterritoryhistoryRest/add")
+	@PostMapping("/salesterritoryhistory/")
 	public Salesterritoryhistory addTerritoryHistory(@RequestBody Salesterritoryhistory salesterritoryhistory) throws Exception{
 		return territoryHistoryService.save(salesterritoryhistory);
 	}
 	
-	@PutMapping("/salesterritoryhistoryRest/update/{id}")
+	@PutMapping("/salesterritoryhistory/{id}")
 	public void updateTerritoryHistory(@RequestBody Salesterritoryhistory salesterritoryhistory) throws Exception{
 		territoryHistoryService.update(salesterritoryhistory);
 	}
 	
-	@DeleteMapping("/salesterritoryhistoryRest/delete/{id}")
+	@DeleteMapping("/salesterritoryhistory/{id}")
 	public void deleteTerritoryHistory(@PathVariable("id")Integer id){
 		territoryHistoryService.delete(id);
 	}

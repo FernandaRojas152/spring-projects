@@ -59,7 +59,7 @@
 								<label for="currency1" class="col-form-label">Currency 1</label>
 								<select class="form-control-range" th:field="*{currency1}">
 									<option th:each="c1: ${currencies}"
-										th:value="${c1.currencycode}" th:text="${c1.name}"
+										th:value="${c1.currencyid}" th:text="${c1.name}"
 										th:selected="${currencyrate.currency1=c1}"></option>
 								</select>
 							</div>
@@ -67,7 +67,7 @@
 								<label for="currency2" class="col-form-label">Currency 1</label>
 								<select class="form-control-range" th:field="*{currency2}">
 									<option th:each="c2: ${currencies}"
-										th:value="${c2.currencycode}" th:text="${c2.name}"
+										th:value="${c2.currencyid}" th:text="${c2.name}"
 										th:selected="${currencyrate.currency2=c2}"></option>
 								</select>
 							</div>

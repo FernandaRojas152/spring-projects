@@ -23,6 +23,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesPersonValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * The persistent class for the salesperson database table.
  *
@@ -69,14 +70,17 @@ public class Salesperson implements Serializable {
 
 	// bi-directional many-to-one association to Salespersonquotahistory
 	@OneToMany(mappedBy = "salesperson")
+	@JsonIgnore
 	private List<Salespersonquotahistory> salespersonquotahistories;
 
 	// bi-directional many-to-one association to Salesterritoryhistory
 	@OneToMany(mappedBy = "salesperson")
+	@JsonIgnore
 	private List<Salesterritoryhistory> salesterritoryhistories;
 
 	// bi-directional many-to-one association to Store
 	@OneToMany(mappedBy = "salesperson")
+	@JsonIgnore
 	private List<Store> stores;
 
 	public Salesperson() {

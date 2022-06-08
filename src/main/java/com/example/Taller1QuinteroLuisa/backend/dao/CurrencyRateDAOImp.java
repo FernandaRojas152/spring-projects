@@ -51,8 +51,8 @@ public class CurrencyRateDAOImp implements CurrencyRateDAO{
 	}
 
 	@Override
-	public List<Currencyrate> findByCurrency(String currencycode) {
-		String jpql= "SELECT c FROM Currencyrate c WHERE c.currency1.currencycode = '"+currencycode+"'";
+	public List<Currencyrate> findByCurrency(Integer currencyid) {
+		String jpql= "SELECT c FROM Currencyrate c WHERE c.currency1.currencyid = '"+currencyid+"'";
 		return entityManager.createQuery(jpql, Currencyrate.class).getResultList();
 	}
 }
