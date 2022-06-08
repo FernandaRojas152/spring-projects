@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritoryhistory;
 
 @Repository
-@Scope("Singleton")
+@Scope("singleton")
 public class SalesTerritoryHistoryDaoImp implements SalesTerritoryHistoryDAO{
 	@PersistenceContext
 	@Autowired

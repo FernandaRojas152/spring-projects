@@ -23,7 +23,6 @@
 				<form action="#" th:action="@{/currencyrate/add}"
 					th:object="${currencyrate}" method="post">
 					<div class="row">
-						<div class="form-group col-md-6">
 							<div class="form-group col-md-6">
 								<label for="averagerate" class="col-form-label">Average
 									rate</label> <input type="text" th:field="*{averagerate}"
@@ -64,13 +63,12 @@
 								</select>
 							</div>
 							<div class="form-group col-md-6">
-								<label for="currency2" class="col-form-label">Currency 1</label>
+								<label for="currency2" class="col-form-label">Currency 2</label>
 								<select class="form-control-range" th:field="*{currency2}">
 									<option th:each="c2: ${currencies}"
 										th:value="${c2.currencycode}" th:text="${c2.name}"
 										th:selected="${currencyrate.currency2=c2}"></option>
 								</select>
-							</div>
 						</div>
 					</div>
 					<div class="row">
