@@ -275,7 +275,7 @@ public class BusinessDelegateTest {
 		@BeforeEach
 		void setUp(){
 			currency= new Currency();
-			currency.setCurrencycode("USD");
+			currency.setCurrencycode(1);
 			currency.setName("Dolares");
 			
 			delegate= new BusinessDelegate();

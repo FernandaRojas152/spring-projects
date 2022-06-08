@@ -87,7 +87,7 @@ public class Currency implements Serializable {
 		return this.countryregioncurrencies;
 	}
 
-	public String getCurrencycode() {
+	public Integer getCurrencycode() {
 		return this.currencycode;
 	}
 
@@ -132,7 +132,7 @@ public class Currency implements Serializable {
 		this.countryregioncurrencies = countryregioncurrencies;
 	}
 
-	public void setCurrencycode(String currencycode) {
+	public void setCurrencycode(Integer currencycode) {
 		this.currencycode = currencycode;
 	}
 

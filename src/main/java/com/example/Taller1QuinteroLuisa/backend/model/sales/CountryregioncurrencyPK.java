@@ -16,20 +16,21 @@ public class CountryregioncurrencyPK implements Serializable {
 	private String countryregioncode;
 
 	@Column(insertable=false, updatable=false)
-	private String currencycode;
+	private Integer currencycode;
 
 	public CountryregioncurrencyPK() {
 	}
+
 	public String getCountryregioncode() {
 		return this.countryregioncode;
 	}
 	public void setCountryregioncode(String countryregioncode) {
 		this.countryregioncode = countryregioncode;
 	}
-	public String getCurrencycode() {
+	public Integer getCurrencycode() {
 		return this.currencycode;
 	}
-	public void setCurrencycode(String currencycode) {
+	public void setCurrencycode(Integer currencycode) {
 		this.currencycode = currencycode;
 	}
 

@@ -240,7 +240,7 @@ public class AdministratorControllerImp {
 	}
 
 	@PostMapping("/currency/update/{id}")
-	public String updateCurrency(@PathVariable("id") String id, @Validated(CredentialInfoValidation.class) Currency currency,
+	public String updateCurrency(@PathVariable("id") Integer id, @Validated(CredentialInfoValidation.class) Currency currency,
 			BindingResult bindingResult, Model model, @RequestParam(value="action", required= true) String action){
 		if(!action.equals("Cancel")){
 			if(bindingResult.hasErrors()) {
