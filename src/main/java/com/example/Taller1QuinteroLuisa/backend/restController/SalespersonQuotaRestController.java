@@ -15,6 +15,7 @@ import com.example.Taller1QuinteroLuisa.backend.services.SalesPersonQuotaHistory
 @RestController
 @RequestMapping("/api")
 public class SalespersonQuotaRestController{
+
 	private SalesPersonQuotaHistoryServiceImp personQuotaService;
 	
 	@Autowired
@@ -35,6 +36,11 @@ public class SalespersonQuotaRestController{
 	@PutMapping("/salespersonquotahistory/{id}")
 	public void updateSalespersonquota(@RequestBody Salespersonquotahistory salespersonquotahistory) throws Exception {
 		personQuotaService.update(salespersonquotahistory);
+	}
+
+	@GetMapping("/salespersonquotahistory/{id}")
+	public Salespersonquotahistory getById(@PathVariable("id") Integer id){
+		return personQuotaService.findById(id).get();
 	}
 	
 	@DeleteMapping("/salespersonquotahistory/{id}")

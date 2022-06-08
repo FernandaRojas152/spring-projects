@@ -37,7 +37,12 @@ public class SalesterritoryHistoryRestController{
 	public void updateTerritoryHistory(@RequestBody Salesterritoryhistory salesterritoryhistory) throws Exception{
 		territoryHistoryService.update(salesterritoryhistory);
 	}
-	
+
+	@GetMapping("/salesterritoryhistory/{id}")
+	public Salesterritoryhistory getById(@PathVariable("id") Integer id){
+		return territoryHistoryService.findById(id).get();
+	}
+
 	@DeleteMapping("/salesterritoryhistory/{id}")
 	public void deleteTerritoryHistory(@PathVariable("id")Integer id){
 		territoryHistoryService.delete(id);
