@@ -152,7 +152,7 @@ public class BusinessDelegate {
 		restTemplate.delete(URLCURRENCY+id);
 	}
 	
-	public Currency findbyIdCurrency(Integer id) {
+	public Currency findbyIdCurrency(String id) {
 		return restTemplate.getForObject(URLCURRENCY+id, Currency.class);
 	}
 	

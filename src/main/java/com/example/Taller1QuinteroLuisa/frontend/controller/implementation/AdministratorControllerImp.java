@@ -230,7 +230,7 @@ public class AdministratorControllerImp {
 	}
 	
 	@GetMapping("/currency/update/{id}")
-	public String editCurrency(@PathVariable("id")Integer id, Model model){
+	public String editCurrency(@PathVariable("id")String id, Model model){
 		Currency t= businessDelegate.findbyIdCurrency(id);
 		if(t.equals(null)) {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
@@ -240,14 +240,14 @@ public class AdministratorControllerImp {
 	}
 
 	@PostMapping("/currency/update/{id}")
-	public String updateCurrency(@PathVariable("id") Integer id, @Validated(CredentialInfoValidation.class) Currency currency,
+	public String updateCurrency(@PathVariable("id") String id, @Validated(CredentialInfoValidation.class) Currency currency,
 			BindingResult bindingResult, Model model, @RequestParam(value="action", required= true) String action){
 		if(!action.equals("Cancel")){
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("currency", currency);
 				return "administrator/update-currency";
 			}
-			currency.setCurrencyid(id);
+			currency.setCurrencycode(id);
 			businessDelegate.updateCurrency(currency);
 		}
 		return "redirect:/currency";
@@ -263,6 +263,7 @@ public class AdministratorControllerImp {
 	@GetMapping("/currencyrate/add")
 	public String addCurrencyRate(Model model) {
 		model.addAttribute("currencyrate", new Currencyrate());
+		model.addAttribute("currencies", businessDelegate.getCurrencyrate());
 		return "administrator/add-currencyrate";
 	}
 
@@ -273,6 +274,8 @@ public class AdministratorControllerImp {
 			return "redirect:/currencyrate/";
 		}
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("currencyrate", currencyrate);
+			model.addAttribute("currency", businessDelegate.getCurrencyrate());
 			return "/administrator/add-currencyrate";
 		}else {
 			this.businessDelegate.addCurrencyrate(currencyrate);
@@ -287,7 +290,9 @@ public class AdministratorControllerImp {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
 		}
 		model.addAttribute("currencyrate", t);
+		model.addAttribute("currencies", businessDelegate.getCurrencyrate());
 		return "administrator/update-currencyrate";
+		
 	}
 	
 	@PostMapping("/currencyrate/update/{id}")
@@ -296,8 +301,10 @@ public class AdministratorControllerImp {
 		if(!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("currencyrate", currencyrate);
+				model.addAttribute("currency", businessDelegate.getCurrencyrate());
 				return "administrator/update-currencyrate";
 			}
+			
 			currencyrate.setCurrencyrateid(id);
 			businessDelegate.updateCurrencyrate(currencyrate);
 		}

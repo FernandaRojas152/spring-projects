@@ -38,12 +38,12 @@ public class CurrencyRestController{
 	}
 	
 	@DeleteMapping("/currency/{id}")
-	public void deleteCurrency(@PathVariable("id")Integer id) {
+	public void deleteCurrency(@PathVariable("id")String id) {
 		currencyService.deleteCurrency(id);
 	}
 	
 	@GetMapping("/currency/{id}")
-	public Currency findById(@PathVariable("id")Integer id) {
+	public Currency findById(@PathVariable("id")String id) {
 		return currencyService.findById(id);
 	}
 }

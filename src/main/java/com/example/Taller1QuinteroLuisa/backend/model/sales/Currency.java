@@ -30,16 +30,6 @@ public class Currency implements Serializable {
 	@Id
 	@SequenceGenerator(name = "CURRENCY_CURRENCYCODE_GENERATOR", allocationSize = 1, sequenceName = "CURRENCY_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CURRENCY_CURRENCYCODE_GENERATOR")
-	private Integer currencyid;
-	
-	public Integer getCurrencyid() {
-		return currencyid;
-	}
-
-	public void setCurrencyid(Integer currencyid) {
-		this.currencyid = currencyid;
-	}
-
 	private String currencycode;
 
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
@@ -47,6 +37,7 @@ public class Currency implements Serializable {
 
 	@NotBlank
 	private String name;
+	
 
 	// bi-directional many-to-one association to Countryregioncurrency
 	@OneToMany(mappedBy = "currency")

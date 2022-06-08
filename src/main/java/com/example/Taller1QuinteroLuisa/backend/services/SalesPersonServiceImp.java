@@ -69,7 +69,7 @@ public class SalesPersonServiceImp implements SalesPersonService{
 	}
 	
 	public Iterable<Salesperson> findAll(){
-		return sp.findAll();
+		return salespersonDao.findAll();
 	}
 	
 	public Iterable<Salesterritory> findAllTerritories(){
@@ -77,7 +77,7 @@ public class SalesPersonServiceImp implements SalesPersonService{
 	}
 	
 	public Optional<Salesperson> findById(Integer id){
-		return sp.findById(id);
+		return Optional.of(salespersonDao.findById(id));
 	}
 	
 	public Iterable<Salesperson> findByTerritory(Integer id){
