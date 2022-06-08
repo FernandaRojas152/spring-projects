@@ -180,12 +180,12 @@ public class BusinessDelegate {
 	public Currencyrate findbyIdCurrencyRate(Integer id) {
 		return restTemplate.getForObject(URLCURRENCYRATE+id, Currencyrate.class);
 	}
-	
-	//Special Queries
-	public Iterable<Salesterritory> findTwoSalesPersonWithQuota(){
-		Salesterritory[] tList = restTemplate.getForObject(URLTERRITORY, Salesterritory[].class);
-		return Arrays.asList(tList);
-	}
+//	
+//	//Special Queries
+//	public Iterable<Salesterritory> findTwoSalesPersonWithQuota(){
+//		Salesterritory[] tList = restTemplate.getForObject(URLTERRITORY, Salesterritory[].class);
+//		return Arrays.asList(tList);
+//	}
 	
 
 }

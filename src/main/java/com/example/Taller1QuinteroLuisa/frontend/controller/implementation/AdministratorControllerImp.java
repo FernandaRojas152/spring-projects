@@ -313,9 +313,9 @@ public class AdministratorControllerImp {
 	
 	//Special Queries
 	
-	@GetMapping("/salesterritory")
-	public String specialQueries(Model model){
-		model.addAttribute("salesterritory", businessDelegate.findTwoSalesPersonWithQuota());
-		return "administrator/query";
-	}
+//	@GetMapping("/query")
+//	public String specialQueries(Model model){
+//		model.addAttribute("salesterritory", businessDelegate.findTwoSalesPersonWithQuota());
+//		return "administrator/query";
+//	}
 }

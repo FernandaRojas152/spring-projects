@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.Taller1QuinteroLuisa.backend.dao.SalesTerritoryHistoryDaoImp;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritory;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesterritoryhistory;
@@ -16,6 +17,9 @@ import com.example.Taller1QuinteroLuisa.backend.repository.SalesTerritoryReposit
 
 @Service
 public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistoryService{
+	@Autowired
+	private SalesTerritoryHistoryDaoImp territoryDao;
+	
 	private SalesTerritoryHistoryRepository sth;
 	private SalesPersonRepository sp;
 	private SalesTerritoryRepository st;
@@ -29,7 +33,7 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 
 	@Override
 	public Salesterritoryhistory save(Salesterritoryhistory territory) throws Exception {
-		Salesterritoryhistory temp= null;
+		//Salesterritoryhistory temp= null;
 		validateConstrains(territory);
 		
 		Optional<Salesterritory> optional= this.st.findById(territory.getSalesterritory().getTerritoryid());
@@ -39,24 +43,22 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 			territory.setSalesterritory(optional.get());
 			territory.setSalesperson(optional2.get());
 			
-			System.out.println("Aqui esta: " + territory.getSalesperson().getBusinessentityid());
-			temp= this.sth.save(territory);
+			this.territoryDao.save(territory);
 		}
-		return temp;
+		return territory;
 	}
 
 	@Transactional
 	@Override
 	public Salesterritoryhistory update(Salesterritoryhistory territory) throws Exception {
-		Salesterritoryhistory temp= null;
-
+		//Salesterritoryhistory temp= null;
 		if(territory.getId()!=null) {
 			Optional<Salesterritoryhistory> optional = sth.findById(territory.getId());
 			if(optional.isPresent()) {
-				temp = save(territory);
+				territoryDao.update(territory);
 			}	
 		}
-		return temp;
+		return territory;
 	}
 	
 	public void delete(Integer id) {
@@ -71,11 +73,11 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	}
 	
 	public Iterable<Salesterritoryhistory> findAll(){
-		return sth.findAll();
+		return territoryDao.findAll();
 	}
 	
 	public Optional<Salesterritoryhistory> findById(Integer id){
-		return sth.findById(id);
+		return Optional.of(territoryDao.findById(id));
 	}
 	
 	public Iterable<Salesperson> findAllSalesPerson(){
