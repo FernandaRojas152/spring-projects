@@ -25,31 +25,30 @@
 					<table class="table table-striped table-responsive-md">
 						<thead>
 							<tr>
-								<th>Business Entity Id</th>
-								<th>Bonus</th>
-								<th>Comission percentage</th>
+								<th>Territory Id</th>
+								<th>Name</th>
+								<th>Cost last year</th>
 								<th>Modified date</th>
+								<th>Country region code</th>
 								<th>Sales last year</th>
-								<th>Sales quota</th>
-								<th>Sales tyd</th>
-								<th>Sales Territory</th>
-								<th>Salesperson quota history</th>
-								<th> Edit </th>
+								<th> Salesperson </th>
+								<th> Salesterritory history </th>
+								<th>Edit</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="person : ${salesperson}">
-								<td th:text="${person.businessentityid}"></td>
-								<td th:text="${person.bonus}"></td>
-								<td th:text="${person.commissionpct}"></td>
-								<td th:text="${person.modifieddate}"></td>
-								<td th:text="${person.saleslastyear}"></td>
-								<td th:text="${person.salesquota}"></td>
-								<td th:text="${person.salesytd}"></td>
-								<td th:text="${person.salesterritory.name}"></td>
-								<td><a th:href="@{/salespersonquotahistory/{id}(id=${person.businessentityid})}"
-									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td><a th:href="@{/salesperson/update/{id}(id=${person.businessentityid})}"
+							<tr th:each="territory : ${salesterritory}">
+								<td th:text="${territory.territoryid}"></td>
+								<td th:text="${territory.name}"></td>
+								<td th:text="${territory.costlastyear}"></td>
+								<td th:text="${territory.modifieddate}"></td>
+								<td th:text="${territory.countryregioncode}"></td>
+								<td th:text="${territory.saleslastyear}"></td>
+								<td><a th:href="@{/salesperson/{id}(id=${territory.territoryid})}"
+									class="btn btn-primary"> <i class="fas fa-user-edit ml-2"></i> </a></td>
+								<td><a th:href="@{/salesterritoryhistory/{id}(id=${territory.territoryid})}"
+									class="btn btn-primary"> <i class="fas fa-user-edit ml-2"></i> </a></td>
+								<td><a th:href="@{/salesterritory/update/{id}(id=${territory.territoryid})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 							</tr>
 						</tbody>
