@@ -105,12 +105,6 @@ public class BusinessDelegateTest {
 			assertEquals(delegate.findByIdSalesperson(person.getBusinessentityid()).getBusinessentityid(), person.getBusinessentityid());
 		}
 		
-		/**
-		 * !!
-		 * NEEDS TO BE FIXED !!
-		 * WHEN FIXED, IMPLEMENT IT ON ALL TESTS
-		 * !!
-		 */
 //		@Test
 //		void updateSalesPersonTest(){
 //			delegate.addSalesperson(person);
