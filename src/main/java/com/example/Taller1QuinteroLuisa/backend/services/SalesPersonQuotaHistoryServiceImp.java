@@ -15,6 +15,7 @@ import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository
 
 @Service
 public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistoryService{
+	
 	@Autowired
 	private SalesPersonQuotaHistoryDaoImp personquotaDao;
 	

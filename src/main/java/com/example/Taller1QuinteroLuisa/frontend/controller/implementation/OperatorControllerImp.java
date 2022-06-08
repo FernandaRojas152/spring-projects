@@ -101,7 +101,7 @@ public class OperatorControllerImp implements OperatorController{
 		if(!action.equals("Cancel")){
 			if(bindingResult.hasErrors()){
 				model.addAttribute("salespersonquotahistory", salespersonquotahistory);
-				model.addAttribute("salesperson", businessDelegate.getSalesPerson());
+				model.addAttribute("salespersons", businessDelegate.getSalesPerson());
 				return "operator/update-salespersonquotahistory";
 			}
 			salespersonquotahistory.setBusinessentityid(id);
