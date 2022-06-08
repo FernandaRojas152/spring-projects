@@ -38,12 +38,12 @@ public class Currencyrate implements Serializable {
 	private LocalDate modifieddate;
 
 	//bi-directional many-to-one association to Currency
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="fromcurrencycode")
 	private Currency currency1;
 
 	//bi-directional many-to-one association to Currency
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="tocurrencycode")
 	private Currency currency2;
 

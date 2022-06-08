@@ -51,12 +51,12 @@ public class Currency implements Serializable {
 
 	// bi-directional many-to-one association to Currencyrate
 	@OneToMany(mappedBy = "currency1")
-	@JsonIgnore
+//	@JsonIgnore
 	private List<Currencyrate> currencyrates1;
 
 	// bi-directional many-to-one association to Currencyrate
 	@OneToMany(mappedBy = "currency2")
-	@JsonIgnore
+//	@JsonIgnore
 	private List<Currencyrate> currencyrates2;
 
 	public Currency(){

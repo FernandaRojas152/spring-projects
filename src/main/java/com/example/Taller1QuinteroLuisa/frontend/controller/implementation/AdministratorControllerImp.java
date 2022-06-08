@@ -275,7 +275,7 @@ public class AdministratorControllerImp {
 		}
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("currencyrate", currencyrate);
-			model.addAttribute("currency", businessDelegate.getCurrencyrate());
+			model.addAttribute("currency", businessDelegate.getCurrency());
 			return "/administrator/add-currencyrate";
 		}else {
 			this.businessDelegate.addCurrencyrate(currencyrate);
@@ -290,7 +290,7 @@ public class AdministratorControllerImp {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
 		}
 		model.addAttribute("currencyrate", t);
-		model.addAttribute("currencies", businessDelegate.getCurrencyrate());
+		model.addAttribute("currencies", businessDelegate.getCurrency());
 		return "administrator/update-currencyrate";
 		
 	}
@@ -301,7 +301,7 @@ public class AdministratorControllerImp {
 		if(!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("currencyrate", currencyrate);
-				model.addAttribute("currency", businessDelegate.getCurrencyrate());
+				model.addAttribute("currency", businessDelegate.getCurrency());
 				return "administrator/update-currencyrate";
 			}
 			
