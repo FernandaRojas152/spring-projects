@@ -22,6 +22,7 @@ import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceIm
 import com.example.Taller1QuinteroLuisa.backend.validation.CredentialInfoValidation;
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesPersonQuotaHistoryValidation;
 import com.example.Taller1QuinteroLuisa.backend.validation.SalesTerritoryHistoryValidation;
+import com.example.Taller1QuinteroLuisa.frontend.businessdelegate.BusinessDelegate;
 import com.example.Taller1QuinteroLuisa.frontend.controller.interfaces.OperatorController;
 
 @Controller
@@ -30,6 +31,9 @@ public class OperatorControllerImp implements OperatorController{
 	private SalesPersonServiceImp personService;
 	private SalesTerritoryHistoryServiceImp territoryHistoryService;
 	private SalesTerritoryServiceImp territoryService;
+	
+	@Autowired
+	private BusinessDelegate businessDelegate;
 	
 	@Autowired
 	public OperatorControllerImp(SalesPersonQuotaHistoryServiceImp personQuotaService, SalesTerritoryHistoryServiceImp territoryHistoryService,
@@ -49,14 +53,14 @@ public class OperatorControllerImp implements OperatorController{
 	/** Salesperson quota history mapping */
 	@GetMapping("/salespersonquotahistory")
 	public String salesPersonQuota(Model model) {
-		model.addAttribute("salespersonquotahistory", personQuotaService.findAll());
+		model.addAttribute("salespersonquotahistory", businessDelegate.getSalespersonQuota());
 		return "operator/salespersonquotahistory";
 	}
 	
 	@GetMapping("/salespersonquotahistory/add")
 	public String addSalesPersonQuota(Model model){
 		model.addAttribute("salespersonquotahistory", new Salespersonquotahistory());
-		model.addAttribute("salespersons", personService.findAll());
+		model.addAttribute("salespersons", businessDelegate.getSalesPerson());
 		return "operator/add-salespersonquotahistory";
 	}
 	
@@ -69,25 +73,24 @@ public class OperatorControllerImp implements OperatorController{
 		}
 		if(bindingResult.hasErrors()){
 			model.addAttribute("salespersonquotahistory", salespersonquotahistory);
-			model.addAttribute("salesperson");
+			model.addAttribute("salesperson", businessDelegate.getSalesPerson());
 			return "/operator/add-salespersonquotahistory";
 		}else {
-			personQuotaService.save(salespersonquotahistory);
-			System.out.println("aqui ta: "+ personQuotaService.findAll().toString() + salespersonquotahistory.getSalesquota());
-			System.out.println("persona:"+ salespersonquotahistory.getSalesperson().getBusinessentityid()
-					+ "id: " + salespersonquotahistory.getBusinessentityid());
+			this.businessDelegate.addPersonQuota(salespersonquotahistory);
+//			personQuotaService.save(salespersonquotahistory);
 			return "redirect:/salespersonquotahistory/";
 		}
 	}
 	
 	@GetMapping("/salespersonquotahistory/update/{id}")
 	public String editSalesPersonQuota(@PathVariable("id")Integer id, Model model) {
-		Optional<Salespersonquotahistory> s = personQuotaService.findById(id);
-		if(s.isEmpty()) {
+//		Optional<Salespersonquotahistory> s = personQuotaService.findById(id);
+		Salespersonquotahistory s= businessDelegate.findByIdPersonQuota(id);
+		if(s.equals(null)) {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
 		}
-		model.addAttribute("salespersonquotahistory", s.get());
-		model.addAttribute("salespersons", personQuotaService.findAllSalesPerson());
+		model.addAttribute("salespersonquotahistory", s);
+		model.addAttribute("salespersons", businessDelegate.getSalesPerson());
 		return "operator/update-salespersonquotahistory";
 	}
 	
@@ -97,30 +100,31 @@ public class OperatorControllerImp implements OperatorController{
 			Model model, @RequestParam(value = "action", required = true) String action) throws Exception{
 		if(!action.equals("Cancel")){
 			if(bindingResult.hasErrors()){
-				model.addAttribute("salespersonquotahistory", personQuotaService.findById(id).get());
-				model.addAttribute("salesperson", personQuotaService.findAllSalesPerson());
+				model.addAttribute("salespersonquotahistory", salespersonquotahistory);
+				model.addAttribute("salesperson", businessDelegate.getSalesPerson());
 				return "operator/update-salespersonquotahistory";
 			}
 			salespersonquotahistory.setBusinessentityid(id);
-			personQuotaService.update(salespersonquotahistory);
+			businessDelegate.updatePersonQuota(salespersonquotahistory);
+			//personQuotaService.update(salespersonquotahistory);
 		}
 		return "redirect:/salespersonquotahistory";
 	}
-	
+
 	
 	
 	/** Salesterritory history mapping */
 	@GetMapping("/salesterritoryhistory")
 	public String salesTerritoryHistory(Model model) {
-		model.addAttribute("salesterritoryhistory", territoryHistoryService.findAll());
+		model.addAttribute("salesterritoryhistory", businessDelegate.getSalesterritoryHistory());
 		return "operator/salesterritoryhistory";
 	}
 	
 	@GetMapping("/salesterritoryhistory/add")
 	public String addSalesTerritoryHistory(Model model) {
 		model.addAttribute("salesterritoryhistory", new Salesterritoryhistory());
-		model.addAttribute("salespersons", personService.findAll());
-		model.addAttribute("salesterritories", territoryService.findAll());
+		model.addAttribute("salespersons", businessDelegate.getSalesPerson());
+		model.addAttribute("salesterritories", businessDelegate.getSalesterritory());
 		return "/operator/add-salesterritoryhistory";
 	}
 	
@@ -133,28 +137,26 @@ public class OperatorControllerImp implements OperatorController{
 		}
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("salesterritoryhistory", salesterritoryhistory);
-			model.addAttribute("salesperson");
-			model.addAttribute("salesterritory");
+			model.addAttribute("salesperson", businessDelegate.getSalesPerson());
+			model.addAttribute("salesterritory", businessDelegate.getSalesterritory());
 			return "/operator/add-salesterritoryhistory";
 		}else {
-			territoryHistoryService.save(salesterritoryhistory);
-			System.out.println("aqui esta esa vaina: " + territoryHistoryService.findAll() + "valores: " + salesterritoryhistory.getSalesterritory().getName());
-			System.out.println("se guarda en el modelo: " + salesterritoryhistory.getId() + salesterritoryhistory.getSalesterritory().getName());
-			System.out.println("lista de personas:" + territoryHistoryService.findAllSalesPerson());
-			System.out.println("el salesperson: "+ salesterritoryhistory.getSalesperson() + "y: "+salesterritoryhistory.getSalesperson().getBusinessentityid());
+			this.businessDelegate.addTerritoryHistory(salesterritoryhistory);
+			//territoryHistoryService.save(salesterritoryhistory);
 			return "redirect:/salesterritoryhistory/";
 		}
 	}
 	
 	@GetMapping("/salesterritoryhistory/update/{id}")
 	public String editSalesTerritoryHistory(@PathVariable("id")Integer id, Model model){
-		Optional<Salesterritoryhistory> tH= territoryHistoryService.findById(id);
-		if(tH.isEmpty()) {
+		//Optional<Salesterritoryhistory> tH= territoryHistoryService.findById(id);
+		Salesterritoryhistory tH= businessDelegate.findByIdTerritoryHistory(id);
+		if(tH.equals(null)) {
 			throw new IllegalArgumentException("Couldn't not find the id requested");
 		}
-		model.addAttribute("salesterritoryhistory", tH.get());
-		model.addAttribute("salespersons", territoryHistoryService.findAllSalesPerson());
-		model.addAttribute("salesterritories", territoryHistoryService.findAllSalesTerritory());
+		model.addAttribute("salesterritoryhistory", tH);
+		model.addAttribute("salespersons", businessDelegate.getSalesPerson());
+		model.addAttribute("salesterritories", businessDelegate.getSalesterritory());
 		return "operator/update-salesterritoryhistory";
 	}
 	
@@ -164,14 +166,15 @@ public class OperatorControllerImp implements OperatorController{
 			Model model, @RequestParam(value = "action", required = true) String action) throws Exception{
 		if(!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				model.addAttribute("salesterritoryhistory", territoryHistoryService.findById(id).get());
-				model.addAttribute("salesperson", territoryHistoryService.findAllSalesPerson());
-				model.addAttribute("salesterritory", territoryHistoryService.findAllSalesTerritory());
+				model.addAttribute("salesterritoryhistory", salesterritoryhistory);
+				model.addAttribute("salesperson", businessDelegate.getSalesPerson());
+				model.addAttribute("salesterritory", businessDelegate.getSalesterritory());
 				
 				return "operator/update-salesterritoryhistory";
 			}
 			salesterritoryhistory.setId(id);
-			territoryHistoryService.update(salesterritoryhistory);
+			businessDelegate.updateTerritoryHistory(salesterritoryhistory);
+			//territoryHistoryService.update(salesterritoryhistory);
 		}
 		return "redirect:/salesterritoryhistory";
 		

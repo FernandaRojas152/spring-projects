@@ -310,4 +310,12 @@ public class AdministratorControllerImp {
 		}
 		return "redirect:/currencyrate";
 	}
+	
+	//Special Queries
+	
+//	@GetMapping("/query")
+//	public String specialQueries(Model model){
+//		model.addAttribute("salesterritory", businessDelegate.findTwoSalesPersonWithQuota());
+//		return "administrator/query";
+//	}
 }

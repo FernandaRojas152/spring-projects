@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Taller1QuinteroLuisa.backend.dao.SalesPersonQuotaHistoryDaoImp;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salesperson;
 import com.example.Taller1QuinteroLuisa.backend.model.sales.Salespersonquotahistory;
 import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonQuotaHistoryRepository;
@@ -14,6 +15,9 @@ import com.example.Taller1QuinteroLuisa.backend.repository.SalesPersonRepository
 
 @Service
 public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistoryService{
+	@Autowired
+	private SalesPersonQuotaHistoryDaoImp personquotaDao;
+	
 	private SalesPersonQuotaHistoryRepository spq;
 	private SalesPersonRepository person;
 	
@@ -25,28 +29,28 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	
 	@Override
 	public Salespersonquotahistory save(Salespersonquotahistory sales) throws Exception{
-		Salespersonquotahistory temp = null;
+		//Salespersonquotahistory temp = null;
 		validateConstraints(sales);
 		
 		Optional<Salesperson> optional = this.person.findById(sales.getSalesperson().getBusinessentityid());
 		if(optional.isPresent()) {
 			sales.setSalesperson(optional.get());
-			temp= this.spq.save(sales);
+			this.personquotaDao.save(sales);
 		}
 		
-		return temp;
+		return sales;
 	}
 
 	@Override
 	public Salespersonquotahistory update(Salespersonquotahistory sales) throws Exception {
-		Salespersonquotahistory temp = null;
+		//Salespersonquotahistory temp = null;
 		
 		Optional<Salespersonquotahistory> optional = spq.findById(sales.getBusinessentityid());
 		if(optional.isPresent()) {
 			//validateConstraints(sales);
-			temp= save(sales);
+			personquotaDao.update(sales);
 		}
-		return temp;
+		return sales;
 	}
 	
 	public void delete(Integer id){
@@ -61,7 +65,7 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	}
 	
 	public Iterable<Salespersonquotahistory> findAll(){
-		return spq.findAll();
+		return personquotaDao.findAll();
 	}
 	
 	public Iterable<Salesperson> findAllSalesPerson(){
@@ -69,7 +73,7 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	}
 	
 	public Optional<Salespersonquotahistory> findById(Integer id){
-		return spq.findById(id);
+		return Optional.of(personquotaDao.findById(id));
 	}
 	
 	public Iterable<Salespersonquotahistory> findBySalesPerson(Integer id){
