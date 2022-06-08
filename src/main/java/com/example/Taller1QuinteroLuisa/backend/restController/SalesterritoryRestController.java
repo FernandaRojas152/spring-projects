@@ -1,6 +1,9 @@
 package com.example.Taller1QuinteroLuisa.backend.restController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import com.example.Taller1QuinteroLuisa.backend.services.SalesTerritoryServiceIm
 @RestController
 @RequestMapping("/api")
 public class SalesterritoryRestController{
+
 	private SalesTerritoryServiceImp territoryService;
 	
 	@Autowired
@@ -30,6 +34,10 @@ public class SalesterritoryRestController{
 	@PostMapping("/salesterritory/")
 	public Salesterritory addSalesterritory(@RequestBody Salesterritory salesterritory) throws Exception {
 		return territoryService.save(salesterritory);
+		// HttpHeaders headers =  new HttpHeaders();
+		// headers.add("Reader", "SalesterritoryRestController");
+		// //log.info("Post Create Student : " + salesterritory);
+		// return new ResponseEntity<Salesterritory>(salesterritory, headers, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/salesterritory/{id}")
