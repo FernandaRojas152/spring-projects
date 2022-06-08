@@ -27,10 +27,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Currency implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	/*@Id
 	@SequenceGenerator(name = "CURRENCY_CURRENCYCODE_GENERATOR", allocationSize = 1, sequenceName = "CURRENCY_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CURRENCY_CURRENCYCODE_GENERATOR")
-	private String currencycode;
+	private String currencycode;*/
+	
+	@Id
+	@SequenceGenerator(name="\"CURRENCY_CURRENCYCODE_GENERATOR",allocationSize = 1, sequenceName="CURRENCY_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CURRENCY_CURRENCYCODE_GENERATOR")
+	private Integer currencycode;
 
 	@DateTimeFormat(pattern= "yyyy-MM-dd")
 	private LocalDate modifieddate;
