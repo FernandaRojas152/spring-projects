@@ -23,7 +23,6 @@
 				<form action="#" th:action="@{/currency/update/{id}(id=${currency.currencycode})}"
 					th:object="${currency}" method="post">
 					<div class="row">
-						<div class="form-group col-md-6">
 							<div class="form-group col-md-6">
 								<label for="modifieddate" class="col-form-label">Modified
 									Date</label> <input type="date" th:field="*{modifieddate}"
@@ -37,7 +36,6 @@
 								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
 								class="text-danger"></span>
 							</div>
-					</div>
 					<div class="row">
 						<div class="col-md-4 mt-3">
 							<input type="submit" name="action" class="btn btn-primary"
